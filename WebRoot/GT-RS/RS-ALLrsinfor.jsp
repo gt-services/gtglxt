@@ -157,17 +157,19 @@ function doExport(){
 
 
 function batchdeleteRS(){
-    var uuidarr = takeuuid();
-    console.log(uuidarr);
-    if(uuidarr.length > 0){
-        var data = {
+    var uuidarrs = takeuuid();
+    //debugger;
+
+    if(uuidarrs.length > 0){
+       /* var data = {
             uuidarr:uuidarr
-        }
-        $(this).alertmsg('confirm', '确认删除该条数据？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
+        };*/
+        //console.log(data);
+        $(this).alertmsg('confirm', '确认删除这些数据？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
             $.ajax({
                 type: "POST",
                 url: "batchdelRoster.action",
-                data: data,
+                data: {uuidarr:uuidarrs},
                 dataType: "json",
                 success: function(data){
                     if(data.statusCode==200){
@@ -178,6 +180,8 @@ function batchdeleteRS(){
                 }
             });
         }});
+    }else{
+        $(this).alertmsg('confirm', '请至少选择一条数据', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息'});
     }
 }
 

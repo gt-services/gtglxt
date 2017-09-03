@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1d02eb1-61cb-4e40-a22c-db3f0b2ba614" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebRoot/GT-RS/RS-ALLrsinfor.jsp" afterPath="$PROJECT_DIR$/WebRoot/GT-RS/RS-ALLrsinfor.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/roster/RosterAction.java" afterPath="$PROJECT_DIR$/src/roster/RosterAction.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,18 +48,28 @@
       <file leaf-file-name="CwAction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cw/CwAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
+            <state relative-caret-position="15">
               <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RS-ALLrsinfor.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RS-ALLrsinfor.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WebRoot/GT-RS/RS-ALLrsinfor.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
+            <state relative-caret-position="135">
               <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RosterAction.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/roster/RosterAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="665">
+              <caret line="729" column="24" lean-forward="false" selection-start-line="729" selection-start-column="17" selection-end-line="729" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -70,29 +81,6 @@
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RosterAction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/roster/RosterAction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7350">
-              <caret line="729" column="24" lean-forward="false" selection-start-line="729" selection-start-column="17" selection-end-line="729" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#getTodayAddRosterList#0;class#RosterAction#0" expanded="false" />
-                <element signature="method#getTodayDelRosterList#0;class#RosterAction#0" expanded="false" />
-                <element signature="method#editRoster#0;class#RosterAction#0" expanded="false" />
-                <element signature="method#addRoster#0;class#RosterAction#0" expanded="false" />
-                <element signature="method#getSecondList#0;class#RosterAction#0" expanded="false" />
-                <element signature="method#addinkqRoster#0;class#RosterAction#0" expanded="false" />
-                <marker date="1504410147000" expanded="true" signature="35765:36088" ph="DELETE FROM " />
-                <marker date="1504410147000" expanded="true" signature="35827:35936" ph="SELECT a.ide... *" />
-                <marker date="1504410147000" expanded="true" signature="35853:35933" ph="SELECT * FRO... gt_roster" />
-                <marker date="1504410147000" expanded="true" signature="35979:36087" ph="SELECT b.* F... MAX" />
-                <marker date="1504410147000" expanded="true" signature="35996:36084" ph="SELECT MAX(c... gt_roster" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -316,6 +304,52 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="WebRoot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gtglxt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gtglxt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gtglxt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gtglxt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="roster" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gtglxt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gtglxt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -335,16 +369,16 @@
     <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/roster" />
-      <recent name="$PROJECT_DIR$/src/kqb" />
-      <recent name="$PROJECT_DIR$/WebRoot/GT-RS" />
-      <recent name="$PROJECT_DIR$/WebRoot/GT-PX" />
-      <recent name="$PROJECT_DIR$/src/px" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/second" />
       <recent name="$PROJECT_DIR$/WebRoot/GT-SC" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/roster" />
+      <recent name="$PROJECT_DIR$/WebRoot/GT-RS" />
+      <recent name="$PROJECT_DIR$/src/kqb" />
+      <recent name="$PROJECT_DIR$/WebRoot/GT-PX" />
+      <recent name="$PROJECT_DIR$/src/px" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -1113,12 +1147,12 @@
       <workItem from="1504253658558" duration="785000" />
       <workItem from="1504315190834" duration="1466000" />
       <workItem from="1504405831441" duration="5016000" />
-      <workItem from="1504417051929" duration="32000" />
+      <workItem from="1504417051929" duration="289000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="226914000" />
+    <option name="totallyTimeSpent" value="227171000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1146,16 +1180,16 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4642857" sideWeight="0.497558" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32695374" sideWeight="0.497558" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21428572" sideWeight="0.495116" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21428572" sideWeight="0.495116" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.327252" sideWeight="0.4945055" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35612243" sideWeight="0.5952381" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2622449" sideWeight="0.5952381" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32695374" sideWeight="0.4896215" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21733822" sideWeight="0.5085519" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16788767" sideWeight="0.4914481" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16788767" sideWeight="0.4914481" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21489622" sideWeight="0.507874" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1176,20 +1210,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/roster/RosterAction.java</url>
-          <line>736</line>
-          <properties />
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/roster/RosterAction.java</url>
-          <line>729</line>
-          <properties />
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="96" />
     </breakpoint-manager>
     <watches-manager />
@@ -1469,6 +1489,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1476,6 +1497,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1483,6 +1505,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1512,7 +1535,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cw/CwAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
+        <state relative-caret-position="15">
           <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
           <folding />
         </state>
@@ -1550,31 +1573,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/roster/RosterAction.java">
+    <entry file="file://$PROJECT_DIR$/WebRoot/GT-RS/RS-ALLrsinfor.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7350">
-          <caret line="729" column="24" lean-forward="false" selection-start-line="729" selection-start-column="17" selection-end-line="729" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getTodayAddRosterList#0;class#RosterAction#0" expanded="false" />
-            <element signature="method#getTodayDelRosterList#0;class#RosterAction#0" expanded="false" />
-            <element signature="method#editRoster#0;class#RosterAction#0" expanded="false" />
-            <element signature="method#addRoster#0;class#RosterAction#0" expanded="false" />
-            <element signature="method#getSecondList#0;class#RosterAction#0" expanded="false" />
-            <element signature="method#addinkqRoster#0;class#RosterAction#0" expanded="false" />
-            <marker date="1504410147000" expanded="true" signature="35765:36088" ph="DELETE FROM " />
-            <marker date="1504410147000" expanded="true" signature="35827:35936" ph="SELECT a.ide... *" />
-            <marker date="1504410147000" expanded="true" signature="35853:35933" ph="SELECT * FRO... gt_roster" />
-            <marker date="1504410147000" expanded="true" signature="35979:36087" ph="SELECT b.* F... MAX" />
-            <marker date="1504410147000" expanded="true" signature="35996:36084" ph="SELECT MAX(c... gt_roster" />
-          </folding>
+        <state relative-caret-position="135">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WebRoot/GT-RS/RS-ALLrsinfor.jsp">
+    <entry file="file://$PROJECT_DIR$/src/roster/RosterAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state relative-caret-position="665">
+          <caret line="729" column="24" lean-forward="false" selection-start-line="729" selection-start-column="17" selection-end-line="729" selection-end-column="24" />
           <folding />
         </state>
       </provider>

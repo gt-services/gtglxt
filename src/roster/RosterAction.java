@@ -74,7 +74,7 @@ public class RosterAction extends ActionSupport {
 	private String orderField;
 	private String orderDirection;
 	private Page page = new Page();
-	private int currentPage=1;		
+	private int currentPage=1;
 
 	public int getCurrentPage() {
 		return currentPage;
@@ -144,7 +144,7 @@ public class RosterAction extends ActionSupport {
 			if(StringHelp.isNotEmpty(scz)){
 				sql += "and scz = :scz ";
 			}
-			sql += "order by createDate desc";
+			sql += "order by createDate asc";
 			Query q1 = session.createQuery(sql);
 			if(keyword != null && !keyword.equals("")){
 				q1.setParameter("name", "%"+keyword+"%");
@@ -727,18 +727,22 @@ public class RosterAction extends ActionSupport {
 
 	public String batchdelRoster(){
 		HttpServletRequest request = ServletActionContext.getRequest ();
-		String[] uuidarr =request.getParameterValues("data");
+		Map uuidarrs =request.getParameterMap();
+		Object uuidarrObj = uuidarrs.get("uuidarr[]");
+		String[] uuidarr =(String[])uuidarrObj;
+		List uuidList = Arrays.asList(uuidarr);
+		System.out.println(uuidarr);
 		Session session = Hfsession.init();
 		Transaction tx = session.beginTransaction();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
-			Query q = session.createQuery("from Roster where uuid  in :uuidarr").setParameterList("uuidarr", uuidarr);
+			Query q = session.createQuery("from Roster where uuid  in :uuidarr").setParameterList("uuidarr", uuidList);
 			List<Roster> list   = q.list();
-			System.out.println("++++++++++++++++++++++++++++++++++roster="+list);
-//			roster.setDel("0");
-//			roster.setCreateDate(sdf.format(new Date()));
-//			session.update(roster);
+			for (Roster r:list
+				 ) {
+				session.delete(r);
+			}
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 			tx.commit();
@@ -1316,7 +1320,7 @@ public class RosterAction extends ActionSupport {
 		    String[] arrayStr =new String[]{};
 
 		    arrayStr = str.split(",");
-		    piclist=java.util.Arrays.asList(arrayStr);
+		    piclist= Arrays.asList(arrayStr);
 			
 			tx.commit();
 			Hfsession.close();
