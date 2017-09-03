@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GT_417:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/GT_417_war_exploded</output-path>
+    <root id="archive" name="GT_417_war exploded.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="gtglxt" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="gtglxt/web/Web" />
+      <element id="dir-copy" path="$PROJECT_DIR$/WebRoot" />
+    </root>
+  </artifact>
+</component>
