@@ -808,11 +808,6 @@ public class RosterAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest ();
 		String sczname =request.getParameter("sczn");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		/*try {
-			sczname = new String(sczn.getBytes("iso8859-1"),"utf-8");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		}*/
 		List<Object> listObject = new ArrayList<>();
 		List<Object> listRoster = new ArrayList<>();
 
