@@ -796,6 +796,8 @@ public class RosterAction extends ActionSupport {
 			e.printStackTrace();
 		}
 		return SUCCESS;
+
+
 	}
 	
 	public String inDialog(){
