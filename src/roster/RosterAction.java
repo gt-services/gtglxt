@@ -198,8 +198,6 @@ public class RosterAction extends ActionSupport {
 			}
 			Long count= (Long)query.uniqueResult();
 			 
-			//page.setTotalCount(Integer.parseInt(String.valueOf(count)));
-			
 			//此处才是作为查询数据中的数据
 			String sql = "from Roster where del=1 ";
 			if(admin.getAuthority().equals("5")){
