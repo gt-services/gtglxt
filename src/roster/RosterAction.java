@@ -731,6 +731,7 @@ public class RosterAction extends ActionSupport {
 		Object uuidarrObj = uuidarrs.get("uuidarr[]");
 		String[] uuidarr =(String[])uuidarrObj;
 		List uuidList = Arrays.asList(uuidarr);
+		
 		Session session = Hfsession.init();
 		Transaction tx = session.beginTransaction();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
