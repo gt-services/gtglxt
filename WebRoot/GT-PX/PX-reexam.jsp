@@ -37,10 +37,9 @@
             
             <button type="submit"  class="btn-default" data-icon="search" id="queryPX">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo" id="clearQuery">清空查询</a>
-            <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-red" onclick="batchdeletePX()" value="批量删除" /></span>
+
+            <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-red" onclick="batchpassReExam()" value="补考通过" /></span>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doExport()" value="导出" /></span>
-            <span style="float:right;margin-right:5px;"><a href="/GT-PX/PXimport.jsp" class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
-            <span style="float:right;margin-right:5px;"><a href="/GT-PX/PXadd.jsp" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" data-mask="true" data-icon="plus">新增</a></span>
         </div>
     </form>
 
@@ -66,6 +65,7 @@
             <th>优惠金额</th>
             <th>详细</th>
             <th>操作</th>
+            <th>考试情况</th>
         </tr>
         </thead>
        <tbody>
@@ -90,7 +90,9 @@
             	<td><s:property value="discountAmount"/></td>
             	<td><a href="editPxInfo.action?type=1&uuid=<s:property value="uuid"/>" class="btn-blue" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" >详细</a></td>
                 <td><a href="editPxInfo.action?uuid=<s:property value="uuid"/>" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" >编辑</a>&nbsp;
-                    <a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deletePX('<s:property value="uuid" />')">删除</a>
+                </td>
+                <td>
+                    <a class="btn btn-green" id="delete<s:property value="uuid" />" onclick="passReExam('<s:property value="uuid" />')">考试通过</a>
                     <input type="checkbox" style="width: 15px;height: 15px" name="delUuid" value="<s:property value="uuid" />"/>
                 </td>
             </tr>
@@ -107,19 +109,7 @@
     </div>
 </div>
 <script type="text/javascript">
-	function deletePX(uuid){
-		$(this).alertmsg('confirm', '确认删除该条数据？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
-			$.ajax({
-             type: "POST",
-             url: "delPxInfo.action",
-             data: {uuid:uuid},
-             dataType: "json",
-             success: function(data){
-                 $("#queryPX").click();
-           }
-         });
-	   }});
-	}
+
 	
 		function doExport(){
 			var a =$("#trainType").val();
@@ -131,16 +121,29 @@
 	}
 
 
-    function batchdeletePX(){
+    function addReExam(uuid){
+        $(this).alertmsg('confirm', '确认将此人加入补考？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
+            $.ajax({
+                type: "POST",
+                url: "batchaddReExam.action",
+                data: {uuid:uuid,type:'passreexam'},
+                dataType: "json",
+                success: function(data){
+                    $("#queryPX").click();
+                }
+            });
+        }});
+    }
+    function batchaddReExam(){
         var uuidarrs = takeuuid();
         //debugger;
 
         if(uuidarrs.length > 0){
-            $(this).alertmsg('confirm', '确认删除这些数据？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
+            $(this).alertmsg('confirm', '确认将此人加入补考？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
                 $.ajax({
                     type: "POST",
-                    url: "batchdelPxInfo.action",
-                    data: {uuidarr:uuidarrs},
+                    url: "batchaddReExam.action",
+                    data: {uuidarr:uuidarrs,type:'passreexam'},
                     dataType: "json",
                     success: function(data){
                         if(data.statusCode==200){
@@ -155,7 +158,6 @@
             $(this).alertmsg('confirm', '请至少选择一条数据', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息'});
         }
     }
-
 
 
 

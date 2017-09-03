@@ -346,7 +346,7 @@
 									<li data-id="13" data-pid="1" data-url="getPxInfoList.action?pageType=5"
 										data-tabid="table" data-faicon="check-square-o">考试人员名单</li>
 									<li data-id="13" data-pid="1" data-url="getPxInfoList.action?pageType=6"
-										data-tabid="table" data-faicon="check-square-o">补考未通过人员名单</li>
+										data-tabid="table" data-faicon="check-square-o">补考人员名单</li>
 								</ul>
 							</div>
 						</div>

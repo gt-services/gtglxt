@@ -24,7 +24,7 @@
                 <tr><td><label class='control-label x85'>考试情况:</label><input type='text'  name='pxInfo.test'  size='20'   value='<s:property value="pxInfo.test" />'  ></td>
                		<td><label class='control-label x85'>标准金额:</label><input type='text'  name='pxInfo.standardAmount'  size='20'   value='<s:property value="pxInfo.standardAmount" />'  ></td>
            		<tr><td><label class='control-label x85'>优惠金额:</label><input type='text'  name='pxInfo.discountAmount'  size='20'   value='<s:property value="pxInfo.discountAmount" />'  ></td>
-                    <td><label class='control-label x85'>培训日期:</label><input type='text' data-toggle="datepicker" name='pxInfo.signupDate'  size='20'    value='<s:date name="pxInfo.signupDate" format="yyyy-MM-dd"/>'  ></td></tr>
+                    <td><label class='control-label x85'>培训日期:</label><input type='text' data-toggle="datepicker" name='pxInfo.signupDate'  size='20'    value='<s:property value="pxInfo.signupDate" />'  ></td></tr>
                 <tr><td><label class='control-label x85'>缴费情况:</label><select data-toggle="selectpicker" id="payCost"  name='pxInfo.payCost'  data-width="100">
                     <option value="已缴费" <s:if test="pxInfo.payCostequals(\"已缴费\")">selected = "selected"</s:if>>已缴费</option>
                     <option value="未缴费" <s:if test="pxInfo.payCost.equals(\"未缴费\")">selected = "selected"</s:if>>未缴费</option>

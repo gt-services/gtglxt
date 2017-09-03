@@ -741,7 +741,8 @@ public class RosterAction extends ActionSupport {
 			List<Roster> list   = q.list();
 			for (Roster r:list
 				 ) {
-				session.delete(r);
+				r.setDel("0");
+				session.update(r);
 			}
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);

@@ -8,8 +8,8 @@
                 <result name="PXJFGK">/GT-PX/PX-jfgk.jsp</result>
                 <result name="PXJJDQZS">/GT-PX/PX-jjdqzs.jsp</result>
                 <result name="PXWLZ">/GT-PX/PX-wlz.jsp</result>
-                <result name="PXneedRetest">/GT-PX/PX-ALLpxinfo.jsp</result>
-                <result name="PXRetestFail">/GT-PX/PX-ALLpxinfo.jsp</result>
+                <result name="PXneedtest">/GT-PX/PX-exam.jsp</result>
+                <result name="PXRetest">/GT-PX/PX-reexam.jsp</result>
                 <result name="error">index.jsp</result>
                 <interceptor-ref name="defaultStack"/>
         </action>
@@ -17,6 +17,12 @@
                 <result name="success">main.jsp</result>
                 <interceptor-ref name="defaultStack"/>
         </action>
+
+        <action name="batchdelPxInfo" class="px.PxAction" method="batchdelPxInfo">
+            <result name="success">main.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+
          <action name="addPxInfo" class="px.PxAction" method="addPxInfo">
                  <result name="success">main.jsp</result>
                 <result name="error">index.jsp</result>

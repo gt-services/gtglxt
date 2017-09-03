@@ -8,12 +8,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -271,9 +266,9 @@ public class PxAction extends ActionSupport {
 		case "4":
 			return "PXWLZ";
 		case "5":
-			return "PXneedRetest";
+			return "PXneedtest";
 		case "6":
-			return "PXRetestFail";
+			return "PXRetest";
 		default:
 			return ERROR;
 		}
@@ -294,6 +289,33 @@ public class PxAction extends ActionSupport {
 			e.printStackTrace();
 		}finally{
 			Hfsession.close();
+		}
+		return SUCCESS;
+	}
+	public String batchdelPxInfo(){
+		HttpServletRequest request = ServletActionContext.getRequest ();
+		Map uuidarrs =request.getParameterMap();
+		Object uuidarrObj = uuidarrs.get("uuidarr[]");
+		String[] uuidarr =(String[])uuidarrObj;
+		List uuidList = Arrays.asList(uuidarr);
+
+		Session session = Hfsession.init();
+		Transaction tx = session.beginTransaction();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			Query q = session.createQuery("from PxInfo where uuid  in :uuidarr").setParameterList("uuidarr", uuidList);
+			List<PxInfo> list   = q.list();
+			for (PxInfo r:list
+					) {
+				session.delete(r);
+			}
+			map.put("statusCode", 200);
+			ResultUtils.toJson(ServletActionContext.getResponse(), map);
+			tx.commit();
+			Hfsession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return SUCCESS;
 	}
