@@ -108,7 +108,6 @@ public class PxAction extends ActionSupport {
 			yandm  = year+"-"+month;
 		}
 		
-        //System.out.println("==================year-month==============="+yandm);
 		try {
 
 			String hql = "select count(*) from PxInfo where 1=1 ";
