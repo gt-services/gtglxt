@@ -2,7 +2,7 @@
 	contentType="text/html; charset=utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <div class="bjui-pageHeader">
-    <form id="pagerForm" data-toggle="ajaxsearch" action="getPxInfoList.action?pageType=1" method="post">
+    <form id="pagerForm" data-toggle="ajaxsearch" action="getPxInfoList.action?pageType=5" method="post">
 
         <input type="hidden" name="pageSize" value="20">
         <input type="hidden" name="currentPage" id="pageCurrent" value="<s:property value="page.currentPage" />">
@@ -37,9 +37,8 @@
             
             <button type="submit"  class="btn-default" data-icon="search" id="queryPX">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo" id="clearQuery">清空查询</a>
-
-            <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-red" onclick="batchaddReExam()" value="加入补考" /></span>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-green" onclick="batchpassExam()" value="考试通过" /></span>
+            <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-red" onclick="batchaddReExam()" value="加入补考" /></span>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doExport()" value="导出" /></span>
         </div>
     </form>
@@ -143,7 +142,7 @@
             $(this).alertmsg('confirm', '确认删除这些数据？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
                 $.ajax({
                     type: "POST",
-                    url: "batchdelPxInfo.action",
+                    url: "changeStatus.action",
                     data: {uuidarr:uuidarrs},
                     dataType: "json",
                     success: function(data){
@@ -164,11 +163,13 @@
 
 
     function addReExam(uuid){
+        var uuidarr = [];
+        uuidarr.push(uuid);
         $(this).alertmsg('confirm', '确认将此人加入补考？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
             $.ajax({
                 type: "POST",
-                url: "addReExam.action",
-                data: {uuid:uuid,type:'addreexam'},
+                url: "changeStatus.action",
+                data: {uuidarr:uuidarr,status:'2'},
                 dataType: "json",
                 success: function(data){
                     $("#queryPX").click();
@@ -181,11 +182,11 @@
         //debugger;
 
         if(uuidarrs.length > 0){
-            $(this).alertmsg('confirm', '确认将此人加入补考？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
+            $(this).alertmsg('confirm', '确认将这些人加入补考？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
                 $.ajax({
                     type: "POST",
-                    url: "batchaddReExam.action",
-                    data: {uuidarr:uuidarrs,type:'addreexam'},
+                    url: "changeStatus.action",
+                    data: {uuidarr:uuidarrs,status:'2'},
                     dataType: "json",
                     success: function(data){
                         if(data.statusCode==200){
@@ -203,11 +204,13 @@
 
 
     function passExam(uuid){
-        $(this).alertmsg('confirm', '确认将此人加入补考？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
+        var uuidarr = [];
+        uuidarr.push(uuid);
+        $(this).alertmsg('confirm', '确认此人考试通过？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
             $.ajax({
                 type: "POST",
-                url: "passExam.action",
-                data: {uuid:uuid,type:'exampass'},
+                url: "changeStatus.action",
+                data: {uuidarr:uuidarr,status:'1'},
                 dataType: "json",
                 success: function(data){
                     $("#queryPX").click();
@@ -220,11 +223,11 @@
         //debugger;
 
         if(uuidarrs.length > 0){
-            $(this).alertmsg('confirm', '确认考试通过？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
+            $(this).alertmsg('confirm', '确认这些人考试通过？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
                 $.ajax({
                     type: "POST",
-                    url: "batchpassExam.action",
-                    data: {uuidarr:uuidarrs,type:'exampass'},
+                    url: "changeStatus.action",
+                    data: {uuidarr:uuidarrs,status:'1'},
                     dataType: "json",
                     success: function(data){
                         if(data.statusCode==200){

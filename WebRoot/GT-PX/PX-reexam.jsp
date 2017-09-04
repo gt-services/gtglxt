@@ -2,7 +2,7 @@
 	contentType="text/html; charset=utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <div class="bjui-pageHeader">
-    <form id="pagerForm" data-toggle="ajaxsearch" action="getPxInfoList.action?pageType=1" method="post">
+    <form id="pagerForm" data-toggle="ajaxsearch" action="getPxInfoList.action?pageType=6" method="post">
 
         <input type="hidden" name="pageSize" value="20">
         <input type="hidden" name="currentPage" id="pageCurrent" value="<s:property value="page.currentPage" />">
@@ -38,7 +38,7 @@
             <button type="submit"  class="btn-default" data-icon="search" id="queryPX">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo" id="clearQuery">清空查询</a>
 
-            <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-red" onclick="batchpassReExam()" value="补考通过" /></span>
+            <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-green" onclick="changeStatus()" value="补考通过" /></span>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doExport()" value="导出" /></span>
         </div>
     </form>
@@ -92,7 +92,7 @@
                 <td><a href="editPxInfo.action?uuid=<s:property value="uuid"/>" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" >编辑</a>&nbsp;
                 </td>
                 <td>
-                    <a class="btn btn-green" id="delete<s:property value="uuid" />" onclick="passReExam('<s:property value="uuid" />')">考试通过</a>
+                    <a class="btn btn-green" id="delete<s:property value="uuid" />" onclick="addReExam('<s:property value="uuid" />')">补考通过</a>
                     <input type="checkbox" style="width: 15px;height: 15px" name="delUuid" value="<s:property value="uuid" />"/>
                 </td>
             </tr>
@@ -122,11 +122,13 @@
 
 
     function addReExam(uuid){
+        var uuidarr = [];
+        uuidarr.push(uuid);
         $(this).alertmsg('confirm', '确认将此人加入补考？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
             $.ajax({
                 type: "POST",
-                url: "batchaddReExam.action",
-                data: {uuid:uuid,type:'passreexam'},
+                url: "changeStatus.action",
+                data: {uuidarr:uuidarr,status:'1'},
                 dataType: "json",
                 success: function(data){
                     $("#queryPX").click();
@@ -134,22 +136,22 @@
             });
         }});
     }
-    function batchaddReExam(){
+    function changeStatus(){
         var uuidarrs = takeuuid();
         //debugger;
 
         if(uuidarrs.length > 0){
-            $(this).alertmsg('confirm', '确认将此人加入补考？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
+            $(this).alertmsg('confirm', '确认将此人通过考试？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
                 $.ajax({
                     type: "POST",
-                    url: "batchaddReExam.action",
-                    data: {uuidarr:uuidarrs,type:'passreexam'},
+                    url: "changeStatus.action",
+                    data: {uuidarr:uuidarrs,status:'1'},
                     dataType: "json",
                     success: function(data){
                         if(data.statusCode==200){
                             $("#clearQuery").click();
                         }else{
-                            $(this).alertmsg('error', '删除失败');
+                            $(this).alertmsg('error', '操作失败');
                         }
                     }
                 });

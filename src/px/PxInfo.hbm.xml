@@ -47,5 +47,6 @@
 		<property name="FirstRetestactualResults" column="FirstRetestactualResults"/>
 		<property name="SecondRetestactualResults" column="SecondRetestactualResults"/>
 		<property name="ThirdRetestactualResults" column="ThirdRetestactualResults"/>
+		<property name="status" column="status"/>
 	</class>
 </hibernate-mapping>

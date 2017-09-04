@@ -53,6 +53,22 @@ public class PxInfo implements Serializable{
 	private int ThirdRetestactualResults;
 
 
+	/**
+	 *
+	 * 培训新增考试状态 0未考;1通过；2未通过
+	 */
+
+	private Integer status =0;
+
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}

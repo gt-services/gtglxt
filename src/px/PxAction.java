@@ -123,19 +123,21 @@ public class PxAction extends ActionSupport {
 				hql += " and licenseStatus = :licenseStatus ";
 
 			}
-			//需要补考人员
+			//未考人员
 			if ("5".equals(pageType)) {
-				hql += " and ( theoryResults< :theoryResults or actualResults< :actualResults) ";
+				/*hql += " and ( theoryResults< :theoryResults or actualResults< :actualResults) ";
 				hql += " and (FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) " ;
-				hql += " and (SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults)";
+				hql += " and (SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults)";*/
+				hql += " and status = 0";
 
 			}
-			//补考未通过人员
+			//考试未通过人员
 			if ("6".equals(pageType)) {
-				hql += " and ( FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) ";
+				/*hql += " and ( FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) ";
 				hql +=	"and ( SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults) ";
 				hql +=	"and ( ThirdRetesttheoryResults< :ThirdRetesttheoryResults or ThirdRetestactualResults< :ThirdRetestactualResults) ";
-				hql +=	"and ( theoryResults< :theoryResults or actualResults< :actualResults)";
+				hql +=	"and ( theoryResults< :theoryResults or actualResults< :actualResults)";*/
+				hql += " and status = 2";
 			}
 			hql += " and signupDate like :signupDate ";
 
@@ -159,7 +161,7 @@ public class PxAction extends ActionSupport {
 				query.setParameter("licenseStatus", "未领证");
 
 			}
-			if ("5".equals(pageType)) {
+			/*if ("5".equals(pageType)) {
 				query.setParameter("theoryResults",60);
 				query.setParameter("actualResults", 60);
 				query.setParameter("FirstRetesttheoryResults", 60);
@@ -176,7 +178,7 @@ public class PxAction extends ActionSupport {
 				query.setParameter("SecondRetestactualResults", 60);
 				query.setParameter("ThirdRetesttheoryResults", 60);
 				query.setParameter("ThirdRetestactualResults", 60);
-			}
+			}*/
 			Long count = (Long) query.uniqueResult();
 			//System.out.println("===========count================"+count);
 			page.setTotalCount(Integer.parseInt(String.valueOf(count)));
@@ -191,16 +193,18 @@ public class PxAction extends ActionSupport {
 			}
 			//需要补考人员
 			if ("5".equals(pageType)) {
-				sql += " and ( theoryResults< :theoryResults or actualResults< :actualResults) ";
+				/*sql += " and ( theoryResults< :theoryResults or actualResults< :actualResults) ";
 				sql += " and (FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) " ;
-				sql += " and (SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults)";
+				sql += " and (SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults)";*/
+				sql += " and status = 0";
 			}
-			//补考未通过人员
+			//补考未通过人员s
 			if ("6".equals(pageType)) {
-				sql += " and ( FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) ";
+				/*sql += " and ( FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) ";
 				sql +=	"and ( SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults) ";
 				sql +=	"and ( ThirdRetesttheoryResults< :ThirdRetesttheoryResults or ThirdRetestactualResults< :ThirdRetestactualResults) ";
-				sql +=	"and ( theoryResults< :theoryResults or actualResults< :actualResults)";
+				sql +=	"and ( theoryResults< :theoryResults or actualResults< :actualResults)";*/
+				sql += " and status = 2";
 			}
 			if (keyword != null && !keyword.equals("")) {
 				sql += "and name like :name ";
@@ -227,7 +231,7 @@ public class PxAction extends ActionSupport {
 				q.setParameter("licenseStatus", "未领证");
 
 			}
-			if ("5".equals(pageType)) {
+			/*if ("5".equals(pageType)) {
 				q.setParameter("theoryResults",60);
 				q.setParameter("actualResults", 60);
 				q.setParameter("FirstRetesttheoryResults", 60);
@@ -244,7 +248,7 @@ public class PxAction extends ActionSupport {
 				q.setParameter("SecondRetestactualResults", 60);
 				q.setParameter("ThirdRetesttheoryResults", 60);
 				q.setParameter("ThirdRetestactualResults", 60);
-			}
+			}*/
 			q.setFirstResult((currentPage - 1) * 20);
 			q.setMaxResults(20);
 			list = q.list();
@@ -300,7 +304,6 @@ public class PxAction extends ActionSupport {
 
 		Session session = Hfsession.init();
 		Transaction tx = session.beginTransaction();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
 			Query q = session.createQuery("from PxInfo where uuid  in :uuidarr").setParameterList("uuidarr", uuidList);
@@ -332,6 +335,44 @@ public class PxAction extends ActionSupport {
 			} else {
 				session.update(pxInfo);
 			}
+			map.put("statusCode", 200);
+			ResultUtils.toJson(ServletActionContext.getResponse(), map);
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+		}finally{
+			Hfsession.close();
+		}
+		return SUCCESS;
+	}
+
+	/**
+	 * 改变人员的状态 0 未考 1 通过 2 未通过
+	 * @return
+	 */
+	public String changeStatus() {
+		Session session = Hfsession.init();
+		Transaction tx = session.beginTransaction();
+		HttpServletRequest request = ServletActionContext.getRequest ();
+		String statusStr = request.getParameter("status");
+		Integer status = Integer.parseInt(statusStr);
+		Map uuidarrs =request.getParameterMap();
+		Object uuidarrObj = uuidarrs.get("uuidarr[]");
+		String[] uuidarr =(String[])uuidarrObj;
+		List uuidList = Arrays.asList(uuidarr);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Query q = session.createQuery("from PxInfo where uuid  in :uuidarr").setParameterList("uuidarr", uuidList);
+			List<PxInfo> list = q.list();
+
+			for (PxInfo p : list
+				 ) {
+				p.setStatus(status);
+				session.update(p);
+			}
+
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 			tx.commit();
@@ -473,7 +514,7 @@ public class PxAction extends ActionSupport {
 			InputStream fis = new FileInputStream(excelPath);
 			list = new ArrayList<>();
 			list = PxService.importExcel(fis);
-			System.out.println("=============LISTSIZE===================="+list.size());
+			//System.out.println("=============LISTSIZE===================="+list.size());
 			for (PxInfo info : list) {
 				session.save(info);
 			}

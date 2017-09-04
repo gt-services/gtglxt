@@ -22,6 +22,10 @@
             <result name="success">main.jsp</result>
             <interceptor-ref name="defaultStack"/>
         </action>
+        <action name="changeStatus" class="px.PxAction" method="changeStatus">
+            <result name="success">main.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
 
          <action name="addPxInfo" class="px.PxAction" method="addPxInfo">
                  <result name="success">main.jsp</result>
