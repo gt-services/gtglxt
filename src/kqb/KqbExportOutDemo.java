@@ -46,6 +46,115 @@ public class KqbExportOutDemo {
 	private String day29;
 	private String day30; 
 	private String day31;
+	/*新增的扣款项*/
+	private String submit_healcard;//健康证报销
+	private String cut_waterandele;//水电费扣款
+	private String cut_forkcard;//叉车证扣款
+	private String repay_forkcard;//叉车证还款
+	private String repay_staff;//员工还款
+	private String borrow_staff;//员工借款
+	private String cut_stay;//住宿扣款
+	private String cut_clothesandshoes;//工作服和鞋扣款
+	private String repay_clothesandshoes;//工作服和鞋还款
+	private String canbu;//餐补
+	private String cut_else;//其他扣款
+	private String remark;//备注
+
+	public String getSubmit_healcard() {
+		return submit_healcard;
+	}
+
+	public void setSubmit_healcard(String submit_healcard) {
+		this.submit_healcard = submit_healcard;
+	}
+
+	public String getCut_waterandele() {
+		return cut_waterandele;
+	}
+
+	public void setCut_waterandele(String cut_waterandele) {
+		this.cut_waterandele = cut_waterandele;
+	}
+
+	public String getCut_forkcard() {
+		return cut_forkcard;
+	}
+
+	public void setCut_forkcard(String cut_forkcard) {
+		this.cut_forkcard = cut_forkcard;
+	}
+
+	public String getRepay_forkcard() {
+		return repay_forkcard;
+	}
+
+	public void setRepay_forkcard(String repay_forkcard) {
+		this.repay_forkcard = repay_forkcard;
+	}
+
+	public String getRepay_staff() {
+		return repay_staff;
+	}
+
+	public void setRepay_staff(String repay_staff) {
+		this.repay_staff = repay_staff;
+	}
+
+	public String getBorrow_staff() {
+		return borrow_staff;
+	}
+
+	public void setBorrow_staff(String borrow_staff) {
+		this.borrow_staff = borrow_staff;
+	}
+
+	public String getCut_stay() {
+		return cut_stay;
+	}
+
+	public void setCut_stay(String cut_stay) {
+		this.cut_stay = cut_stay;
+	}
+
+	public String getCut_clothesandshoes() {
+		return cut_clothesandshoes;
+	}
+
+	public void setCut_clothesandshoes(String cut_clothesandshoes) {
+		this.cut_clothesandshoes = cut_clothesandshoes;
+	}
+
+	public String getRepay_clothesandshoes() {
+		return repay_clothesandshoes;
+	}
+
+	public void setRepay_clothesandshoes(String repay_clothesandshoes) {
+		this.repay_clothesandshoes = repay_clothesandshoes;
+	}
+
+	public String getCanbu() {
+		return canbu;
+	}
+
+	public void setCanbu(String canbu) {
+		this.canbu = canbu;
+	}
+
+	public String getCut_else() {
+		return cut_else;
+	}
+
+	public void setCut_else(String cut_else) {
+		this.cut_else = cut_else;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	public String getName() {
 		return name;

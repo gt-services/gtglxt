@@ -12,10 +12,10 @@
     	</id>
     	<property name="signupDate" type="string" column="signupdate"/>
     	<property name="name" column="name"/>
-    	<property name="sex" column="sex"/>
+    	<property name="sex" column="sex" length="10"/>
     	<property name="idCard" column="idcard"/>
     	<property name="levelEdu" column="leveledu"/>
-    	<property name="unitOrPerson" column="unitorperson"/>
+    	<property name="unitOrPerson" column="unitorperson" length="500"/>
     	<property name="telephone" column="telephone"/>
     	<property name="contactOfUnit" column="contactofunit"/>
     	<property name="unitPhone" column="unitphone"/>

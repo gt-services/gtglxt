@@ -1103,7 +1103,7 @@ public class RosterAction extends ActionSupport {
 		}finally{
 			Hfsession.close();
 		}
-		return NONE;
+		return SUCCESS;
 	}
 
 	public String getDepartureList () {

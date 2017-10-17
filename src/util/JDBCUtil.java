@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBCUtil {
-//	private static final String URL = "jdbc:mysql://localhost:3306/gt?useUnicode=true&amp;characterEncoding=utf8";
-//	private static final String USERNAME = "root";
-//	private static final String PASSWORD = "123456";
-	private static final String URL = "jdbc:mysql://rm-uf6533mo112otpf4so.mysql.rds.aliyuncs.com:3306/gt?useUnicode=true&amp;characterEncoding=utf8";
+	private static final String URL = "jdbc:mysql://localhost:3306/gt?useUnicode=true&amp;characterEncoding=utf8";
+	private static final String USERNAME = "root";
+	private static final String PASSWORD = "123456";
+	/*private static final String URL = "jdbc:mysql://rm-uf6533mo112otpf4so.mysql.rds.aliyuncs.com:3306/gt?useUnicode=true&amp;characterEncoding=utf8";
 	private static final String USERNAME = "rootadmin";
-	private static final String PASSWORD = "rootAdmin@123";
+	private static final String PASSWORD = "rootAdmin@123";*/
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static Connection conn =null;
 	private static Statement stat=null;

@@ -50,6 +50,18 @@
     	<property name="day29" column="day29" length="255"/>
     	<property name="day30" column="day30" length="255"/>
     	<property name="day31" column="day31" length="255"/>
+    	<property name="submit_healcard" column="submit_healcard"/>
+    	<property name="cut_waterandele" column="cut_waterandele"/>
+    	<property name="cut_forkcard" column="cut_forkcard"/>
+    	<property name="repay_forkcard" column="repay_forkcard"/>
+    	<property name="repay_staff" column="repay_staff"/>
+    	<property name="borrow_staff" column="borrow_staff"/>
+    	<property name="cut_stay" column="cut_stay"/>
+    	<property name="cut_clothesandshoes" column="cut_clothesandshoes"/>
+    	<property name="repay_clothesandshoes" column="repay_clothesandshoes"/>
+    	<property name="canbu" column="canbu"/>
+    	<property name="cut_else" column="cut_else"/>
+    	<property name="remark" column="remark"/>
     	<property name="createDate" column="createDate" type="timestamp"/>
 	</class>
 </hibernate-mapping>

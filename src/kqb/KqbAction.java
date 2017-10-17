@@ -342,6 +342,8 @@ public class KqbAction extends ActionSupport{
 					Integer jidint = Integer.parseInt(jidstr);
 					//如果数据库存在 -- 修改
 					if(jobExist.contains(jidint)){
+						Query q5 = session.createQuery("from Kqb where uuid =:uuid").setParameter("uuid",uuid);
+						Kqb kqb =(Kqb) q5.uniqueResult();
 						Query q2 = session.createQuery("from KqbExport where uuid =:uuid and month =:month and year =:year and jid =:jid");
 						q2.setParameter("uuid",uuid );
 						q2.setParameter("month",month );
@@ -353,6 +355,19 @@ public class KqbAction extends ActionSupport{
 						//动态添加属性字段-----使用工具类
 						m.put("day"+cday,hour[i]);
 						BeanRefUtil.setFieldValue(export, m);
+						/*新增的扣款项*/
+						export.setSubmit_healcard(kqb.getSubmit_healcard());//健康证报销
+						export.setCut_waterandele(kqb.getCut_waterandele());//水电费扣款
+						export.setCut_forkcard(kqb.getCut_forkcard());//叉车证扣款
+						export.setRepay_forkcard(kqb.getRepay_forkcard());//叉车证还款
+						export.setRepay_staff(kqb.getRepay_staff());//员工还款
+						export.setBorrow_staff(kqb.getBorrow_staff());//员工借款
+						export.setCut_stay(kqb.getCut_stay());//住宿扣款
+						export.setCut_clothesandshoes(kqb.getCut_clothesandshoes());//工作服和鞋扣款
+						export.setRepay_clothesandshoes(kqb.getRepay_clothesandshoes());//工作服和鞋还款
+						export.setCanbu(kqb.getCanbu());//餐补
+						export.setCut_else(kqb.getCut_else());//其他扣款
+						export.setRemark(kqb.getRemark());//备注
 						session.update(export);
 					} else {
 						KqbExport export = new KqbExport();
@@ -400,6 +415,21 @@ public class KqbAction extends ActionSupport{
 						export.setYear(year1+"");
 						//月
 						export.setMonth(month);
+
+						/*新增的扣款项*/
+						export.setSubmit_healcard(kqb.getSubmit_healcard());//健康证报销
+						export.setCut_waterandele(kqb.getCut_waterandele());//水电费扣款
+						export.setCut_forkcard(kqb.getCut_forkcard());//叉车证扣款
+						export.setRepay_forkcard(kqb.getRepay_forkcard());//叉车证还款
+						export.setRepay_staff(kqb.getRepay_staff());//员工还款
+						export.setBorrow_staff(kqb.getBorrow_staff());//员工借款
+						export.setCut_stay(kqb.getCut_stay());//住宿扣款
+						export.setCut_clothesandshoes(kqb.getCut_clothesandshoes());//工作服和鞋扣款
+						export.setRepay_clothesandshoes(kqb.getRepay_clothesandshoes());//工作服和鞋还款
+						export.setCanbu(kqb.getCanbu());//餐补
+						export.setCut_else(kqb.getCut_else());//其他扣款
+						export.setRemark(kqb.getRemark());//备注
+
 						export.setCreateDate(new Date());
 						session.save(export);
 					}
@@ -412,6 +442,8 @@ public class KqbAction extends ActionSupport{
 					Integer sidint = Integer.parseInt(sidstr);
 					//如果数据库存在 -- 修改
 					if(sizeExist.contains(sidint)){
+						Query q5 = session.createQuery("from Kqb where uuid =:uuid").setParameter("uuid",uuid);
+						Kqb kqb =(Kqb) q5.uniqueResult();
 						Query q4 = session.createQuery("from KqbExport where uuid =:uuid and month =:month and year =:year and sid =:sid");
 						q4.setParameter("uuid",uuid );
 						q4.setParameter("month",month );
@@ -423,6 +455,19 @@ public class KqbAction extends ActionSupport{
 						//动态添加属性字段-----使用工具类
 						m.put("day"+cday,numbers[i]);
 						BeanRefUtil.setFieldValue(export, m);
+						/*新增的扣款项*/
+						export.setSubmit_healcard(kqb.getSubmit_healcard());//健康证报销
+						export.setCut_waterandele(kqb.getCut_waterandele());//水电费扣款
+						export.setCut_forkcard(kqb.getCut_forkcard());//叉车证扣款
+						export.setRepay_forkcard(kqb.getRepay_forkcard());//叉车证还款
+						export.setRepay_staff(kqb.getRepay_staff());//员工还款
+						export.setBorrow_staff(kqb.getBorrow_staff());//员工借款
+						export.setCut_stay(kqb.getCut_stay());//住宿扣款
+						export.setCut_clothesandshoes(kqb.getCut_clothesandshoes());//工作服和鞋扣款
+						export.setRepay_clothesandshoes(kqb.getRepay_clothesandshoes());//工作服和鞋还款
+						export.setCanbu(kqb.getCanbu());//餐补
+						export.setCut_else(kqb.getCut_else());//其他扣款
+						export.setRemark(kqb.getRemark());//备注
 						session.update(export);
 					} else {
 						KqbExport export = new KqbExport();
@@ -470,6 +515,19 @@ public class KqbAction extends ActionSupport{
 						export.setYear(year1+"");
 						//月
 						export.setMonth(month);
+						/*新增的扣款项*/
+						export.setSubmit_healcard(kqb.getSubmit_healcard());//健康证报销
+						export.setCut_waterandele(kqb.getCut_waterandele());//水电费扣款
+						export.setCut_forkcard(kqb.getCut_forkcard());//叉车证扣款
+						export.setRepay_forkcard(kqb.getRepay_forkcard());//叉车证还款
+						export.setRepay_staff(kqb.getRepay_staff());//员工还款
+						export.setBorrow_staff(kqb.getBorrow_staff());//员工借款
+						export.setCut_stay(kqb.getCut_stay());//住宿扣款
+						export.setCut_clothesandshoes(kqb.getCut_clothesandshoes());//工作服和鞋扣款
+						export.setRepay_clothesandshoes(kqb.getRepay_clothesandshoes());//工作服和鞋还款
+						export.setCanbu(kqb.getCanbu());//餐补
+						export.setCut_else(kqb.getCut_else());//其他扣款
+						export.setRemark(kqb.getRemark());//备注
 						export.setCreateDate(new Date());
 						session.save(export);
 					}
@@ -684,7 +742,7 @@ public class KqbAction extends ActionSupport{
 	
 	
 	//	添加考勤信息到kqb---------------此处有放开权限操作----加入原始统计考勤总表
-	public String updateKqb(){
+	public String updateKqb()	{
 		HttpServletRequest request = ServletActionContext.getRequest ();
 		Session session = Hfsession.init();
 		Transaction tx = session.beginTransaction();
@@ -924,11 +982,25 @@ public class KqbAction extends ActionSupport{
 				kd.setDay29(k.getDay29());
 				kd.setDay30(k.getDay30());
 				kd.setDay31(k.getDay31());
+				/*新增的扣款项*/
+				kd.setSubmit_healcard(k.getSubmit_healcard());//健康证报销
+				kd.setCut_waterandele(k.getCut_waterandele());//水电费扣款
+				kd.setCut_forkcard(k.getCut_forkcard());//叉车证扣款
+				kd.setRepay_forkcard(k.getRepay_forkcard());//叉车证还款
+				kd.setRepay_staff(k.getRepay_staff());//员工还款
+				kd.setBorrow_staff(k.getBorrow_staff());//员工借款
+				kd.setCut_stay(k.getCut_stay());//住宿扣款
+				kd.setCut_clothesandshoes(k.getCut_clothesandshoes());//工作服和鞋扣款
+				kd.setRepay_clothesandshoes(k.getRepay_clothesandshoes());//工作服和鞋还款
+				kd.setCanbu(k.getCanbu());//餐补
+				kd.setCut_else(k.getCut_else());//其他扣款
+				kd.setRemark(k.getRemark());//备注
 				listObject.add(kd);
 			}
 
 
-			String[] str = new String[]{"姓名","银行卡","生产组","岗位名称","年份","月份","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+			String[] str = new String[]{"姓名","银行卡","生产组","岗位名称","年份","月份","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24",
+					"25","26","27","28","29","30","31","健康证报销","水电费扣款","叉车证扣款","叉车证还款","员工还款","员工借款","住宿扣款","工作服和鞋扣款","工作服和鞋还款","餐补","其他扣款","备注"};
 			String title= year+"年"+month+"月考勤表.xls";
 //			if(StringHelp.isNotEmpty(scz)){
 //				for(Second s :lists){
@@ -1184,6 +1256,11 @@ public class KqbAction extends ActionSupport{
 		}
 		return type+"";
 	}
+
+	/**
+	 * 扣款项编辑
+	 * @return
+	 */
 	public String cutEdit(){		
 		Session session = Hfsession.init();
 		Transaction tx = session.beginTransaction();
@@ -1201,8 +1278,27 @@ public class KqbAction extends ActionSupport{
 			kqb1.setRepay_clothesandshoes(kqb.getRepay_clothesandshoes());
 			kqb1.setRepay_forkcard(kqb.getRepay_forkcard());
 			kqb1.setRepay_staff(kqb.getRepay_staff());
-			
+			kqb1.setCanbu(kqb.getCanbu());
 			session.update(kqb1);
+			/*扣款項編輯後修改導出表數據*/
+			Query q2 = session.createQuery("from KqbExport where uuid =:uuid").setParameter("uuid", uuid);
+			List<KqbExport> ke = q2.list();
+			if(ke!=null && ke.size()>0){
+				KqbExport export = ke.get(0);
+				/*新增的扣款项*/
+				export.setSubmit_healcard(kqb1.getSubmit_healcard());//健康证报销
+				export.setCut_waterandele(kqb1.getCut_waterandele());//水电费扣款
+				export.setCut_forkcard(kqb1.getCut_forkcard());//叉车证扣款
+				export.setRepay_forkcard(kqb1.getRepay_forkcard());//叉车证还款
+				export.setRepay_staff(kqb1.getRepay_staff());//员工还款
+				export.setBorrow_staff(kqb1.getBorrow_staff());//员工借款
+				export.setCut_stay(kqb1.getCut_stay());//住宿扣款
+				export.setCut_clothesandshoes(kqb1.getCut_clothesandshoes());//工作服和鞋扣款
+				export.setRepay_clothesandshoes(kqb1.getRepay_clothesandshoes());//工作服和鞋还款
+				export.setCanbu(kqb1.getCanbu());//餐补
+				export.setCut_else(kqb1.getCut_else());//其他扣款
+				export.setRemark(kqb1.getRemark());//备注
+			}
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 			tx.commit();
