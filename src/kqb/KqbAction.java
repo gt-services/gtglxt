@@ -12,12 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -581,14 +576,57 @@ public class KqbAction extends ActionSupport{
 		return SUCCESS;
 	}
 
-	public String addintoKqb(){
+	public String batchaddintoKqb(){
+		HttpServletRequest request = ServletActionContext.getRequest ();
 		Session session = Hfsession.init();
 		Transaction tx = session.beginTransaction();
+		Map requestArr =request.getParameterMap();
+		Object uuidarrObj = requestArr.get("uuidArrs[]");
+		String[] uuidarr =(String[])uuidarrObj;
+		List uuidList = Arrays.asList(uuidarr);
+		Object sczarrObj = requestArr.get("sczArrs[]");
+		String[] sczarr =(String[])sczarrObj;
+		List sczList = Arrays.asList(sczarr);
+		Object namearrObj = requestArr.get("nameArrs[]");
+		String[] namearr =(String[])namearrObj;
+		List nameList = Arrays.asList(namearr);
 		Calendar now = Calendar.getInstance();  
         String year1 = now.get(Calendar.YEAR)+"";
         String month1 = (now.get(Calendar.MONTH) + 1)+"";
         year=year1;
         month=month1;
+		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,String> sczMap = SecondService.getSecondNameToIdMap();
+		List<Kqb> list = new ArrayList<>();
+		try {
+			for(int i = 0 ; i < uuidList.size() ; i++){
+				Kqb k1 = new Kqb();
+				k1.setUuid(uuidarr[i]);
+				k1.setName(namearr[i]);
+				k1.setScz(sczMap.get(sczarr[i]));
+				k1.setYear(year);
+				k1.setMonth(month);
+				session.save(k1);
+			}
+			map.put("statusCode", 200);
+			ResultUtils.toJson(ServletActionContext.getResponse(), map);
+			tx.commit();
+			Hfsession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+		}
+		return SUCCESS;
+	}
+
+	public String addintoKqb(){
+		Session session = Hfsession.init();
+		Transaction tx = session.beginTransaction();
+		Calendar now = Calendar.getInstance();
+		String year1 = now.get(Calendar.YEAR)+"";
+		String month1 = (now.get(Calendar.MONTH) + 1)+"";
+		year=year1;
+		month=month1;
 		Map<String,Object> map = new HashMap<String,Object>();
 		Kqb k1 = new Kqb();
 		try {
@@ -645,7 +683,7 @@ public class KqbAction extends ActionSupport{
 	}
 	
 	
-	//	添加考勤信息到kqb---------------此处有放开权限操作
+	//	添加考勤信息到kqb---------------此处有放开权限操作----加入原始统计考勤总表
 	public String updateKqb(){
 		HttpServletRequest request = ServletActionContext.getRequest ();
 		Session session = Hfsession.init();
@@ -739,9 +777,6 @@ public class KqbAction extends ActionSupport{
 			if(keyword != null && !keyword.equals("")){
 				hql += "and name like :name ";
 			}
-//			if(StringHelp.isNotEmpty(scz)){
-//				hql += "and scz = :scz ";
-//			}
 			if(StringHelp.isNotEmpty(year)){
 				hql += "and year = :year ";
 			}
@@ -923,9 +958,6 @@ public class KqbAction extends ActionSupport{
 		List<Kqb> listKqb = new ArrayList<>();
 		Session session = Hfsession.init();
 		Integer month1=Integer.parseInt(month);
-//		System.out.println("========================================================="+month);
-//		System.out.println("========================================================="+month1);
-	
 		String sczname=request.getParameter("scz");
 		
 //		try {

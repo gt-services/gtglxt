@@ -11,7 +11,7 @@
             <label>关键词：</label><input type="text" id="keyword" value="<s:property value="keyword" />" name="keyword" placeholder="请输入查询姓名" class="form-control" size="12" />
             <button type="submit"  class="btn-default" data-icon="search" id="queryRS">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>
-            <span style="float:right;margin-right:5px;"><a href="/GT-Admin/admin_scadd.jsp" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="250" data-id="dialog-mask" data-mask="true" data-icon="plus">新增</a></span>
+            <span style="float:right;margin-right:5px;"><a href="GT-Admin/admin_scadd.jsp" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="250" data-id="dialog-mask" data-mask="true" data-icon="plus">新增</a></span>
         </div>
     </form>
 

@@ -19,6 +19,7 @@
             <button type="submit"  class="btn-default" data-icon="search" id="queryRS">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo" id="clearQuery">清空查询</a>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doExport()" value="导出" /></span>
+            <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="batchdealnot()" value="批量处理" /></span>
         </div>
     </form>
 
@@ -71,6 +72,7 @@
             	<td>
                     <s:if test="deal==0">
                         <a class="btn btn-red"  onclick="dealnot('<s:property value="uuid" />')">未处理</a>
+                        <input type="checkbox" style="width: 15px;height: 15px" name="delUuid" value="<s:property value="uuid" />"/>
                     </s:if>
                     <s:else>
                         <a class="btn btn-green kqardadd" onclick="deal('<s:property value="uuid" />')">已处理</a>
@@ -115,18 +117,48 @@ function deal(uuid){
 }
 
 function dealnot(uuid){
-    $.ajax({
-        type: "POST",
-        url: "editDeal.action",
-        data: {deal:'1',uuid:uuid},
-        dataType: "json",
-        success: function(data){
-            if(data.statusCode==200){
-                $("#queryRS").click();
-            }else{
-                $(this).alertmsg('error', '删除失败');
+        $.ajax({
+            type: "POST",
+            url: "editDeal.action",
+            data: {deal:'1',uuid:uuid},
+            dataType: "json",
+            success: function(data){
+                if(data.statusCode==200){
+                    $("#queryRS").click();
+                }else{
+                    $(this).alertmsg('error', '删除失败');
+                }
             }
-        }
+        });
+}
+
+
+
+function batchdealnot() {
+    var uuidarrs = takeuuid();
+    if(uuidarrs.length > 0){
+        $.ajax({
+            type: "POST",
+            url: "batcheditDeal.action",
+            data: {deal: '1', uuidarr: uuidarrs},
+            dataType: "json",
+            success: function (data) {
+                if (data.statusCode == 200) {
+                    $("#queryRS").click();
+                } else {
+                    $(this).alertmsg('error', '删除失败');
+                }
+            }
+        });
+    }
+}
+
+
+function takeuuid(){ //jquery获取复选框值
+    var uuidArr =[];
+    $('input[name="delUuid"]:checked').each(function(){
+        uuidArr.push($(this).val());
     });
+    return uuidArr;
 }
 </script>

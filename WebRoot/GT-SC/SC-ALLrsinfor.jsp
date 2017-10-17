@@ -21,8 +21,9 @@
             <button type="submit"  class="btn-default" data-icon="search" id="queryRS">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo" id="clearQuery">清空查询</a>
             <%--<span style="float:right;margin-right:5px;"><a onclick="doExport()" class="btn btn-blue" data-confirm-msg="确定要导出吗？" data-icon="arrow-down">导出</a></span>--%>
-            <span style="float:right;margin-right:5px;"><a href="/GT-RS/RSimport.jsp" class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
+            <span style="float:right;margin-right:5px;"><a href="GT-RS/RSimport.jsp" class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
             <span style="float:right;margin-right:5px;"><a href="preaddroster.action?author=5" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" data-mask="true" data-icon="plus">新增</a></span>
+            <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="batchaddinKQ()" value="批量加入考勤" /></span>
         </div>
     </form>
 
@@ -71,7 +72,8 @@
             	<a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')">删除</a></td>
             	<td>
             		<s:if test=" addinkq== '未添加'">
-            		<a class="btn btn-red"  onclick="addinKQ('<s:property value="uuid" />','<s:property value="scz" />','<s:property value="name" />')">未添加</a>
+            		    <a class="btn btn-red"  onclick="addinKQ('<s:property value="uuid" />','<s:property value="scz" />','<s:property value="name" />')">未添加</a>
+                        <input type="checkbox" style="width: 15px;height: 15px" name="delUuid" value="<s:property value="uuid" />,<s:property value="scz" />,<s:property value="name" />"/>
             		</s:if>
             		<s:else>
             		<a class="btn btn-green kqardadd" onclick="kqardadd()">已添加</a>
@@ -153,5 +155,60 @@
          });
 	   }});
 	}
+
+    function batchaddinKQ(){
+        var parmasarr = takearr();
+        var uuidArr = parmasarr.uuidArr;
+        var sczArr = parmasarr.sczArr;
+        var nameArr = parmasarr.nameArr;
+        console.log(uuidArr,uuidArr,nameArr);
+        if(uuidArr.length > 0){
+            $(this).alertmsg('confirm', '确认将此人加入考勤？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
+                $.ajax({
+                    type: "POST",
+                    url: "batchaddinkqroster.action",
+                    data: {uuidArrs:uuidArr},
+                    dataType: "json",
+                    success: function(data){
+                        if(data.statusCode==200){
+                            $.ajax({
+                                type: "POST",
+                                url: "batchaddinkqb.action",
+                                data: {sczArrs:sczArr,nameArrs:nameArr,uuidArrs:uuidArr},
+                                dataType: "json",
+                                success: function(data){
+                                    if(data.statusCode==200){
+                                        $("#clearQuery").click();
+                                    }else{
+                                        $(this).alertmsg('error', '加入考勤失败');
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }});
+        }
+    }
+
+    function takearr(){ //jquery获取复选框值
+        var uuidArr =[];
+        var sczArr = [];
+        var nameArr = [];
+        $('input[name="delUuid"]:checked').each(function(){
+            var arrlist = $(this).val();
+            var arrobj = arrlist.split(',');
+            uuidArr.push(arrobj[0]);
+            sczArr.push(arrobj[1]);
+            nameArr.push(arrobj[2]);
+        });
+        var arr = {
+            uuidArr:uuidArr,
+            sczArr:sczArr,
+            nameArr:nameArr
+        }
+        return arr;
+    }
+
 
 </script>

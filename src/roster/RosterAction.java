@@ -797,8 +797,34 @@ public class RosterAction extends ActionSupport {
 			e.printStackTrace();
 		}
 		return SUCCESS;
+	}
 
+	public String batchaddinkqRoster(){
+		HttpServletRequest request = ServletActionContext.getRequest ();
+		Map uuidarrs =request.getParameterMap();
+		Object uuidarrObj = uuidarrs.get("uuidArrs[]");
+		String[] uuidarr =(String[])uuidarrObj;
+		List uuidList = Arrays.asList(uuidarr);
 
+		Session session = Hfsession.init();
+		Transaction tx = session.beginTransaction();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			Query q = session.createQuery("from Roster where uuid  in :uuidarr").setParameterList("uuidarr", uuidList);
+			List<Roster> list   = q.list();
+			for (Roster r:list) {
+				r.setAddinkq("已添加");
+				session.update(r);
+			}
+			map.put("statusCode", 200);
+			ResultUtils.toJson(ServletActionContext.getResponse(), map);
+			tx.commit();
+			Hfsession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
 	}
 	
 	public String inDialog(){
@@ -1250,9 +1276,7 @@ public class RosterAction extends ActionSupport {
         return fileName.substring(pos);  
     }  
   
-    public String fileUpload() {  
-    	System.out.println("==================这里是upload=============================");
-    	System.out.println("==================这里是uploaduuid============================="+uuid);
+    public String fileUpload() {
     	/*if(myFile1!=null){
     		
     		myFile.add(myFile1);
@@ -1261,8 +1285,6 @@ public class RosterAction extends ActionSupport {
     		
     		myFile.add(myFile2);
     	}*/
-    	System.out.println("==================myFile============================="+myFile1);
-    	System.out.println("==================myFile============================="+myFile2);
     	Session session = Hfsession.init();
     	Transaction tx = session.beginTransaction();
     	Map<String,Object> map = new HashMap<String,Object>();
@@ -1272,8 +1294,7 @@ public class RosterAction extends ActionSupport {
         String str ="";
        // System.out.println("========================myfilesize==========================="+myFile.size());
         try {
-	        for (int i = 0; i < myFile.size(); i++) {  
-	        	System.out.println("========================myfile==========================="+myFile.get(i));
+	        for (int i = 0; i < myFile.size(); i++) {
 	            imageFileName.add(new Date().getTime()+ getExtention(this.getMyFileFileName().get(i))) ;  
 	           
 	            File imageFile = new File(ServletActionContext.getServletContext()  //得到图片保存的位置(根据root来得到图片保存的路径在tomcat下的该工程里)  
@@ -1283,18 +1304,14 @@ public class RosterAction extends ActionSupport {
 	            if(!imageFile.getParentFile().exists()){     //如果Images文件夹不存在  
 	            	imageFile.getParentFile().mkdirs();      //则创建新的多级文件夹  
 	                  
-	            }  
-	            System.out.println("===========imageFile==================="+imageFile);
-	            copy(myFile.get(i), imageFile);  //把图片写入到上面设置的路径里  
+	            }
+	            copy(myFile.get(i), imageFile);  //把图片写入到上面设置的路径里
 	            str+="UploadImages/"+imageFileName.get(i)+",";
 	            
-	        } 
-	        System.out.println("=================str========================="+str);
+	        }
 	        Query q = session.createQuery("from Roster where uuid =:uuid").setParameter("uuid", uuid);
 	        Roster ro = (Roster) q.uniqueResult();
 	        ro.setImage(str);
-	      
-	        System.out.println("===================roster=============="+ro);
 	        session.update(ro);
 	        map.put("statusCode", 200);
 	        ResultUtils.toJson(ServletActionContext.getResponse(), map);
@@ -1355,6 +1372,35 @@ public class RosterAction extends ActionSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ERROR;
+		}
+		return SUCCESS;
+	}
+
+	public String batcheditDeal(){
+		HttpServletRequest request = ServletActionContext.getRequest ();
+		String deal = request.getParameter("deal");
+		Map uuidarrs =request.getParameterMap();
+		Object uuidarrObj = uuidarrs.get("uuidarr[]");
+		String[] uuidarr =(String[])uuidarrObj;
+		List uuidList = Arrays.asList(uuidarr);
+		Session session = Hfsession.init();
+		Transaction tx = session.beginTransaction();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			Query q = session.createQuery("from Roster where uuid  in :uuidarr").setParameterList("uuidarr", uuidList);
+			List<Roster> list   = q.list();
+			for (Roster r:list
+					) {
+				r.setDeal(deal);
+				session.update(r);
+			}
+			map.put("statusCode", 200);
+			ResultUtils.toJson(ServletActionContext.getResponse(), map);
+			tx.commit();
+			Hfsession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return SUCCESS;
 	}

@@ -27,9 +27,19 @@
         <result name="success">main.jsp</result>
                 <interceptor-ref name="defaultStack"/>
         </action>
+
+        <action name="batchaddinkqb" class="kqb.KqbAction" method="batchaddintoKqb">
+            <result name="success">main.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
         <action name="addinkqroster" class="roster.RosterAction" method="addinkqRoster">
         <result name="success">main.jsp</result>
                 <interceptor-ref name="defaultStack"/>
+        </action>
+
+        <action name="batchaddinkqroster" class="roster.RosterAction" method="batchaddinkqRoster">
+            <result name="success">main.jsp</result>
+            <interceptor-ref name="defaultStack"/>
         </action>
         <action name="editkqb" class="kqb.KqbAction" method="editKqb">
                 

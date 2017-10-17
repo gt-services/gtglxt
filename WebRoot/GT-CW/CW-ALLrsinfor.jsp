@@ -12,8 +12,8 @@
             <button type="submit"  class="btn-default" data-icon="search" id="queryRS">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo" id="clearQuery">清空查询</a>
             <span style="float:right;margin-right:5px;"><a href="exportRoster.action" class="btn btn-blue" data-confirm-msg="确定要导出吗？" data-icon="arrow-down">导出</a></span>
-            <span style="float:right;margin-right:5px;"><a href="/GT-RS/RSimport.jsp" class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
-            <span style="float:right;margin-right:5px;"><a href="/GT-RS/RSadd.jsp" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" data-mask="true" data-icon="plus">新增</a></span>
+            <span style="float:right;margin-right:5px;"><a href="GT-RS/RSimport.jsp" class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
+            <span style="float:right;margin-right:5px;"><a href="GT-RS/RSadd.jsp" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" data-mask="true" data-icon="plus">新增</a></span>
         </div>
     </form>
 

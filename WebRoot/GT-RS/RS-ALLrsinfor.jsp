@@ -54,7 +54,7 @@
 
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-red" onclick="batchdeleteRS()" value="批量删除" /></span>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doExport()" value="导出" /></span>
-            <span style="float:right;margin-right:5px;"><a href="/GT-RS/RSimport.jsp"  class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
+            <span style="float:right;margin-right:5px;"><a href="GT-RS/RSimport.jsp"  class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
             <span style="float:right;margin-right:5px;"><a href="preaddroster.action?author=2" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" data-mask="true" data-icon="plus">新增</a></span>
         </div>
     </form>

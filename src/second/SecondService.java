@@ -101,4 +101,20 @@ public class SecondService {
 		}
 		return map;
 	}
+
+	public static Map<String,String> getSecondNameToIdMap(){
+		Session session = Hfsession.init();
+		List<Second> list = new ArrayList<Second>();
+		Map<String,String> map = new HashMap<>();
+		try {
+			Query q = session.createQuery("from Second where 1=1 ");
+			list = q.list();
+			for(int i =0;i<list.size();i++){
+				map.put(list.get(i).getName(),list.get(i).getSecondId()+"");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
 }
