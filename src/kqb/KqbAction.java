@@ -84,7 +84,7 @@ public class KqbAction extends ActionSupport{
 	}
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
-	
+	/*啦啦啦*/
 	public String getKqbList(){
 		HttpServletRequest request = ServletActionContext.getRequest ();
 		HttpSession httpSession = request.getSession();
