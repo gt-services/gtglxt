@@ -48,7 +48,7 @@ public class Sbinfo {
 	public Long getUuid() {
 		return uuid;
 	}
-	public void setUuid(java.lang.Long uuid) {
+	public void setUuid(Long uuid) {
 		this.uuid = uuid;
 	}
 
