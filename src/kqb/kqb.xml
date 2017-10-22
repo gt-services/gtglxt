@@ -42,21 +42,22 @@
             <interceptor-ref name="defaultStack"/>
         </action>
         <action name="editkqb" class="kqb.KqbAction" method="editKqb">
-                
-                <result name="2">/GT-SC/kq_edit.jsp</result>
-               
-                <result name="error">/GT-SC/kq_add.jsp</result>
-                <interceptor-ref name="defaultStack"/>
+            <result name="2">/GT-SC/kq_edit.jsp</result>
+            <result name="error">/GT-SC/kq_add.jsp</result>
+            <interceptor-ref name="defaultStack"/>
         </action>
-                <action name="viewkqb" class="kqb.KqbAction" method="viewKqb">
-                <result name="1">/GT-SC/kq_cut.jsp</result>
-                <result name="2">/GT-SC/kq_view.jsp</result>
-               
-                <result name="error">/GT-SC/kq_add.jsp</result>
-                <interceptor-ref name="defaultStack"/>
+            <action name="viewkqb" class="kqb.KqbAction" method="viewKqb">
+            <result name="1">/GT-SC/kq_cut.jsp</result>
+            <result name="2">/GT-SC/kq_view.jsp</result>
+            <result name="error">/GT-SC/kq_add.jsp</result>
+            <interceptor-ref name="defaultStack"/>
         </action>
         
         <action name="exportKqb" class="kqb.KqbAction" method="exportKqb">
+            <result name="success">main.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+        <action name="importKqb" class="kqb.KqbAction" method="importKqb">
             <result name="success">main.jsp</result>
             <interceptor-ref name="defaultStack"/>
         </action>

@@ -8,14 +8,14 @@ import java.util.Date;
  *
  */
 public class KqbExport {
-	private Integer keid; //考勤数据id
-	private String uuid;//人员编号
-	private String name;//姓名
-	private String bankCard;//银行卡
-	private String scz;//所属生产组
-	private Integer jid; //计量工作id
-	private Integer sid; //计数工作id
-	private String jobOrSizeName;//工作种类名称
+	private Integer keid; //考勤数据id (只读)
+	private String uuid;//人员编号(只读)
+	private String name;//姓名(只读)
+	private String bankCard;//银行卡(只读)
+	private String scz;//所属生产组(只读)
+	private Integer jid; //计量工作id(只读)
+	private Integer sid; //计数工作id(只读)
+	private String jobOrSizeName;//工作种类名称(只读)
 	private String year;//年
 	private String month;//月
 	private String day1;

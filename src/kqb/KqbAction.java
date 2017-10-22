@@ -6,13 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -895,6 +892,44 @@ public class KqbAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
+
+	//导入功能模块
+	public String importExcel() throws IOException, SQLException {
+		Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			Session session = Hfsession.init();
+			Transaction tx = session.beginTransaction();
+			InputStream fis = new FileInputStream(excelPath);
+			List<KqbExport> kqbExportList = new ArrayList<>();
+			kqbExportList = KqbService.importExcel(fis);
+			//导入添加人员
+			for(int i =0; i<kqbExportList.size();i++) {
+				//如果身份证不为空给加
+				//System.out.println("================================================================"+info.getIdentityId());
+					session.save(kqbExportList.get(i));
+			}
+			tx.commit();
+			JDBCUtil jbutil =new JDBCUtil();
+			Connection con =jbutil.getConnection();
+			String sql1 ="delete FROM gt_kqb_export t WHERE UUID IN (SELECT a.UUID FROM (SELECT  UUID  FROM gt_kqb_export  GROUP  BY  UUID,scz,jobOrSizeName,YEAR,MONTH   HAVING  COUNT(UUID) > 1 AND COUNT(scz) > 1 AND COUNT(jobOrSizeName) > 1 AND COUNT(YEAR) > 1 AND  COUNT(MONTH) > 1) a)\n" +
+					"AND createDate NOT IN (SELECT b.* FROM (SELECT MAX(createDate) FROM gt_kqb_export GROUP BY UUID,  scz,jobOrSizeName,  YEAR,  MONTH HAVING COUNT(UUID) > 1 AND COUNT(scz) > 1 AND  COUNT(jobOrSizeName) > 1 AND COUNT(YEAR) > 1 AND COUNT(MONTH) > 1) b) ;";
+			PreparedStatement psta1 =con.prepareStatement(sql1);
+			psta1.execute(sql1);
+			jbutil.close();
+			map.put("msg", "success");
+			map.put("statusCode", 200);
+			ResultUtils.toJson(ServletActionContext.getResponse(), map);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+			map.put("statusCode", 100);
+			ResultUtils.toJson(ServletActionContext.getResponse(), map);
+		}finally{
+			Hfsession.close();
+		}
+		return SUCCESS;
+	}
+
 	public String exportKqbExport(){
 		HttpServletRequest request = ServletActionContext.getRequest ();
 		HttpSession httpSession = request.getSession();
@@ -943,7 +978,7 @@ public class KqbAction extends ActionSupport{
 			lists = SecondService.getListSecond();
 
 			for(KqbExport k :listExp){
-				KqbExportOutDemo kd = new KqbExportOutDemo();
+				/*KqbExportOutDemo kd = new KqbExportOutDemo();
 				kd.setBankCard(k.getBankCard());
 				kd.setJobOrSizeName(k.getJobOrSizeName());
 				kd.setMonth(k.getMonth());
@@ -981,7 +1016,7 @@ public class KqbAction extends ActionSupport{
 				kd.setDay29(k.getDay29());
 				kd.setDay30(k.getDay30());
 				kd.setDay31(k.getDay31());
-				/*新增的扣款项*/
+				//新增的扣款项
 				kd.setSubmit_healcard(k.getSubmit_healcard());//健康证报销
 				kd.setCut_waterandele(k.getCut_waterandele());//水电费扣款
 				kd.setCut_forkcard(k.getCut_forkcard());//叉车证扣款
@@ -993,13 +1028,12 @@ public class KqbAction extends ActionSupport{
 				kd.setRepay_clothesandshoes(k.getRepay_clothesandshoes());//工作服和鞋还款
 				kd.setCanbu(k.getCanbu());//餐补
 				kd.setCut_else(k.getCut_else());//其他扣款
-				kd.setRemark(k.getRemark());//备注
-				listObject.add(kd);
+				kd.setRemark(k.getRemark());//备注*/
+				listObject.add(k);
 			}
 
-
-			String[] str = new String[]{"姓名","银行卡","生产组","岗位名称","年份","月份","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24",
-					"25","26","27","28","29","30","31","健康证报销","水电费扣款","叉车证扣款","叉车证还款","员工还款","员工借款","住宿扣款","工作服和鞋扣款","工作服和鞋还款","餐补","其他扣款","备注"};
+			String[] str = new String[]{"数据编号(只读)","人员编号(只读)","姓名(只读)","银行卡(只读)","生产组(只读)","计量工作标识(只读)","计数工作标识(只读)","岗位名称","年份","月份","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24",
+					"25","26","27","28","29","30","31","健康证报销","水电费扣款","叉车证扣款","叉车证还款","员工还款","员工借款","住宿扣款","工作服和鞋扣款","工作服和鞋还款","餐补","其他扣款","备注","数据更新时间（只读）"};
 			String title= year+"年"+month+"月考勤表.xls";
 //			if(StringHelp.isNotEmpty(scz)){
 //				for(Second s :lists){
@@ -1102,29 +1136,7 @@ public class KqbAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	public String importKqb() throws IOException{
-		Map<String,Object> map = new HashMap<String,Object>();
-		try {
-			Session session = Hfsession.init();
-			Transaction tx = session.beginTransaction();
-			InputStream fis = new FileInputStream(excelPath);
-			list = new ArrayList<>();
-			list = KqbService.importExcel(fis);
-			for(Kqb info:list) {
-	            session.save(info); 
-	        } 
-			tx.commit();
-			Hfsession.close();
-			map.put("msg", "success");
-			map.put("statusCode", 200);
-			ResultUtils.toJson(ServletActionContext.getResponse(), map);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			map.put("statusCode", 300);
-			return SUCCESS;
-		} 
-		return SUCCESS;
-	}
+
 	//供月考勤信息查看
 	public String viewKqb(){
 		HttpServletRequest request = ServletActionContext.getRequest ();
