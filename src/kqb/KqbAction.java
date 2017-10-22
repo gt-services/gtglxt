@@ -942,7 +942,6 @@ public class KqbAction extends ActionSupport{
 			List<KqbExport> listExp = query.list();
 			lists = SecondService.getListSecond();
 
-			int i = 0;
 			for(KqbExport k :listExp){
 				KqbExportOutDemo kd = new KqbExportOutDemo();
 				kd.setBankCard(k.getBankCard());
