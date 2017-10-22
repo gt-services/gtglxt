@@ -5,6 +5,8 @@
 	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 	<!-- configuration pool -->
 
+
+
 <hibernate-configuration>
 	<session-factory>
 		<!-- 配置mysql数据库连接参数 -->
