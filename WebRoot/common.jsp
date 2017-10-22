@@ -448,7 +448,17 @@
 			<div class="navtab-panel tabsPageContent">
 				<div class="navtabPage unitBox">
 					<div class="bjui-pageContent" style="background:#FFF;">
-						Loading...</div>
+						<div class="panel panel-default col-lg-4 col-md-5 col-sm-6" style="padding:0">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									导出记录
+								</h3>
+							</div>
+							<div class="panel-body">
+
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

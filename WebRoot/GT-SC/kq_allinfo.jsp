@@ -81,11 +81,8 @@
             </select>
             <button type="submit"  class="btn-default" data-icon="search" id="queryRS">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>
-            <s:if test="#session.admin.authority.equals(\"1\") || #session.admin.authority.equals(\"3\")">
-                <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doExportDetail()" value="详表导出" /></span>
-                <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doExport()" value="总表导出" /></span>
-                <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doKqbExport()" value="新表导出" /></span>
-            </s:if>
+            <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doKqbExport()" value="新表导出" /></span>
+            <span style="float:right;margin-right:5px;"><a href="GT-SC/KQimport.jsp"  class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
         </div>
     </form>
 	
