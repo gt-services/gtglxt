@@ -69,7 +69,7 @@
                     <option value="<s:property value="22" />" <s:if test="day==22">selected = "selected"</s:if>>22</option>
                     <option value="<s:property value="23" />" <s:if test="day==23">selected = "selected"</s:if>>23</option>
                     <option value="<s:property value="24" />" <s:if test="day==24">selected = "selected"</s:if>>24</option>
-                     <option value="<s:property value="25" />" <s:if test="day==25">selected = "selected"</s:if>>25</option>
+                    <option value="<s:property value="25" />" <s:if test="day==25">selected = "selected"</s:if>>25</option>
                     <option value="<s:property value="26" />" <s:if test="day==26">selected = "selected"</s:if>>26</option>
                     <option value="<s:property value="27" />" <s:if test="day==27">selected = "selected"</s:if>>27</option>
                     <option value="<s:property value="28" />" <s:if test="day==28">selected = "selected"</s:if>>28</option>

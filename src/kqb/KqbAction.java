@@ -894,7 +894,7 @@ public class KqbAction extends ActionSupport{
 	}
 
 	//导入功能模块
-	public String importExcel() throws IOException, SQLException {
+	public String importKqb() throws IOException, SQLException {
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
 			Session session = Hfsession.init();
@@ -905,13 +905,12 @@ public class KqbAction extends ActionSupport{
 			//导入添加人员
 			for(int i =0; i<kqbExportList.size();i++) {
 				//如果身份证不为空给加
-				//System.out.println("================================================================"+info.getIdentityId());
 					session.save(kqbExportList.get(i));
 			}
 			tx.commit();
 			JDBCUtil jbutil =new JDBCUtil();
 			Connection con =jbutil.getConnection();
-			String sql1 ="delete FROM gt_kqb_export t WHERE UUID IN (SELECT a.UUID FROM (SELECT  UUID  FROM gt_kqb_export  GROUP  BY  UUID,scz,jobOrSizeName,YEAR,MONTH   HAVING  COUNT(UUID) > 1 AND COUNT(scz) > 1 AND COUNT(jobOrSizeName) > 1 AND COUNT(YEAR) > 1 AND  COUNT(MONTH) > 1) a)\n" +
+			String sql1 ="delete FROM gt_kqb_export  WHERE UUID IN (SELECT a.UUID FROM (SELECT  UUID  FROM gt_kqb_export  GROUP  BY  UUID,scz,jobOrSizeName,YEAR,MONTH   HAVING  COUNT(UUID) > 1 AND COUNT(scz) > 1 AND COUNT(jobOrSizeName) > 1 AND COUNT(YEAR) > 1 AND  COUNT(MONTH) > 1) a)\n" +
 					"AND createDate NOT IN (SELECT b.* FROM (SELECT MAX(createDate) FROM gt_kqb_export GROUP BY UUID,  scz,jobOrSizeName,  YEAR,  MONTH HAVING COUNT(UUID) > 1 AND COUNT(scz) > 1 AND  COUNT(jobOrSizeName) > 1 AND COUNT(YEAR) > 1 AND COUNT(MONTH) > 1) b) ;";
 			PreparedStatement psta1 =con.prepareStatement(sql1);
 			psta1.execute(sql1);
