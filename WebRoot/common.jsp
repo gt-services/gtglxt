@@ -448,14 +448,16 @@
 			<div class="navtab-panel tabsPageContent">
 				<div class="navtabPage unitBox">
 					<div class="bjui-pageContent" style="background:#FFF;">
-						<div class="panel panel-default col-lg-4 col-md-5 col-sm-6" style="padding:0">
+						<div class="panel panel-default" style="padding:0">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									导出记录
+									操作日志
 								</h3>
 							</div>
 							<div class="panel-body">
-
+								<div>
+									开发中...
+								</div>
 							</div>
 						</div>
 					</div>
@@ -466,8 +468,8 @@
 	</div>
 
 
-	<footer id="bjui-footer">Copyright &copy; 2017 - 2018 <a
-		href="#" target="_blank">国通企业管理有限公司</a> </footer>
+	<footer id="bjui-footer">Copyright &copy; 2017 - 2018
+		<a href="#" target="_blank">国通企业管理有限公司</a> </footer>
 
 </body>
 

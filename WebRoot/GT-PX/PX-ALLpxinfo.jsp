@@ -35,8 +35,9 @@
                     <option value="<s:property value="12" />" <s:if test="month==12">selected = "selected"</s:if>>12</option>
             </select>
             
-            <button type="submit"  class="btn-default" data-icon="search" id="queryPX">查询</button>
+            <button type="submit"  class="btn-default" data-icon="search">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo" id="clearQuery">清空查询</a>
+            <span style="float:right;margin-right:5px;"><a href="GT-PX/batchAddExamDate.jsp" class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">录入考试日期</a></span>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-red" onclick="batchdeletePX()" value="批量删除" /></span>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doExport()" value="导出" /></span>
             <span style="float:right;margin-right:5px;"><a href="GT-PX/PXimport.jsp" class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
@@ -65,7 +66,9 @@
             <th>标准金额</th>
             <th>优惠金额</th>
             <th>详细</th>
-            <th>操作</th>
+            <th>操作
+                <input type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" style="margin-left: 20px"/>全选/取消
+            </th>
         </tr>
         </thead>
        <tbody>
@@ -165,6 +168,23 @@
             uuidArr.push($(this).val());
         });
         return uuidArr;
+    }
+
+    function DoCheck()
+    {
+        var ch=document.getElementsByName("delUuid");
+        if(document.getElementsByName("allChecked")[0].checked==true)
+        {
+            for(var i=0;i<ch.length;i++)
+            {
+                ch[i].checked=true;
+            }
+        }else{
+            for(var i=0;i<ch.length;i++)
+            {
+                ch[i].checked=false;
+            }
+        }
     }
 
 

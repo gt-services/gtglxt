@@ -161,24 +161,6 @@ public class PxAction extends ActionSupport {
 				query.setParameter("licenseStatus", "未领证");
 
 			}
-			/*if ("5".equals(pageType)) {
-				query.setParameter("theoryResults",60);
-				query.setParameter("actualResults", 60);
-				query.setParameter("FirstRetesttheoryResults", 60);
-				query.setParameter("FirstRetestactualResults", 60);
-				query.setParameter("SecondRetesttheoryResults", 60);
-				query.setParameter("SecondRetestactualResults", 60);
-			}
-			if ("6".equals(pageType)) {
-				query.setParameter("theoryResults",60);
-				query.setParameter("actualResults", 60);
-				query.setParameter("FirstRetesttheoryResults", 60);
-				query.setParameter("FirstRetestactualResults", 60);
-				query.setParameter("SecondRetesttheoryResults", 60);
-				query.setParameter("SecondRetestactualResults", 60);
-				query.setParameter("ThirdRetesttheoryResults", 60);
-				query.setParameter("ThirdRetestactualResults", 60);
-			}*/
 			Long count = (Long) query.uniqueResult();
 			//System.out.println("===========count================"+count);
 			page.setTotalCount(Integer.parseInt(String.valueOf(count)));
@@ -231,24 +213,6 @@ public class PxAction extends ActionSupport {
 				q.setParameter("licenseStatus", "未领证");
 
 			}
-			/*if ("5".equals(pageType)) {
-				q.setParameter("theoryResults",60);
-				q.setParameter("actualResults", 60);
-				q.setParameter("FirstRetesttheoryResults", 60);
-				q.setParameter("FirstRetestactualResults", 60);
-				q.setParameter("SecondRetesttheoryResults", 60);
-				q.setParameter("SecondRetestactualResults", 60);
-			}
-			if ("6".equals(pageType)) {
-				q.setParameter("theoryResults",60);
-				q.setParameter("actualResults", 60);
-				q.setParameter("FirstRetesttheoryResults", 60);
-				q.setParameter("FirstRetestactualResults", 60);
-				q.setParameter("SecondRetesttheoryResults", 60);
-				q.setParameter("SecondRetestactualResults", 60);
-				q.setParameter("ThirdRetesttheoryResults", 60);
-				q.setParameter("ThirdRetestactualResults", 60);
-			}*/
 			q.setFirstResult((currentPage - 1) * 20);
 			q.setMaxResults(20);
 			list = q.list();
@@ -522,6 +486,41 @@ public class PxAction extends ActionSupport {
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return ERROR;
+		}finally{
+			Hfsession.close();
+		}
+		return SUCCESS;
+	}
+
+
+	public String batchAddExamDate() throws ParseException {
+		Session session = Hfsession.init();
+		Transaction tx = session.beginTransaction();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String examDateString = request.getParameter("examdate");
+		Date examDate = sdf.parse(examDateString);
+		Map uuidarrs =request.getParameterMap();
+		Map<String, Object> map = new HashMap<String, Object>();
+		Object uuidarrObj = uuidarrs.get("uuidarr[]");
+		String[] uuidarr =(String[])uuidarrObj;
+		List uuidList = Arrays.asList(uuidarr);
+		try {
+			Query q = session.createQuery("from PxInfo where uuid  in :uuidarr").setParameterList("uuidarr", uuidList);
+			List<PxInfo> list = q.list();
+
+			for (PxInfo p : list
+					) {
+				p.setTestDate(examDate);
+				session.update(p);
+			}
+
+			map.put("statusCode", 200);
+			ResultUtils.toJson(ServletActionContext.getResponse(), map);
+			tx.commit();
+		} catch (Exception e) {
 			e.printStackTrace();
 			return ERROR;
 		}finally{

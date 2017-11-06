@@ -47,5 +47,11 @@
             <interceptor-ref name="fileUpload"/>
         </action>
 
+
+        <action name="batchAddExamDate" class="px.PxAction" method="batchAddExamDate">
+            <result name="success">/GT-PX/PXimport.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+
     </package>
 </struts>
