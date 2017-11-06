@@ -173,6 +173,7 @@ public class PxAction extends ActionSupport {
 				sql += " and licenseStatus = :licenseStatus ";
 
 			}
+
 			//需要补考人员
 			if ("5".equals(pageType)) {
 				/*sql += " and ( theoryResults< :theoryResults or actualResults< :actualResults) ";
