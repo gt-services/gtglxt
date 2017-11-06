@@ -21,15 +21,25 @@
                     <td><label class='control-label x85'>单位电话:</label><input type='text' name='pxInfo.unitPhone'  size='20'   value='<s:property value="pxInfo.unitPhone" />'  ></td></tr>
                 <tr><td><label class='control-label x85'>培训点:</label><input type='text'  name='pxInfo.trainPlace'  size='20'  value='<s:property value="pxInfo.trainPlace" />'  ></td>
                     <td><label class='control-label x85'>培训科目:</label><input type='text'  name='pxInfo.trainType'  size='20'  value='<s:property value="pxInfo.trainType" />'  ></td></tr>
-                <tr><td><label class='control-label x85'>考试情况:</label><input type='text'  name='pxInfo.test'  size='20'   value='<s:property value="pxInfo.test" />'  ></td>
+                <tr><td>
+                    <label class='control-label x85'>考试情况:</label>
+                    <select data-toggle="selectpicker" id="test"  name='pxInfo.test'  data-width="100">
+                        <option value="合格" <s:if test="pxInfo.test.equals(\"合格\")">selected = "selected"</s:if>>合格</option>
+                        <option value="不合格" <s:if test="pxInfo.payCost.equals(\"不合格\")">selected = "selected"</s:if>>不合格</option>
+                        <option value="未考" <s:if test="pxInfo.payCost.equals(\"未考\")">selected = "selected"</s:if>>未考</option>
+                    </select>
+                    </td>
                		<td><label class='control-label x85'>标准金额:</label><input type='text'  name='pxInfo.standardAmount'  size='20'   value='<s:property value="pxInfo.standardAmount" />'  ></td>
            		<tr><td><label class='control-label x85'>优惠金额:</label><input type='text'  name='pxInfo.discountAmount'  size='20'   value='<s:property value="pxInfo.discountAmount" />'  ></td>
                     <td><label class='control-label x85'>培训日期:</label><input type='text' data-toggle="datepicker" name='pxInfo.signupDate'  size='20'    value='<s:property value="pxInfo.signupDate" />'  ></td></tr>
-                <tr><td><label class='control-label x85'>缴费情况:</label><select data-toggle="selectpicker" id="payCost"  name='pxInfo.payCost'  data-width="100">
-                    <option value="已缴费" <s:if test="pxInfo.payCostequals(\"已缴费\")">selected = "selected"</s:if>>已缴费</option>
-                    <option value="未缴费" <s:if test="pxInfo.payCost.equals(\"未缴费\")">selected = "selected"</s:if>>未缴费</option>
-                    <option value="转账" <s:if test="pxInfo.payCost.equals(\"未缴费\")">selected = "selected"</s:if>>转账</option>
-                </select></td>
+                <tr>
+                    <td><label class='control-label x85'>缴费情况:</label>
+                        <select data-toggle="selectpicker" id="payCost"  name='pxInfo.payCost'  data-width="100">
+                        <option value="已缴费" <s:if test="pxInfo.payCost.equals(\"已缴费\")">selected = "selected"</s:if>>已缴费</option>
+                        <option value="未缴费" <s:if test="pxInfo.payCost.equals(\"未缴费\")">selected = "selected"</s:if>>未缴费</option>
+                        <option value="转账" <s:if test="pxInfo.payCost.equals(\"未缴费\")">selected = "selected"</s:if>>转账</option>
+                        </select>
+                    </td>
                     <td><label class='control-label x85'>收据号:</label><input type='text'  name='pxInfo.payNumber'  size='20'    value='<s:property value="pxInfo.payNumber" />'   ></td></tr>
                 <tr>
                 	<td><label class='control-label x85'>领证情况:</label>
@@ -49,32 +59,16 @@
                     <td><label class='control-label x85'>截止日期:</label><input type='text' data-toggle="datepicker" name='pxInfo.dueToDate'  size='20'    value='<s:date name="pxInfo.dueToDate" format="yyyy-MM-dd"/>'  ></td>
                 </tr>
                 <tr>
-                    <td><label class='control-label x85'>理论成绩:</label><input type='text'  name='pxInfo.theoryResults'  size='20'  value='<s:property value="pxInfo.CertificateNum" />'  ></td>
-                    <td><label class='control-label x85'>实际操作:</label><input type='text'  name='pxInfo.actualResults'  size='20'  value='<s:property value="pxInfo.CertificateNum" />'  ></td>
-                </tr>
-                <tr>
                     <td><label class='control-label x85'>补考一费用:</label><input type='text'  name='pxInfo.FirstRetestFee'  size='20'  value='<s:property value="pxInfo.FirstRetestFee" />'  ></td>
                     <td><label class='control-label x85'>补考一收据号:</label><input type='text'  name='pxInfo.FirstRetesPayNumber'  size='20'  value='<s:property value="pxInfo.FirstRetesPayNumber" />'  ></td>
-                </tr>
-                <tr>
-                    <td><label class='control-label x100'>补考一理论成绩:</label><input type='number'  name='pxInfo.FirstRetesttheoryResults'  size='20'  value='<s:property value="pxInfo.FirstRetesttheoryResults" />'  ></td>
-                    <td><label class='control-label x100'>补考一实操成绩:</label><input type='number'  name='pxInfo.FirstRetestactualResults'  size='20'  value='<s:property value="pxInfo.FirstRetestactualResults" />'  ></td>
                 </tr>
                 <tr>
                     <td><label class='control-label x85'>补考二费用:</label><input type='text'  name='pxInfo.SecondRetestFee'  size='20'  value='<s:property value="pxInfo.SecondRetestFee" />'  ></td>
                     <td><label class='control-label x85'>补考二收据号:</label><input type='text'  name='pxInfo.SecondRetesPayNumber'  size='20'  value='<s:property value="pxInfo.SecondRetesPayNumber" />'  ></td>
                 </tr>
                 <tr>
-                    <td><label class='control-label x100'>补考二理论成绩:</label><input type='number'  name='pxInfo.SecondRetesttheoryResults'  size='20'  value='<s:property value="pxInfo.SecondRetesttheoryResults" />'  ></td>
-                    <td><label class='control-label x100'>补考二实操成绩:</label><input type='number'  name='pxInfo.SecondRetestactualResults'  size='20'  value='<s:property value="pxInfo.SecondRetestactualResults" />'  ></td>
-                </tr>
-                <tr>
                     <td><label class='control-label x85'>补考三费用:</label><input type='text'  name='pxInfo.ThirdRetestFee'  size='20'  value='<s:property value="pxInfo.ThirdRetestFee" />'  ></td>
                     <td><label class='control-label x85'>补考三收据号:</label><input type='text'  name='pxInfo.ThirdRetesPayNumber'  size='20'  value='<s:property value="pxInfo.ThirdRetesPayNumber" />'  ></td>
-                </tr>
-                <tr>
-                    <td><label class='control-label x100'>补考三理论成绩:</label><input type='number'  name='pxInfo.ThirdRetesttheoryResults'  size='20'  value='<s:property value="pxInfo.ThirdRetesttheoryResults" />'  ></td>
-                    <td><label class='control-label x100'>补考三实操成绩:</label><input type='number'  name='pxInfo.ThirdRetestactualResults'  size='20'  value='<s:property value="pxInfo.ThirdRetestactualResults" />'  ></td>
                 </tr>
                 </tbody>
 

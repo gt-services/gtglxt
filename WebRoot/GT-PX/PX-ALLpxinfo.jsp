@@ -31,7 +31,7 @@
                     <option value="<s:property value="8" />" <s:if test="month==8">selected = "selected"</s:if>>8</option>
                     <option value="<s:property value="9" />" <s:if test="month==9">selected = "selected"</s:if>>9</option>
                     <option value="<s:property value="10" />" <s:if test="month==10">selected = "selected"</s:if>>10</option>
-                    <option value="<s:property value="12" />" <s:if test="month==11">selected = "selected"</s:if>>11</option>
+                    <option value="<s:property value="11" />" <s:if test="month==11">selected = "selected"</s:if>>11</option>
                     <option value="<s:property value="12" />" <s:if test="month==12">selected = "selected"</s:if>>12</option>
             </select>
             
