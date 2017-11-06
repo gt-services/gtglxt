@@ -155,30 +155,6 @@ public class PxService {
                 if(cellslength >=29){
                     info.setThirdRetesPayNumber(cells[28].getContents().toString());
                 }
-                if(cellslength >=30 && !"".equals(cells[29].getContents().toString())){
-                    info.setTheoryResults(Integer.parseInt(cells[29].getContents().toString()));
-                }
-                if(cellslength >=31 && !"".equals(cells[30].getContents().toString())){
-                    info.setActualResults(Integer.parseInt(cells[30].getContents().toString()));
-                }
-                if(cellslength >=32 && !"".equals(cells[31].getContents().toString())){
-                    info.setFirstRetesttheoryResults(Integer.parseInt(cells[31].getContents().toString()));
-                }
-                if(cellslength >=33 && !"".equals(cells[32].getContents().toString())){
-                    info.setSecondRetesttheoryResults(Integer.parseInt(cells[32].getContents().toString()));
-                }
-                if(cellslength >=34 && !"".equals(cells[33].getContents().toString())){
-                    info.setThirdRetesttheoryResults(Integer.parseInt(cells[33].getContents().toString()));
-                }
-                if(cellslength >=35 && !"".equals(cells[34].getContents().toString())){
-                    info.setFirstRetestactualResults(Integer.parseInt(cells[34].getContents().toString()));
-                }
-                if(cellslength >=36 && !"".equals(cells[35].getContents().toString())){
-                    info.setSecondRetestactualResults(Integer.parseInt(cells[35].getContents().toString()));
-                }
-                if(cellslength >=37 && !"".equals(cells[36].getContents().toString())){
-                    info.setThirdRetestactualResults(Integer.parseInt(cells[36].getContents().toString()));
-                }
                 infos.add(info);
             }  
               

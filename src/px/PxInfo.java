@@ -43,14 +43,14 @@ public class PxInfo implements Serializable{
 	private String FirstRetesPayNumber;//第一次补考收据号
 	private String SecondRetestPayNumber;
 	private String ThirdRetesPayNumber;
-	private int theoryResults;//理论成绩
-	private int actualResults; //实际操作成绩
-	private int FirstRetesttheoryResults;//第一次补考理论成绩
-	private int SecondRetesttheoryResults;
-	private int ThirdRetesttheoryResults;
-	private int FirstRetestactualResults;//第一次补考实操成绩
-	private int SecondRetestactualResults;
-	private int ThirdRetestactualResults;
+//	private int theoryResults;//理论成绩
+//	private int actualResults; //实际操作成绩
+//	private int FirstRetesttheoryResults;//第一次补考理论成绩
+//	private int SecondRetesttheoryResults;
+//	private int ThirdRetesttheoryResults;
+//	private int FirstRetestactualResults;//第一次补考实操成绩
+//	private int SecondRetestactualResults;
+//	private int ThirdRetestactualResults;
 
 
 	/**
@@ -305,67 +305,4 @@ public class PxInfo implements Serializable{
 		ThirdRetesPayNumber = thirdRetesPayNumber;
 	}
 
-	public int getTheoryResults() {
-		return theoryResults;
-	}
-
-	public void setTheoryResults(int theoryResults) {
-		this.theoryResults = theoryResults;
-	}
-
-	public int getActualResults() {
-		return actualResults;
-	}
-
-	public void setActualResults(int actualResults) {
-		this.actualResults = actualResults;
-	}
-
-	public int getFirstRetesttheoryResults() {
-		return FirstRetesttheoryResults;
-	}
-
-	public void setFirstRetesttheoryResults(int firstRetesttheoryResults) {
-		FirstRetesttheoryResults = firstRetesttheoryResults;
-	}
-
-	public int getSecondRetesttheoryResults() {
-		return SecondRetesttheoryResults;
-	}
-
-	public void setSecondRetesttheoryResults(int secondRetesttheoryResults) {
-		SecondRetesttheoryResults = secondRetesttheoryResults;
-	}
-
-	public int getThirdRetesttheoryResults() {
-		return ThirdRetesttheoryResults;
-	}
-
-	public void setThirdRetesttheoryResults(int thirdRetesttheoryResults) {
-		ThirdRetesttheoryResults = thirdRetesttheoryResults;
-	}
-
-	public int getFirstRetestactualResults() {
-		return FirstRetestactualResults;
-	}
-
-	public void setFirstRetestactualResults(int firstRetestactualResults) {
-		FirstRetestactualResults = firstRetestactualResults;
-	}
-
-	public int getSecondRetestactualResults() {
-		return SecondRetestactualResults;
-	}
-
-	public void setSecondRetestactualResults(int secondRetestactualResults) {
-		SecondRetestactualResults = secondRetestactualResults;
-	}
-
-	public int getThirdRetestactualResults() {
-		return ThirdRetestactualResults;
-	}
-
-	public void setThirdRetestactualResults(int thirdRetestactualResults) {
-		ThirdRetestactualResults = thirdRetestactualResults;
-	}
 }

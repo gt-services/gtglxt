@@ -33,20 +33,13 @@
 		<property name="CertificateUsedDate" column="CertificateUsedDate"/>
 		<property name="dueToDate" column="duetodate"/>
 		<property name="studentId" column="studentId"/>
-		<property name="theoryResults" column="theoryResults"/>
-		<property name="actualResults" column="actualResults"/>
 		<property name="FirstRetestFee" column="FirstRetestFee"/>
 		<property name="SecondRetestFee" column="SecondRetestFee"/>
 		<property name="ThirdRetestFee" column="ThirdRetestFee"/>
 		<property name="FirstRetesPayNumber" column="FirstRetesPayNumber"/>
 		<property name="SecondRetestPayNumber" column="SecondRetestPayNumber"/>
 		<property name="ThirdRetesPayNumber" column="ThirdRetesPayNumber"/>
-		<property name="FirstRetesttheoryResults" column="FirstRetesttheoryResults"/>
-		<property name="SecondRetesttheoryResults" column="SecondRetesttheoryResults"/>
-		<property name="ThirdRetesttheoryResults" column="ThirdRetesttheoryResults"/>
-		<property name="FirstRetestactualResults" column="FirstRetestactualResults"/>
-		<property name="SecondRetestactualResults" column="SecondRetestactualResults"/>
-		<property name="ThirdRetestactualResults" column="ThirdRetestactualResults"/>
+
 		<property name="status" column="status"/>
 	</class>
 </hibernate-mapping>

@@ -178,15 +178,15 @@ public class PxAction extends ActionSupport {
 				/*sql += " and ( theoryResults< :theoryResults or actualResults< :actualResults) ";
 				sql += " and (FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) " ;
 				sql += " and (SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults)";*/
-				sql += " and status = 0";
+				sql += " and test = '不合格'";
 			}
-			//补考未通过人员s
+			//考试通过人员
 			if ("6".equals(pageType)) {
 				/*sql += " and ( FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) ";
 				sql +=	"and ( SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults) ";
 				sql +=	"and ( ThirdRetesttheoryResults< :ThirdRetesttheoryResults or ThirdRetestactualResults< :ThirdRetestactualResults) ";
 				sql +=	"and ( theoryResults< :theoryResults or actualResults< :actualResults)";*/
-				sql += " and status = 2";
+				sql += " and test = '合格'";
 			}
 			if (keyword != null && !keyword.equals("")) {
 				sql += "and name like :name ";
@@ -404,7 +404,6 @@ public class PxAction extends ActionSupport {
 				month="0"+exmonth;
 			}
 			yandm  = year+"-"+month;
-			//System.out.println("==================================yandm=================================="+yandm);
 			if (exportType != null && "1".equals(exportType)) {
 				String sql="from PxInfo where 1 = 1  and dueToDate >= :dateNow and dueToDate <= :nextDate ";
 				if(exptrainType!=null && !"".equals(exptrainType)){
@@ -451,9 +450,7 @@ public class PxAction extends ActionSupport {
 			}
 			String[] str = new String[] { "序号", "培训日期", "姓名", "姓别", "身份证", "文化程度", "单位/个人", "联系电话", "单位联系人", "单位电话",
 					"培训点", "类别", "考试情况", "标准金额", "优惠金额", "缴费情况","收据号", "到期日期","考试日期", "领证情况",
-					"生效日期","证书编号","学员编号","第一次补考费用","第二次补考费用","第三次补考费用","第一次补考收据号","第二次补考收据号","第三次补考收据号","理论成绩",
-					"实际操作成绩","第一次补考理论成绩","第二次补考理论成绩","第三次补考理论成绩","第一次补考实操成绩","第二次补考实操成绩","第三次补考实操成绩"
-
+					"生效日期","证书编号","学员编号","第一次补考费用","第二次补考费用","第三次补考费用","第一次补考收据号","第二次补考收据号","第三次补考收据号","状态（只读）"
 			};
 			String title="国通企业培训人员花名册--"+sdf.format(new Date())+".xls";
 			if(exptrainType!=null && !"".equals(exptrainType)){
@@ -478,7 +475,6 @@ public class PxAction extends ActionSupport {
 			InputStream fis = new FileInputStream(excelPath);
 			list = new ArrayList<>();
 			list = PxService.importExcel(fis);
-			//System.out.println("=============LISTSIZE===================="+list.size());
 			for (PxInfo info : list) {
 				session.save(info);
 			}
