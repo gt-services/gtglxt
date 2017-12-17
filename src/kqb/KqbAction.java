@@ -919,11 +919,13 @@ public class KqbAction extends ActionSupport{
 			jbutil.close();*/
 			map.put("msg", "success");
 			map.put("statusCode", 200);
+			map.put("data", kqbExportList);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			map.put("msg", "error");
 			map.put("statusCode", 100);
+			map.put("data", kqbExportList);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 		}finally{
 			Hfsession.close();
@@ -1499,11 +1501,7 @@ public class KqbAction extends ActionSupport{
 		this.status = status;
 	}
 
-	public List<KqbExport> getKqbExportList() {
-		return kqbExportList;
-	}
 
-	public void setKqbExportList(List<KqbExport> kqbExportList) {
-		this.kqbExportList = kqbExportList;
-	}
+
+
 }
