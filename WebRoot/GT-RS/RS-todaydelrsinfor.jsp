@@ -44,7 +44,9 @@
             <th>招聘来源</th>
             <th>所在生产组</th>
             <th >详细</th>
-            <th>处理情况</th>
+            <th>处理情况
+                <input type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" style="margin-left: 20px"/>全选/取消
+            </th>
             
         </tr>
         </thead>
@@ -159,5 +161,22 @@ function takeuuid(){ //jquery获取复选框值
         uuidArr.push($(this).val());
     });
     return uuidArr;
+}
+
+function DoCheck()
+{
+    var ch=document.getElementsByName("delUuid");
+    if(document.getElementsByName("allChecked")[0].checked==true)
+    {
+        for(var i=0;i<ch.length;i++)
+        {
+            ch[i].checked=true;
+        }
+    }else{
+        for(var i=0;i<ch.length;i++)
+        {
+            ch[i].checked=false;
+        }
+    }
 }
 </script>

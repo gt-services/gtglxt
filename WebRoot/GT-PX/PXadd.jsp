@@ -23,10 +23,11 @@
                     <td><label class='control-label x85'>培训科目:</label><input type='text'  name='pxInfo.trainType'  size='20'  value='<s:property value="pxInfo.trainType" />'  ></td></tr>
                 <tr><td>
                     <label class='control-label x85'>考试情况:</label>
-                    <select data-toggle="selectpicker" id="test"  name='pxInfo.test'  data-width="100">
+                    <select data-toggle="selectpicker" name='pxInfo.test'  data-width="100">
+                        <option value="">请选择</option>
+                        <option value="待考" <s:if test="pxInfo.test.equals(\"待考\")">selected = "selected"</s:if>>待考</option>
                         <option value="合格" <s:if test="pxInfo.test.equals(\"合格\")">selected = "selected"</s:if>>合格</option>
-                        <option value="不合格" <s:if test="pxInfo.payCost.equals(\"不合格\")">selected = "selected"</s:if>>不合格</option>
-                        <option value="未考" <s:if test="pxInfo.payCost.equals(\"未考\")">selected = "selected"</s:if>>未考</option>
+                        <option value="不合格" <s:if test="pxInfo.test.equals(\"不合格\")">selected = "selected"</s:if>>不合格</option>
                     </select>
                     </td>
                		<td><label class='control-label x85'>标准金额:</label><input type='text'  name='pxInfo.standardAmount'  size='20'   value='<s:property value="pxInfo.standardAmount" />'  ></td>
@@ -48,15 +49,10 @@
 	                    <option value="未领证" <s:if test="pxInfo.licenseStatus.equals(\"未领证\")">selected = "selected"</s:if>>未领证</option>
                 		</select>
                 	</td>
-                    <td><label class='control-label x85'>证书编号:</label><input type='text'  name='pxInfo.CertificateNum'  size='20'  value='<s:property value="pxInfo.CertificateNum" />'  ></td>
-                 </tr>
-                 <tr>
-                     <td><label class='control-label x85'>考试日期:</label><input type='text' data-toggle="datepicker" name='pxInfo.testDate'  size='20'    value='<s:date name="pxInfo.testDate" format="yyyy-MM-dd"/>'  ></td>
-                     <td><label class='control-label x85'>学员编号:</label><input type='text'  name='pxInfo.studentId'  size='20'  value='<s:property value="pxInfo.studentId" />'  ></td>
                  </tr>
                 <tr>
-                    <td><label class='control-label x85'>生效日期:</label><input type='text' data-toggle="datepicker" name='pxInfo.CertificateUsedDate'  size='20'    value='<s:date name="pxInfo.dueToDate" format="yyyy-MM-dd"/>'  ></td>
-                    <td><label class='control-label x85'>截止日期:</label><input type='text' data-toggle="datepicker" name='pxInfo.dueToDate'  size='20'    value='<s:date name="pxInfo.dueToDate" format="yyyy-MM-dd"/>'  ></td>
+                    <td><label class='control-label x85'>考试日期:</label><input type='text' data-toggle="datepicker" name='pxInfo.testDate'  size='20'    value='<s:date name="pxInfo.testDate" format="yyyy-MM-dd"/>'  ></td>
+                    <td><label class='control-label x85'>复审日期:</label><input type='text' data-toggle="datepicker" name='pxInfo.dueToDate'  size='20'    value='<s:date name="pxInfo.dueToDate" format="yyyy-MM-dd"/>'  ></td>
                 </tr>
                 <tr>
                     <td><label class='control-label x85'>补考一费用:</label><input type='text'  name='pxInfo.FirstRetestFee'  size='20'  value='<s:property value="pxInfo.FirstRetestFee" />'  ></td>

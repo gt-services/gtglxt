@@ -39,7 +39,7 @@
                     <option value="<s:property value="8" />" <s:if test="month==8">selected = "selected"</s:if>>8</option>
                     <option value="<s:property value="9" />" <s:if test="month==9">selected = "selected"</s:if>>9</option>
                     <option value="<s:property value="10" />" <s:if test="month==10">selected = "selected"</s:if>>10</option>
-                    <option value="<s:property value="12" />" <s:if test="month==11">selected = "selected"</s:if>>11</option>
+                    <option value="<s:property value="11" />" <s:if test="month==11">selected = "selected"</s:if>>11</option>
                     <option value="<s:property value="12" />" <s:if test="month==12">selected = "selected"</s:if>>12</option>
             </select>
              <label>日：</label>
@@ -174,23 +174,6 @@ function kq(type,uuid,sczidd){
     $(this).dialog({id:'mydialog2', url:'editkqb.action?type=2&uuid='+uuid+'&sczidd='+sczidd+'&month='+month+'&day='+day, title:'考勤添加',width:900,height:500});
 
 
-}
-
-function doExport(){
-	var scz=$("#scz").val();
-	var year=$("#year").val();
-	var month=$("#month").val();
-	$(this).alertmsg('confirm', '确定要导出吗？', {displayMode:'slide', displayPosition:'topcenter', okName:'确定', cancelName:'取消', title:'提示信息',okCall:function(){
-	  location.href='exportKqb.action?year='+year+'&month='+month+'&scz='+scz;
-}});
-}
-
-function doExportDetail(){
-    var month=$("#month").val();
-    var scz=$("#scz").find("option:selected").text();
-    $(this).alertmsg('confirm', '确定要导出吗？', {displayMode:'slide', displayPosition:'topcenter', okName:'确定', cancelName:'取消', title:'提示信息',okCall:function(){
-        location.href='exportKqbDetail.action?month='+month+'&scz='+scz;
-    }});
 }
 
 function doKqbExport(){

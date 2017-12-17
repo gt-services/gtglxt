@@ -20,7 +20,7 @@
                     	<td><label class='control-label x85'>银行卡号:</label><input type='text'  name='roster.bankCard'  size='20'   value='<s:property value="roster.bankCard" />'  ></td>
                     	<td><label class='control-label x85'>人事来源:</label><input type='text'  name='roster.source'  size='20'   value='<s:property value="roster.source" />'  ></td>
                 </tr>
-                <tr><td><label class='control-label x85'>社保编号:</label><input type='text'  name='roster.sbNumber'  size='20'  value='<s:property value="roster.sbNumber" />'  ></td>
+                <tr><td><label class='control-label x85'>保险编号:</label><input type='text'  name='roster.sbNumber'  size='20'  value='<s:property value="roster.sbNumber" />'  ></td>
                     <td><label class='control-label x85'>家庭住址:</label><input type='text' name='roster.address'  size='20'   value='<s:property value="roster.address" />'  ></td></tr>
                 <tr><td><label class='control-label x85'>合同开始日期:</label><input type='text' data-toggle="datepicker" name='roster.htStart'  size='20'  value='<s:date name="roster.htStart" format="yyyy-MM-dd"/>'  ></td>
                     <td><label class='control-label x85'>合同结束日期:</label><input type='text' data-toggle="datepicker" name='roster.htEnd'  size='20'   value='<s:date name="roster.htEnd" format="yyyy-MM-dd"/>'   readonly="readonly"></td></tr>

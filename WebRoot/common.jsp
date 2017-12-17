@@ -292,9 +292,7 @@
 							<div>
 								<ul id="bjui-tree1" class="ztree ztree_main" data-toggle="ztree"
 									data-on-click="MainMenuClick" data-expand-all="true">
-									<li data-id="31" data-pid="3" data-url="getRosterList.action"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "
-									data-tabid="datagrid-convertable" data-faicon="table">人事信息</li>
-									
+									<li data-id="31" data-pid="3" data-url="getRosterList.action"  data-tabid="datagrid-convertable" data-faicon="table">人事信息</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "
 									<li data-id="20" data-pid="2" data-url="yujing.action"
 										data-tabid="table" data-faicon="table">代缴社保预警</li>
 									
@@ -344,7 +342,7 @@
 									<li data-id="13" data-pid="1" data-url="getPxInfoList.action?pageType=4"
 										data-tabid="table" data-faicon="check-square-o">未领证人员</li>
 									<li data-id="13" data-pid="1" data-url="getPxInfoList.action?pageType=5"
-										data-tabid="table" data-faicon="check-square-o">考试人员名单</li>
+										data-tabid="table" data-faicon="check-square-o">待考人员名单</li>
 									<li data-id="13" data-pid="1" data-url="getPxInfoList.action?pageType=6"
 										data-tabid="table" data-faicon="check-square-o">补考人员名单</li>
 								</ul>
@@ -373,14 +371,14 @@
 										data-tabid="table" data-faicon="table">人员考勤</li>
 
 									<li data-id="21" data-pid="2" data-url="getSCList.action"
-										data-tabid="table-fixed" data-faicon="list-alt">录入人事信息</li>
+										data-tabid="table-fixed" data-faicon="list-alt">员工花名册</li>
 									<li data-id="21" data-pid="2" data-url="getDeparture.action"
-										data-tabid="table-fixed" data-faicon="list-alt">已离职人员</li>
+										data-tabid="table-fixed" data-faicon="list-alt">离职人员</li>
 
 									<li data-id="21" data-pid="2" data-url="getJob.action"
-										data-tabid="table-fixed" data-faicon="list-alt">岗位添加</li>
+										data-tabid="table-fixed" data-faicon="list-alt">计时岗位添加</li>
 										<li data-id="21" data-pid="2" data-url="getSize.action"
-										data-tabid="table-fixed" data-faicon="list-alt">规格添加</li>
+										data-tabid="table-fixed" data-faicon="list-alt">计件岗位添加</li>
 								</ul>
 							</div>
 						</div>

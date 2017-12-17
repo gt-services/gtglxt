@@ -112,7 +112,8 @@ public class RosterAction extends ActionSupport {
 		page.setCurrentPage(1);
 		try {
 			//此处为查询数据库中的总条数，为分页做准备
-			String hql = "select count(*) from Roster where del=1 ";
+			String hql = "select count(*) from Roster where del=1";
+			hql += "and(lcTime = '' or lcTime = null)";
 			if(admin.getAuthority().equals("5")){
 				hql += "and scz ="+"'"+admin.getSczname().toString()+"'";
 			}
@@ -134,7 +135,8 @@ public class RosterAction extends ActionSupport {
 			page.setTotalCount(Integer.parseInt(String.valueOf(count)));
 			
 			//此处才是作为查询数据中的数据
-			String sql = "from Roster where del=1 ";
+			String sql = "from Roster where del=1";
+			sql += "and(lcTime = '' or lcTime = null)";
 			if(admin.getAuthority().equals("5")){
 				sql += "and scz ="+"'"+admin.getSczname().toString()+"'";
 			}
@@ -552,7 +554,7 @@ public class RosterAction extends ActionSupport {
 		try {
 			//此处为查询数据库中的总条数，为分页做准备
 
-			String hql = "select count(*) from Roster where del=0 and createDate>= ' " + start +"' and createDate <= '"+end+"'";
+			String hql = "select count(*) from Roster where (lcTime != '' or lcTime != null) and createDate>= ' " + start +"' and createDate <= '"+end+"'";
 			
 			if(keyword != null && !keyword.equals("")){
 				hql += "and name like :name ";
@@ -572,7 +574,7 @@ public class RosterAction extends ActionSupport {
 			page.setTotalCount(Integer.parseInt(String.valueOf(count)));
 			
 			//此处才是作为查询数据中的数据
-			String sql = "from Roster where del=0 and createDate>= ' " + start +"' and createDate <= '"+end+"'";
+			String sql = "from Roster where (lcTime != '' or lcTime != null) and createDate>= ' " + start +"' and createDate <= '"+end+"'";
 			if(keyword != null && !keyword.equals("")){ 
 				sql += "and name like :name ";
 			}
@@ -1057,19 +1059,18 @@ public class RosterAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	//导入功能模块
+	//人事导入导入功能模块
 	public String importExcel() throws IOException, SQLException{
 		Map<String,Object> map = new HashMap<String,Object>();
+		Session session = Hfsession.init();
+		Transaction tx = session.beginTransaction();
 		try {
-			Session session = Hfsession.init();
-			Transaction tx = session.beginTransaction();
 			InputStream fis = new FileInputStream(excelPath);
 			list = new ArrayList<>();
 			list = RosterService.importExcel(fis);
 			//导入添加人员
 			for(int i =0; i<list.size();i++) {
 				//如果身份证不为空给加
-				//System.out.println("================================================================"+info.getIdentityId());
 				if (list.get(i).getIdentityId()!=null && !"".equals(list.get(i).getIdentityId())) {
 					session.save(list.get(i));
 				}else{
@@ -1079,23 +1080,28 @@ public class RosterAction extends ActionSupport {
 					ResultUtils.toJson(ServletActionContext.getResponse(), map);
 					break;
 				}
-	            
+
 	        }
 			tx.commit();
 			JDBCUtil jbutil =new JDBCUtil();
 			Connection con =jbutil.getConnection();
-			String sql1 ="DELETE FROM  gt_roster "+
-				"WHERE identityId  IN "+
-					"(SELECT a.identityId FROM (SELECT  *  FROM gt_roster  GROUP  BY  identityId   HAVING  COUNT(identityId) > 1) a)"+ 
-				"AND createdate2 NOT IN"+ 
-					"(SELECT b.* FROM (SELECT MAX(createdate2) FROM  gt_roster  GROUP BY identityId  HAVING COUNT(identityId)>1) b)";
+			String sql1 ="delete from gt_roster"+
+					" WHERE uuid in" +
+					"(select a.uuid from" +
+					"(select g.uuid from gt_roster g," +
+					"(SELECT max(createdate2),identityId,uuid FROM  gt_roster  GROUP BY identityId  HAVING COUNT(identityId)>1) t"+
+					" WHERE " +
+					" g.identityId=t.identityId" +
+					" and g.uuid!=t.uuid" +
+					") a);";
 			PreparedStatement psta1 =con.prepareStatement(sql1);
 			psta1.execute(sql1);
-			jbutil.close();		
+			jbutil.close();
 			map.put("msg", "success");
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 		} catch (FileNotFoundException e) {
+			tx.rollback();
 			e.printStackTrace();
 			map.put("msg", "error");
 			map.put("statusCode", 100);
@@ -1118,7 +1124,7 @@ public class RosterAction extends ActionSupport {
 		page.setCurrentPage(1);
 		try {
 			//此处为查询数据库中的总条数，为分页做准备
-			String hql = "select count(*) from Roster where del=0 ";
+			String hql = "select count(*) from Roster where (lcTime is not null or lcTime !='')";
 			if (admin.getAuthority().equals("5")) {
 				hql += "and scz =" + "'" + admin.getSczname().toString() + "'";
 			}
@@ -1140,7 +1146,7 @@ public class RosterAction extends ActionSupport {
 			page.setTotalCount(Integer.parseInt(String.valueOf(count)));
 
 			//此处才是作为查询数据中的数据
-			String sql = "from Roster where del=0 ";
+			String sql = "from Roster where (lcTime is not null or lcTime !='')";
 			if (admin.getAuthority().equals("5")) {
 				sql += "and scz =" + "'" + admin.getSczname().toString() + "'";
 			}
@@ -1575,6 +1581,6 @@ public class RosterAction extends ActionSupport {
 
 	public void setMyFile2(File myFile2) {
 		this.myFile2 = myFile2;
-	}  
-	
+	}
+
 }

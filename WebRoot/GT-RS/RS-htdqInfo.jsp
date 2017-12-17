@@ -35,7 +35,9 @@
             <th>社保结束日期</th>
             <th>工伤概况</th>
             <th >详细</th>
-            <th >操作</th>
+            <th >操作
+                <input type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" style="margin-left: 20px"/>全选/取消
+            </th>
         </tr>
         </thead>
        <tbody>
@@ -128,6 +130,23 @@
             uuidArr.push($(this).val());
         });
         return uuidArr;
+    }
+
+    function DoCheck()
+    {
+        var ch=document.getElementsByName("delUuid");
+        if(document.getElementsByName("allChecked")[0].checked==true)
+        {
+            for(var i=0;i<ch.length;i++)
+            {
+                ch[i].checked=true;
+            }
+        }else{
+            for(var i=0;i<ch.length;i++)
+            {
+                ch[i].checked=false;
+            }
+        }
     }
 
 </script>

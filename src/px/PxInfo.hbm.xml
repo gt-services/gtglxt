@@ -28,11 +28,7 @@
     	<property name="payNumber" column="payNumber"/>
     	<property name="testDate" column="testDate"/>
     	<property name="licenseStatus" column="licensestatus"/>
-
-		<property name="CertificateNum" column="CertificateNum"/>
-		<property name="CertificateUsedDate" column="CertificateUsedDate"/>
 		<property name="dueToDate" column="duetodate"/>
-		<property name="studentId" column="studentId"/>
 		<property name="FirstRetestFee" column="FirstRetestFee"/>
 		<property name="SecondRetestFee" column="SecondRetestFee"/>
 		<property name="ThirdRetestFee" column="ThirdRetestFee"/>
@@ -40,6 +36,5 @@
 		<property name="SecondRetestPayNumber" column="SecondRetestPayNumber"/>
 		<property name="ThirdRetesPayNumber" column="ThirdRetesPayNumber"/>
 
-		<property name="status" column="status"/>
 	</class>
 </hibernate-mapping>

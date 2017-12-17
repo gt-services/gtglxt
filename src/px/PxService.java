@@ -14,7 +14,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-public class PxService {
+public class    PxService {
 	public static List<PxInfo> importExcel(InputStream fis){  
         List<PxInfo> infos = new ArrayList<PxInfo>();  
         PxInfo info;  
@@ -126,34 +126,22 @@ public class PxService {
                 	info.setLicenseStatus(cells[19].getContents().toString());
                 }
                 if(cellslength >=21){
-
-                    if(!cells[20].getContents().toString().equals("")){
-                        info.setCertificateUsedDate(ft.parse(cells[20].getContents().toString()));
-                    }
+                    info.setFirstRetestFee(cells[20].getContents().toString());
                 }
                 if(cellslength >=22){
-                    info.setCertificateNum(cells[21].getContents().toString());
+                    info.setSecondRetestFee(cells[21].getContents().toString());
                 }
                 if(cellslength >=23){
-                    info.setStudentId(cells[22].getContents().toString());
+                    info.setThirdRetestFee(cells[22].getContents().toString());
                 }
                 if(cellslength >=24){
-                    info.setFirstRetestFee(cells[23].getContents().toString());
+                    info.setFirstRetesPayNumber(cells[23].getContents().toString());
                 }
                 if(cellslength >=25){
-                    info.setSecondRetestFee(cells[24].getContents().toString());
+                    info.setSecondRetestPayNumber(cells[24].getContents().toString());
                 }
                 if(cellslength >=26){
-                    info.setThirdRetestFee(cells[25].getContents().toString());
-                }
-                if(cellslength >=27){
-                    info.setFirstRetesPayNumber(cells[26].getContents().toString());
-                }
-                if(cellslength >=28){
-                    info.setSecondRetestPayNumber(cells[27].getContents().toString());
-                }
-                if(cellslength >=29){
-                    info.setThirdRetesPayNumber(cells[28].getContents().toString());
+                    info.setThirdRetesPayNumber(cells[25].getContents().toString());
                 }
                 infos.add(info);
             }  

@@ -21,7 +21,7 @@
             <button type="submit"  class="btn-default" data-icon="search" id="queryRS">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo" id="clearQuery">清空查询</a>
             <%--<span style="float:right;margin-right:5px;"><a onclick="doExport()" class="btn btn-blue" data-confirm-msg="确定要导出吗？" data-icon="arrow-down">导出</a></span>--%>
-            <span style="float:right;margin-right:5px;"><a href="GT-RS/RSimport.jsp" class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
+                <span style="float:right;margin-right:5px;"><a href="GT-RS/RSimport.jsp" class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
             <span style="float:right;margin-right:5px;"><a href="preaddroster.action?author=5" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" data-mask="true" data-icon="plus">新增</a></span>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="batchaddinKQ()" value="批量加入考勤" /></span>
         </div>
@@ -46,7 +46,9 @@
             <th>工伤概况</th>
             <th >详细</th>
             <th >操作</th>
-            <th>加入考勤</th>
+            <th>加入考勤
+                <input type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" style="margin-left: 20px"/>全选/取消
+            </th>
             <th>图片上传</th>
         </tr>
         </thead>
@@ -69,7 +71,13 @@
             	<td><s:property value="gsqk" /></td>
           		<td><a href="editroster.action?type=1&uuid=<s:property value="uuid"/>" class="btn-blue" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" >详细</a></td>
             	<td><a href="editroster.action?uuid=<s:property value="uuid"/>" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" >编辑</a>&nbsp;&nbsp;
-            	<a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')">删除</a></td>
+                    <s:if test="lcTime == null">
+                        <a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')" disabled="true">删除</a>
+                    </s:if>
+                    <s:else>
+                        <a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')">离职</a>
+                    </s:else>
+                </td>
             	<td>
             		<s:if test=" addinkq== '未添加'">
             		    <a class="btn btn-red"  onclick="addinKQ('<s:property value="uuid" />','<s:property value="scz" />','<s:property value="name" />')">未添加</a>
@@ -208,6 +216,23 @@
             nameArr:nameArr
         }
         return arr;
+    }
+
+    function DoCheck()
+    {
+        var ch=document.getElementsByName("delUuid");
+        if(document.getElementsByName("allChecked")[0].checked==true)
+        {
+            for(var i=0;i<ch.length;i++)
+            {
+                ch[i].checked=true;
+            }
+        }else{
+            for(var i=0;i<ch.length;i++)
+            {
+                ch[i].checked=false;
+            }
+        }
     }
 
 

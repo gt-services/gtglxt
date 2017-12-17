@@ -16,7 +16,7 @@
                     <option value="女" <s:if test="roster.sex.equals(\"女\")">selected = "selected"</s:if>>女</option>
                 </select></td>
                     <td><label class='control-label x85'>身份证:</label><input type='text'  name='roster.identityId'  size='20'   value='<s:property value="roster.identityId" />'  ></td></tr>
-                <tr><td><label class='control-label x85'>社保编号:</label><input type='text'  name='roster.sbNumber'  size='20'  value='<s:property value="roster.sbNumber" />'  ></td>
+                <tr><td><label class='control-label x85'>保险编号:</label><input type='text'  name='roster.sbNumber'  size='20'  value='<s:property value="roster.sbNumber" />'  ></td>
                     <td><label class='control-label x85'>家庭住址:</label><input type='text' name='roster.address'  size='20'   value='<s:property value="roster.address" />'  ></td></tr>
                 <tr>
                     	<td><label class='control-label x85'>银行卡号:</label><input type='text'  name='roster.bankCard'  size='20'   value='<s:property value="roster.bankCard" />'  ></td>

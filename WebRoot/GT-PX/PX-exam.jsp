@@ -31,7 +31,7 @@
                     <option value="<s:property value="8" />" <s:if test="month==8">selected = "selected"</s:if>>8</option>
                     <option value="<s:property value="9" />" <s:if test="month==9">selected = "selected"</s:if>>9</option>
                     <option value="<s:property value="10" />" <s:if test="month==10">selected = "selected"</s:if>>10</option>
-                    <option value="<s:property value="12" />" <s:if test="month==11">selected = "selected"</s:if>>11</option>
+                    <option value="<s:property value="11" />" <s:if test="month==11">selected = "selected"</s:if>>11</option>
                     <option value="<s:property value="12" />" <s:if test="month==12">selected = "selected"</s:if>>12</option>
             </select>
             
@@ -65,7 +65,9 @@
             <th>优惠金额</th>
             <th>详细</th>
             <th>操作</th>
-            <th>考试情况</th>
+            <th>考试情况
+                <input type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" style="margin-left: 20px"/>全选/取消
+            </th>
         </tr>
         </thead>
        <tbody>
@@ -169,7 +171,7 @@
             $.ajax({
                 type: "POST",
                 url: "changeStatus.action",
-                data: {uuidarr:uuidarr,status:'2'},
+                data: {uuidarr:uuidarr,test:'不合格'},
                 dataType: "json",
                 success: function(data){
                     $("#queryPX").click();
@@ -186,7 +188,7 @@
                 $.ajax({
                     type: "POST",
                     url: "changeStatus.action",
-                    data: {uuidarr:uuidarrs,status:'2'},
+                    data: {uuidarr:uuidarrs,test:'不合格'},
                     dataType: "json",
                     success: function(data){
                         if(data.statusCode==200){
@@ -210,7 +212,7 @@
             $.ajax({
                 type: "POST",
                 url: "changeStatus.action",
-                data: {uuidarr:uuidarr,status:'1'},
+                data: {uuidarr:uuidarr,test:'合格'},
                 dataType: "json",
                 success: function(data){
                     $("#queryPX").click();
@@ -227,7 +229,7 @@
                 $.ajax({
                     type: "POST",
                     url: "changeStatus.action",
-                    data: {uuidarr:uuidarrs,status:'1'},
+                    data: {uuidarr:uuidarrs,status:'合格'},
                     dataType: "json",
                     success: function(data){
                         if(data.statusCode==200){
@@ -251,6 +253,24 @@
             uuidArr.push($(this).val());
         });
         return uuidArr;
+    }
+
+
+    function DoCheck()
+    {
+        var ch=document.getElementsByName("delUuid");
+        if(document.getElementsByName("allChecked")[0].checked==true)
+        {
+            for(var i=0;i<ch.length;i++)
+            {
+                ch[i].checked=true;
+            }
+        }else{
+            for(var i=0;i<ch.length;i++)
+            {
+                ch[i].checked=false;
+            }
+        }
     }
 
 

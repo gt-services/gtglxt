@@ -2,7 +2,7 @@
 	contentType="text/html; charset=utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <div class="bjui-pageHeader">
-    <form id="pagerForm" data-toggle="ajaxsearch" method="post">
+    <form id="pagerForm" data-toggle="ajaxsearch" action="getDeparture.action" method="post">
 
         <input type="hidden" name="pageSize" value="20">
         <input type="hidden" name="currentPage" id="pageCurrent" value="<s:property value="page.currentPage" />">

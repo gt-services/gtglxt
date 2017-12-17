@@ -12,8 +12,8 @@
 		<!-- 配置mysql数据库连接参数 -->
 		<property name="hbm2ddl.auto">update</property>
 
-		<property name="show_sql">true</property>
-		<property name="format_sql">true</property>
+		<!--<property name="show_sql">true</property>-->
+		<!--<property name="format_sql">true</property>-->
 
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>

@@ -123,21 +123,14 @@ public class PxAction extends ActionSupport {
 				hql += " and licenseStatus = :licenseStatus ";
 
 			}
-			//未考人员
+			//考试人员名单
 			if ("5".equals(pageType)) {
-				/*hql += " and ( theoryResults< :theoryResults or actualResults< :actualResults) ";
-				hql += " and (FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) " ;
-				hql += " and (SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults)";*/
-				hql += " and status = 0";
+				hql += " and test = '待考' and testDate != ''";
 
 			}
-			//考试未通过人员
+			//补考人员名单
 			if ("6".equals(pageType)) {
-				/*hql += " and ( FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) ";
-				hql +=	"and ( SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults) ";
-				hql +=	"and ( ThirdRetesttheoryResults< :ThirdRetesttheoryResults or ThirdRetestactualResults< :ThirdRetestactualResults) ";
-				hql +=	"and ( theoryResults< :theoryResults or actualResults< :actualResults)";*/
-				hql += " and status = 2";
+				hql += " and test = '不合格'";
 			}
 			hql += " and signupDate like :signupDate ";
 
@@ -174,20 +167,13 @@ public class PxAction extends ActionSupport {
 
 			}
 
-			//需要补考人员
+			//待考试人员名单
 			if ("5".equals(pageType)) {
-				/*sql += " and ( theoryResults< :theoryResults or actualResults< :actualResults) ";
-				sql += " and (FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) " ;
-				sql += " and (SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults)";*/
-				sql += " and test = '不合格'";
+				sql += " and test = '待考' and testDate != ''";
 			}
-			//考试通过人员
+			//补考人员名单
 			if ("6".equals(pageType)) {
-				/*sql += " and ( FirstRetesttheoryResults< :FirstRetesttheoryResults or FirstRetestactualResults< :FirstRetestactualResults) ";
-				sql +=	"and ( SecondRetesttheoryResults< :SecondRetesttheoryResults or SecondRetestactualResults< :SecondRetestactualResults) ";
-				sql +=	"and ( ThirdRetesttheoryResults< :ThirdRetesttheoryResults or ThirdRetestactualResults< :ThirdRetestactualResults) ";
-				sql +=	"and ( theoryResults< :theoryResults or actualResults< :actualResults)";*/
-				sql += " and test = '合格'";
+				sql += " and test = '不合格'";
 			}
 			if (keyword != null && !keyword.equals("")) {
 				sql += "and name like :name ";
@@ -313,15 +299,14 @@ public class PxAction extends ActionSupport {
 	}
 
 	/**
-	 * 改变人员的状态 0 未考 1 通过 2 未通过
+	 * 改变人员的状态  待考  合格  不合格
 	 * @return
 	 */
 	public String changeStatus() {
 		Session session = Hfsession.init();
 		Transaction tx = session.beginTransaction();
 		HttpServletRequest request = ServletActionContext.getRequest ();
-		String statusStr = request.getParameter("status");
-		Integer status = Integer.parseInt(statusStr);
+		String statusStr = request.getParameter("test");
 		Map uuidarrs =request.getParameterMap();
 		Object uuidarrObj = uuidarrs.get("uuidarr[]");
 		String[] uuidarr =(String[])uuidarrObj;
@@ -334,10 +319,9 @@ public class PxAction extends ActionSupport {
 
 			for (PxInfo p : list
 				 ) {
-				p.setStatus(status);
+				p.setTest(statusStr);
 				session.update(p);
 			}
-
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 			tx.commit();
@@ -383,13 +367,6 @@ public class PxAction extends ActionSupport {
 		String exptrainType =request.getParameter("exptrainType");
 		String exyear =request.getParameter("year");
 		String exmonth =request.getParameter("month");
-//		try {
-//			if(extrainType!=null && !"".equals(extrainType)){
-//				exptrainType = new String(extrainType.getBytes("iso8859-1"),"utf-8");
-//			}
-//		} catch (UnsupportedEncodingException e1) {
-//			e1.printStackTrace();
-//		}
 		Session session = Hfsession.init();
 		//Transaction tx = session.beginTransaction();
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -450,8 +427,8 @@ public class PxAction extends ActionSupport {
 				listObject.add(r);
 			}
 			String[] str = new String[] { "序号", "培训日期", "姓名", "姓别", "身份证", "文化程度", "单位/个人", "联系电话", "单位联系人", "单位电话",
-					"培训点", "类别", "考试情况", "标准金额", "优惠金额", "缴费情况","收据号", "到期日期","考试日期", "领证情况",
-					"生效日期","证书编号","学员编号","第一次补考费用","第二次补考费用","第三次补考费用","第一次补考收据号","第二次补考收据号","第三次补考收据号","状态（只读）"
+					"培训点", "培训项目", "考试情况", "标准金额", "实收金额", "缴费情况","收据号", "复审日期","考试日期", "领证情况",
+					"第一次补考费用","第二次补考费用","第三次补考费用","第一次补考收据号","第二次补考收据号","第三次补考收据号"
 			};
 			String title="国通企业培训人员花名册--"+sdf.format(new Date())+".xls";
 			if(exptrainType!=null && !"".equals(exptrainType)){

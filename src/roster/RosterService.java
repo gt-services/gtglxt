@@ -23,18 +23,17 @@ public class RosterService {
             //打开文件
             Workbook book = Workbook.getWorkbook(fis);
             //得到第一个工作表对象
-            Sheet sheet = book.getSheet(0);
+
+            Sheet[] sheet = book.getSheets();
             //得到第一个工作表中的总行数
-            int rowCount = sheet.getRows();
-            //System.out.println("==================RSrowCount======================="+rowCount);
+            int rowCount = sheet[0].getRows();
             //日期格式化
             DateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
             //循环取出Excel中的内容
             Date date = new Date();
             for (int i = 1; i < rowCount; i++) {
-            	Cell[] cells =sheet.getRow(i);
+            	Cell[] cells =sheet[0].getRow(i);
             	int cellslength=cells.length;
-            	//System.out.println("====================cellslengthcellslengthcellslengthcellslength===================================");
             	info = new Roster();
             	if(cellslength >=1){
             		info.setHtNumber(cells[0].getContents().toString());

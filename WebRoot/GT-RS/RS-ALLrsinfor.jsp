@@ -80,7 +80,10 @@
             <th>工伤概况</th>            
             <th>所在生产组</th>
             <th >详细</th>
-            <th>操作</th>
+            <th>
+                操作
+                <input type="checkbox" name="allChecked" id="allChecked" onclick="DoCheck()" style="margin-left: 20px"/>全选/取消
+            </th>
         </tr>
         </thead>
        <tbody>
@@ -108,7 +111,7 @@
                         <a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')" disabled="true">删除</a>
                     </s:if>
                     <s:else>
-                        <a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')">删除</a>
+                        <a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')">离职</a>
                         <input type="checkbox" style="width: 15px;height: 15px" name="delUuid" value="<s:property value="uuid" />"/>
                     </s:else>
                 </td>
@@ -191,6 +194,23 @@ function takeuuid(){ //jquery获取复选框值
         uuidArr.push($(this).val());
     });
     return uuidArr;
+}
+
+function DoCheck()
+{
+    var ch=document.getElementsByName("delUuid");
+    if(document.getElementsByName("allChecked")[0].checked==true)
+    {
+        for(var i=0;i<ch.length;i++)
+        {
+            ch[i].checked=true;
+        }
+    }else{
+        for(var i=0;i<ch.length;i++)
+        {
+            ch[i].checked=false;
+        }
+    }
 }
 
 </script>

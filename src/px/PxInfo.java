@@ -28,29 +28,18 @@ public class PxInfo implements Serializable{
 	private String discountAmount;
 	private String payCost;//缴费情况
 	private String payNumber;//收据号
-	private Date dueToDate;//到期日期
+	private Date dueToDate;//复审日期
 	private Date testDate;//考试日期
 	private String licenseStatus;//领证情况
 	/*
 	补考模块新增字段
 	 */
-	private Date CertificateUsedDate;//生效日期
-	private String CertificateNum;//证书编号
-	private String studentId;//学员编号
 	private String FirstRetestFee;//第一次补考费用
 	private String SecondRetestFee;
 	private String ThirdRetestFee;
 	private String FirstRetesPayNumber;//第一次补考收据号
 	private String SecondRetestPayNumber;
 	private String ThirdRetesPayNumber;
-//	private int theoryResults;//理论成绩
-//	private int actualResults; //实际操作成绩
-//	private int FirstRetesttheoryResults;//第一次补考理论成绩
-//	private int SecondRetesttheoryResults;
-//	private int ThirdRetesttheoryResults;
-//	private int FirstRetestactualResults;//第一次补考实操成绩
-//	private int SecondRetestactualResults;
-//	private int ThirdRetestactualResults;
 
 
 	/**
@@ -58,16 +47,6 @@ public class PxInfo implements Serializable{
 	 * 培训新增考试状态 0未考;1通过；2未通过
 	 */
 
-	private Integer status =0;
-
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -231,30 +210,6 @@ public class PxInfo implements Serializable{
 
 	public void setLicenseStatus(String licenseStatus) {
 		this.licenseStatus = licenseStatus;
-	}
-
-	public Date getCertificateUsedDate() {
-		return CertificateUsedDate;
-	}
-
-	public void setCertificateUsedDate(Date certificateUsedDate) {
-		CertificateUsedDate = certificateUsedDate;
-	}
-
-	public String getCertificateNum() {
-		return CertificateNum;
-	}
-
-	public void setCertificateNum(String certificateNum) {
-		CertificateNum = certificateNum;
-	}
-
-	public String getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(String studentId) {
-		this.studentId = studentId;
 	}
 
 	public String getFirstRetestFee() {
