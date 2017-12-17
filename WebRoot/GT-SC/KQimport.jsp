@@ -6,7 +6,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<div class="bjui-pageContent tableContent">
+<div class="bjui-pageHeader">
     <form action="importKqb.action" method="post" id="myfrom" enctype="multipart/form-data">
         <table class="table table-condensed table-hover" width="100%">
             <tbody>
@@ -16,6 +16,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </table>
     </form>
 </div>
+
+
+<div class="bjui-pageContent tableContent">
+    <table data-toggle="tablefixed" data-width="100%" data-layout-h="0" data-nowrap="true">
+        <thead>
+        <tr id="theadTr">
+
+        </tr>
+        </thead>
+        <tbody id="tbodyTr">
+        </tbody>
+    </table>
+</div>
 <div class="bjui-pageFooter">
     <ul>
         <li><button type="button" class="btn-close" data-icon="close">取消</button></li>
@@ -24,6 +37,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 <script type="text/javascript">
+
+    $(function () {
+        var trobj = '<th width="30">NO.</th><th>银行卡</th> <th>生产组</th> <th>岗位</th> <th>年份</th> <th>月份</th>';
+        for(i=1;i<=31;i++){
+            trobj =  trobj + '<th>' + i + '</th>'
+        }
+        trobj = trobj + '<th>健康证报销</th><th>水电费扣款</th> <th>叉车证扣款</th> <th>叉车证还款</th> <th>员工还款</th> <th>员工借款</th>'
+        +'th>住宿扣款</th><th>工作服和鞋扣款</th> <th>工作服和鞋还款</th> <th>餐补</th> <th>其他扣款</th> <th>备注</th> <th>数据更新时间</th>';
+        $('#theadTr').append(trobj);
+    })
   	function importExcel(){  
 	    //检验导入的文件是否为Excel文件  
 	    var excelPath = document.getElementById("excelPath").value;  
@@ -41,12 +64,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                 dataType: 'JSON',//返回数据的类型
 	                 async:false,
 	                 success: function(data,status) {
+                         console.log(data);
+	                     var obj = data.data;
+	                     var trobj = "";
+	                     for(i=0;i<=obj.length;i++){
+	                         trobj += allPrpos(obj[i]);
+                         }
+
+                         $('#tbodyTr').append(trobj);
+                         console.log(trobj);
 	                	 $(this).alertmsg('ok', "导入成功！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'});
 		             	    
-	             	    $(this).dialog('closeCurrent',true);
-	             	    setTimeout(function(){
-	             	    	 $("#queryRS").click();
-	                    },500); 
+//	             	    $(this).dialog('closeCurrent',true);
+//	             	    setTimeout(function(){
+//	             	    	 $("#queryRS").click();
+//	                    },500);
 	                 } ,
 	                 error:function(data,status){
 	                	 $(this).alertmsg('error', "导入失败！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'})
@@ -57,5 +89,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            return false;  
 	        }  
 	    } 
-    } 
+    }
+
+
+    function allPrpos(obj) {
+        // 用来保存所有的属性名称和值
+        var props = "";
+        for(var p in obj){
+                props+= '<td>' + obj[p]  + '</td>';
+        }
+        props = '<tr>' + props + '</tr>';
+        return props;
+    }
   </script>

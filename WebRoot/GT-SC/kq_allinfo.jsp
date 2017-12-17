@@ -82,7 +82,7 @@
             <button type="submit"  class="btn-default" data-icon="search" id="queryRS">查询</button>
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doKqbExport()" value="新表导出" /></span>
-            <span style="float:right;margin-right:5px;"><a href="GT-SC/KQimport.jsp"  class="btn btn-blue" data-toggle="dialog" data-width="300" data-height="300" data-icon="arrow-up">导入</a></span>
+            <span style="float:right;margin-right:5px;"><a href="GT-SC/KQimport.jsp"  class="btn btn-blue" data-toggle="dialog" data-width="1000" data-height="600" data-icon="arrow-up">导入</a></span>
         </div>
     </form>
 	
