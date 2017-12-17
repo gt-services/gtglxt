@@ -84,7 +84,6 @@ public class KqbService {
                 info.setCanbu(cells[47].getContents().toString());
                 info.setCut_else(cells[48].getContents().toString());
                 info.setRemark(cells[49].getContents().toString());
-                info.setCreateDate(new Date());
                 infos.add(info);
             }  
               
