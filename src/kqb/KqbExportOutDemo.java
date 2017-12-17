@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class KqbExportOutDemo {
 
+	private String uuid;//人员id
 	private String name;//姓名
 	private String bankCard;//银行卡
 	private String scz;//所属生产组
@@ -59,6 +60,15 @@ public class KqbExportOutDemo {
 	private String canbu;//餐补
 	private String cut_else;//其他扣款
 	private String remark;//备注
+
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 
 	public String getSubmit_healcard() {
 		return submit_healcard;

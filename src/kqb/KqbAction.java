@@ -39,6 +39,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import admin.Admin;
 import admin.AdminService;
 
+import static second.SecondService.getListJobNameToId;
+import static second.SecondService.getListSizeNameToId;
 import static second.SecondService.getSecondMap;
 
 /**
@@ -900,10 +902,20 @@ public class KqbAction extends ActionSupport{
 	public String importKqb() throws IOException, SQLException {
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
-			Session session = Hfsession.init();
-			Transaction tx = session.beginTransaction();
+//			Session session = Hfsession.init();
+//			Transaction tx = session.beginTransaction();
 			InputStream fis = new FileInputStream(excelPath);
 			kqbExportList = KqbService.importExcel(fis);
+			Map<String,Integer> jobNameToId = getListJobNameToId();
+			Map<String,Integer> sizeNameToId = getListSizeNameToId();
+			for (KqbExport kep:kqbExportList
+				 ) {
+				if(jobNameToId.get(kep.getJobOrSizeName())!=null){
+					kep.setJid(jobNameToId.get(kep.getJobOrSizeName()));
+				}else if(sizeNameToId.get(kep.getJobOrSizeName())!=null){
+					kep.setSid(jobNameToId.get(kep.getJobOrSizeName()));
+				}
+			}
 			//导入添加人员
 			/*for(int i =0; i<kqbExportList.size();i++) {
 				//如果身份证不为空给加
@@ -981,7 +993,8 @@ public class KqbAction extends ActionSupport{
 			lists = SecondService.getListSecond();
 
 			for(KqbExport k :listExp){
-				/*KqbExportOutDemo kd = new KqbExportOutDemo();
+				KqbExportOutDemo kd = new KqbExportOutDemo();
+				kd.setUuid(k.getUuid());
 				kd.setBankCard(k.getBankCard());
 				kd.setJobOrSizeName(k.getJobOrSizeName());
 				kd.setMonth(k.getMonth());
@@ -1031,12 +1044,12 @@ public class KqbAction extends ActionSupport{
 				kd.setRepay_clothesandshoes(k.getRepay_clothesandshoes());//工作服和鞋还款
 				kd.setCanbu(k.getCanbu());//餐补
 				kd.setCut_else(k.getCut_else());//其他扣款
-				kd.setRemark(k.getRemark());//备注*/
-				listObject.add(k);
+				kd.setRemark(k.getRemark());//备注
+				listObject.add(kd);
 			}
 
-			String[] str = new String[]{"数据编号(只读)","人员编号(只读)","姓名(只读)","银行卡(只读)","生产组(只读)","计量工作标识(只读)","计数工作标识(只读)","岗位名称","年份","月份","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24",
-					"25","26","27","28","29","30","31","健康证报销","水电费扣款","叉车证扣款","叉车证还款","员工还款","员工借款","住宿扣款","工作服和鞋扣款","工作服和鞋还款","餐补","其他扣款","备注","数据更新时间（只读）"};
+			String[] str = new String[]{/*"数据编号(只读)",*/"人员编号(只读)","姓名(只读)","银行卡(只读)","生产组(只读)",/*"计量工作标识(只读)","计数工作标识(只读)",*/"岗位名称","年份","月份","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24",
+					"25","26","27","28","29","30","31","健康证报销","水电费扣款","叉车证扣款","叉车证还款","员工还款","员工借款","住宿扣款","工作服和鞋扣款","工作服和鞋还款","餐补","其他扣款","备注"/*,"数据更新时间（只读）"*/};
 			String title= year+"年"+month+"月考勤表.xls";
 //			if(StringHelp.isNotEmpty(scz)){
 //				for(Second s :lists){

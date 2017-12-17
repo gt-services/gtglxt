@@ -85,6 +85,37 @@ public class SecondService {
 		}
 		return map;
 	}
+	public static Map<String,Integer> getListSizeNameToId(){
+		Session session = Hfsession.init();
+		List<Size> list = new ArrayList<Size>();
+		Map<String,Integer> map = new HashMap<>();
+		try {
+			Query q = session.createQuery("from Size where 1=1");
+			list = q.list();
+			for(int i =0;i<list.size();i++){
+				map.put( list.get(i).getName(),list.get(i).getSizeid());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
+	@SuppressWarnings("null")
+	public static Map<String,Integer> getListJobNameToId(){
+		Session session = Hfsession.init();
+		List<Job> list = new ArrayList<Job>();
+		Map<String,Integer> map = new HashMap<>();
+		try {
+			Query q = session.createQuery("from Job where 1=1 ");
+			list = q.list();
+			for(int i =0;i<list.size();i++){
+				map.put( list.get(i).getName(),list.get(i).getSecondId());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
 	@SuppressWarnings("null")
 	public static Map<String,String> getSecondMap(){
 		Session session = Hfsession.init();
