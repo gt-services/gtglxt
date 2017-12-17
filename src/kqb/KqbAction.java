@@ -39,6 +39,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import admin.Admin;
 import admin.AdminService;
 
+import static second.SecondService.getSecondMap;
+
 /**
  * 考勤表
  * @author Administrator
@@ -65,6 +67,7 @@ public class KqbAction extends ActionSupport{
 	private File excelPath;
 	private List<Kqb> list;
 	private List<Kqbinfo> listss;
+	private List<KqbExport> kqbExportList;
 	private List<Second> lists;
 	private List<Second> lista;
 	private List<Job> joblist;
@@ -194,7 +197,7 @@ public class KqbAction extends ActionSupport{
 			
 			listss= new ArrayList<>();
 			SecondService second = new SecondService();
-			Map<String,String> secondMap =second.getSecondMap() ;
+			Map<String,String> secondMap = getSecondMap() ;
 			
 			if(list.size()>0){
 				SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -394,7 +397,7 @@ public class KqbAction extends ActionSupport{
 						m.put("day"+cday,hour[i]);
 						BeanRefUtil.setFieldValue(export, m);
 
-						Map<String,String> secondMap = SecondService.getSecondMap();
+						Map<String,String> secondMap = getSecondMap();
 						String sczname = secondMap.get(sczid+"");
 						//1.uuid
 						export.setUuid(uuid);
@@ -494,7 +497,7 @@ public class KqbAction extends ActionSupport{
 						m.put("day"+cday,numbers[i]);
 						BeanRefUtil.setFieldValue(export, m);
 
-						Map<String,String> secondMap = SecondService.getSecondMap();
+						Map<String,String> secondMap = getSecondMap();
 						String sczname = secondMap.get(sczid+"");
 						//1.uuid
 						export.setUuid(uuid);
@@ -900,10 +903,9 @@ public class KqbAction extends ActionSupport{
 			Session session = Hfsession.init();
 			Transaction tx = session.beginTransaction();
 			InputStream fis = new FileInputStream(excelPath);
-			List<KqbExport> kqbExportList = new ArrayList<>();
 			kqbExportList = KqbService.importExcel(fis);
 			//导入添加人员
-			for(int i =0; i<kqbExportList.size();i++) {
+			/*for(int i =0; i<kqbExportList.size();i++) {
 				//如果身份证不为空给加
 					session.save(kqbExportList.get(i));
 			}
@@ -914,7 +916,7 @@ public class KqbAction extends ActionSupport{
 					"AND createDate NOT IN (SELECT b.* FROM (SELECT MAX(createDate) FROM gt_kqb_export GROUP BY UUID,  scz,jobOrSizeName,  YEAR,  MONTH HAVING COUNT(UUID) > 1 AND COUNT(scz) > 1 AND  COUNT(jobOrSizeName) > 1 AND COUNT(YEAR) > 1 AND COUNT(MONTH) > 1) b) ;";
 			PreparedStatement psta1 =con.prepareStatement(sql1);
 			psta1.execute(sql1);
-			jbutil.close();
+			jbutil.close();*/
 			map.put("msg", "success");
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
@@ -948,9 +950,9 @@ public class KqbAction extends ActionSupport{
 			if(keyword != null && !keyword.equals("")){
 				hql += "and name like :name ";
 			}
-//			if(StringHelp.isNotEmpty(scz)){
-//				hql += "and scz = :scz ";
-//			}
+			if(StringHelp.isNotEmpty(scz)){
+				hql += "and scz = :scz ";
+			}
 			if(StringHelp.isNotEmpty(year)){
 				hql += "and year = :year ";
 			}
@@ -963,9 +965,9 @@ public class KqbAction extends ActionSupport{
 			if(keyword != null && !keyword.equals("")){
 				query.setParameter("name", "%"+keyword+"%");
 			}
-//			if(StringHelp.isNotEmpty(scz)){
-//				query.setParameter("scz", scz);
-//			}
+			if(StringHelp.isNotEmpty(scz)){
+				query.setParameter("scz", getSecondMap().get(scz));
+			}
 			if(StringHelp.isNotEmpty(year)){
 				query.setParameter("year", year);
 			}
@@ -1497,5 +1499,11 @@ public class KqbAction extends ActionSupport{
 		this.status = status;
 	}
 
+	public List<KqbExport> getKqbExportList() {
+		return kqbExportList;
+	}
 
+	public void setKqbExportList(List<KqbExport> kqbExportList) {
+		this.kqbExportList = kqbExportList;
+	}
 }

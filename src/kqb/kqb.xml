@@ -57,10 +57,12 @@
             <result name="success">main.jsp</result>
             <interceptor-ref name="defaultStack"/>
         </action>
-        <action name="importKqb" class="kqb.KqbAction" method="importKqb">
-            <result name="success">main.jsp</result>
-            <interceptor-ref name="defaultStack"/>
-        </action>
+       <!-- <action name="importKqb" class="kqb.KqbAction" method="importKqb">
+           &lt;!&ndash; <result name="success">main.jsp</result>&ndash;&gt;
+            <result name="success" type="json">
+                <param name="root">kqbExportList</param>
+            </result>
+        </action>-->
 
         <action name="exportKqbExport" class="kqb.KqbAction" method="exportKqbExport">
             <result name="success">main.jsp</result>
@@ -88,5 +90,17 @@
         		 <result name="success">main.jsp</result> 
                 <interceptor-ref name="defaultStack"/>
         </action>                                
+    </package>
+    <package name="jsonPlugin" extends="json-default">
+        <action name="importKqb" class="kqb.KqbAction" method="importKqb">
+            <!--需要设置视图的类型-->
+            <result type="json"  name="yes">
+                <!--判断Action中的哪些属性需要转换为JSON数据格式-->
+                <param name="root">kqbExportList</param>
+            </result>
+<!--                <result name="success" type="json">
+                    <param name="root">kqbExportList</param>
+                </result>-->
+        </action>
     </package>
 </struts>
