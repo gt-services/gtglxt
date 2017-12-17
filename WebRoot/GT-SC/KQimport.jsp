@@ -113,10 +113,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
     function submitExcel(){
+  	    console.log(exportdata);
   	    $.ajax({
                 type: "POST",
                 url: "importKqbNew.action",
-                data: exportdata,
+                data: {"data":exportdata},
                 dataType: "json",
                 success: function(data){
                     if(data.statusCode==200){

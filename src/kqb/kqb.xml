@@ -57,12 +57,10 @@
             <result name="success">main.jsp</result>
             <interceptor-ref name="defaultStack"/>
         </action>
-       <!-- <action name="importKqb" class="kqb.KqbAction" method="importKqb">
-           &lt;!&ndash; <result name="success">main.jsp</result>&ndash;&gt;
-            <result name="success" type="json">
-                <param name="root">kqbExportList</param>
-            </result>
-        </action>-->
+        <action name="importKqbNew" class="kqb.KqbAction" method="importKqbNew">
+            <result name="success">main.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
 
         <action name="exportKqbExport" class="kqb.KqbAction" method="exportKqbExport">
             <result name="success">main.jsp</result>
