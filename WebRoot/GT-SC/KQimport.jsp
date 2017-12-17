@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 
-<div class="bjui-pageContent tableContent">
+<div class="bjui-pageContent tableContent" data-width="3000">
     <table data-toggle="tablefixed" data-width="100%" data-layout-h="0" data-nowrap="true">
         <thead>
         <tr id="theadTr">
@@ -30,13 +30,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </table>
 </div>
 <div class="bjui-pageFooter">
-    <ul>
+    <ul id="submitExcel">
         <li><button type="button" class="btn-close" data-icon="close">取消</button></li>
         <li><button type="button" class="btn-default" data-icon="save"  onclick="importExcel()">导入</button></li>
     </ul>
 </div>
 
 <script type="text/javascript">
+
+    exportdata = {};
 
     $(function () {
         var trobj = '<th width="30">NO.</th><th>银行卡</th> <th>生产组</th> <th>岗位</th> <th>年份</th> <th>月份</th>';
@@ -47,6 +49,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         +'th>住宿扣款</th><th>工作服和鞋扣款</th> <th>工作服和鞋还款</th> <th>餐补</th> <th>其他扣款</th> <th>备注</th> <th>数据更新时间</th>';
         $('#theadTr').append(trobj);
     })
+
+
+
+    function allPrpos(obj) {
+        // 用来保存所有的属性名称和值
+        var props = "";
+        for(var p in obj){
+            if(p!='jid' && p!='uuid' && p!='sid'){
+                props = props + '<td>' + obj[p]  + '</td>';
+            }
+        }
+        props = '<tr>' + props + '</tr>';
+        return props;
+    }
+
+
   	function importExcel(){  
 	    //检验导入的文件是否为Excel文件  
 	    var excelPath = document.getElementById("excelPath").value;  
@@ -64,15 +82,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                 dataType: 'JSON',//返回数据的类型
 	                 async:false,
 	                 success: function(data,status) {
-                         console.log(data);
-	                     var obj = data.data;
+	                     var obj = data;
+                         obj = JSON.parse(obj).data;
+                         exportdata = obj;
 	                     var trobj = "";
 	                     for(i=0;i<=obj.length;i++){
-	                         trobj += allPrpos(obj[i]);
+	                         trobj = trobj + allPrpos(obj[i]);
                          }
-
+//
                          $('#tbodyTr').append(trobj);
-                         console.log(trobj);
+                         $('#submitExcel').append('<li><button type="button" class="btn-green" onclick="submitExcel()">上传</button></li>');
 	                	 $(this).alertmsg('ok', "导入成功！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'});
 		             	    
 //	             	    $(this).dialog('closeCurrent',true);
@@ -81,6 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 //	                    },500);
 	                 } ,
 	                 error:function(data,status){
+	                     console.log(data);
 	                	 $(this).alertmsg('error', "导入失败！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'})
 	                 }
 	             	});
@@ -92,13 +112,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }
 
 
-    function allPrpos(obj) {
-        // 用来保存所有的属性名称和值
-        var props = "";
-        for(var p in obj){
-                props+= '<td>' + obj[p]  + '</td>';
-        }
-        props = '<tr>' + props + '</tr>';
-        return props;
+    function submitExcel(){
+  	    $.ajax({
+                type: "POST",
+                url: "importKqbNew.action",
+                data: exportdata,
+                dataType: "json",
+                success: function(data){
+                    if(data.statusCode==200){
+                        $("#clearQuery").click();
+                    }else{
+                        $(this).alertmsg('error', '上传失败');
+                    }
+                }
+        });
     }
+
   </script>
