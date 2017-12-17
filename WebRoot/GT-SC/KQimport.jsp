@@ -18,11 +18,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 
 
-<div class="bjui-pageContent tableContent" data-width="3000">
+<div class="bjui-pageContent tableContent">
     <table data-toggle="tablefixed" data-width="100%" data-layout-h="0" data-nowrap="true">
         <thead>
         <tr id="theadTr">
-
         </tr>
         </thead>
         <tbody id="tbodyTr">
@@ -41,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     exportdata = {};
 
     $(function () {
-        var trobj = '<th width="30">NO.</th><th>银行卡</th> <th>生产组</th> <th>岗位</th> <th>年份</th> <th>月份</th>';
+        var trobj = '<th width="30">NO.</th><th>姓名</th><th>银行卡</th> <th>生产组</th> <th>岗位</th> <th>年份</th> <th>月份</th>';
         for(i=1;i<=31;i++){
             trobj =  trobj + '<th>' + i + '</th>'
         }
@@ -113,10 +112,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
     function submitExcel(){
+  	    var data ={
+            exportData:exportdata
+        }
   	    $.ajax({
                 type: "POST",
                 url: "importKqbNew.action",
-                data: exportdata,
+                data: data,
                 dataType: "json",
                 success: function(data){
                     if(data.statusCode==200){
