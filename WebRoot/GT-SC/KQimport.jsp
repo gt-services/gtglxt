@@ -32,6 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <ul id="submitExcel">
         <li><button type="button" class="btn-close" data-icon="close">取消</button></li>
         <li><button type="button" class="btn-default" data-icon="save"  onclick="importExcel()">导入</button></li>
+        <li><button type="button" class="btn-default" data-icon="save"  onclick="importExcel()">批量考勤</button></li>
     </ul>
 </div>
 
@@ -112,22 +113,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
     function submitExcel(){
-  	    var data ={
-            exportData:exportdata
-        }
-  	    $.ajax({
-                type: "POST",
-                url: "importKqbNew.action",
-                data: JSON.stringify(data),
-                dataType: "json",
-                success: function(data){
-                    if(data.statusCode==200){
-                        $("#clearQuery").click();
-                    }else{
-                        $(this).alertmsg('error', '上传失败');
-                    }
+            //检验导入的文件是否为Excel文件
+            var excelPath = document.getElementById("excelPath").value;
+            if(excelPath == null || excelPath == ''){
+                $(this).alertmsg('error', "请选择要上传的Excel文件", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'})
+                return false;
+            }else{
+                var fileExtend = excelPath.substring(excelPath.lastIndexOf('.')).toLowerCase();
+                if(fileExtend == '.xls'){
+                    $.ajaxFileUpload({
+                        url:'importKqbNew.action', //url自己写
+                        secureuri:false, //是否需要安全协议，一般设置为false
+                        type:'post',
+                        fileElementId:'excelPath',//file标签的id
+                        dataType: 'JSON',//返回数据的类型
+                        async:false,
+                        success: function(data,status) {
+                            $(this).alertmsg('ok', "导入成功！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'});
+
+                            $(this).dialog('closeCurrent',true);
+                            setTimeout(function(){
+                                $("#queryRS").click();
+                            },500);
+                        } ,
+                        error:function(data,status){
+                            $(this).alertmsg('error', "导入失败！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'})
+                        }
+                    });
+                }else{
+                    $(this).alertmsg('error', "文件格式需为'.xls'格式", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'})
+                    return false;
                 }
-        });
+            }
+
     }
 
   </script>
