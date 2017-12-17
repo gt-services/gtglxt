@@ -169,7 +169,6 @@
         var uuidArr = parmasarr.uuidArr;
         var sczArr = parmasarr.sczArr;
         var nameArr = parmasarr.nameArr;
-        console.log(uuidArr,uuidArr,nameArr);
         if(uuidArr.length > 0){
             $(this).alertmsg('confirm', '确认将此人加入考勤？', {displayMode:'slide', displayPosition:'topcenter', okName:'Yes', cancelName:'no', title:'提示信息',okCall:function(){
                 $.ajax({

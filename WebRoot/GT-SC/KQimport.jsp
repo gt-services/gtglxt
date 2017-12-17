@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	    $.ajax({
                 type: "POST",
                 url: "importKqbNew.action",
-                data: data,
+                data: JSON.stringify(data),
                 dataType: "json",
                 success: function(data){
                     if(data.statusCode==200){
