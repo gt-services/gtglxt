@@ -18,6 +18,7 @@ import org.apache.struts2.ServletActionContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import basis.Excel;
@@ -63,6 +64,7 @@ public class KqbAction extends ActionSupport{
 	private String year;
 	private String month;
 	private String day;
+	private List data;
 	private Kqb kqb;
 	private Todaykq todaykq;
 	private Kqbinfo kqbinfo;
@@ -945,6 +947,45 @@ public class KqbAction extends ActionSupport{
 		return SUCCESS;
 	}
 
+    //新版导入功能模块
+    public String importKqbNew() throws IOException, SQLException {
+        Map<String,Object> map = new HashMap<String,Object>();
+        HttpServletRequest request = ServletActionContext.getRequest ();
+        String requestParameterMap = request.getParameter("data");
+        System.out.println(requestParameterMap);
+        Session session = Hfsession.init();
+        Transaction tx = session.beginTransaction();
+        try {
+            //导入添加人员
+			/*for(int i =0; i<kqbExportList.size();i++) {
+				//如果身份证不为空给加
+					session.save(kqbExportList.get(i));
+			}
+			tx.commit();
+			JDBCUtil jbutil =new JDBCUtil();
+			Connection con =jbutil.getConnection();
+			String sql1 ="delete FROM gt_kqb_export  WHERE UUID IN (SELECT a.UUID FROM (SELECT  UUID  FROM gt_kqb_export  GROUP  BY  UUID,scz,jobOrSizeName,YEAR,MONTH   HAVING  COUNT(UUID) > 1 AND COUNT(scz) > 1 AND COUNT(jobOrSizeName) > 1 AND COUNT(YEAR) > 1 AND  COUNT(MONTH) > 1) a)\n" +
+					"AND createDate NOT IN (SELECT b.* FROM (SELECT MAX(createDate) FROM gt_kqb_export GROUP BY UUID,  scz,jobOrSizeName,  YEAR,  MONTH HAVING COUNT(UUID) > 1 AND COUNT(scz) > 1 AND  COUNT(jobOrSizeName) > 1 AND COUNT(YEAR) > 1 AND COUNT(MONTH) > 1) b) ;";
+			PreparedStatement psta1 =con.prepareStatement(sql1);
+			psta1.execute(sql1);
+			jbutil.close();*/
+            map.put("msg", "success");
+            map.put("statusCode", 200);
+            map.put("data", kqbExportList);
+            ResultUtils.toJson(ServletActionContext.getResponse(), map);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            map.put("msg", "error");
+            map.put("statusCode", 100);
+            map.put("data", kqbExportList);
+            ResultUtils.toJson(ServletActionContext.getResponse(), map);
+        }finally{
+            Hfsession.close();
+        }
+        return SUCCESS;
+    }
+
+
 	public String exportKqbExport(){
 		HttpServletRequest request = ServletActionContext.getRequest ();
 		HttpSession httpSession = request.getSession();
@@ -1342,7 +1383,16 @@ public class KqbAction extends ActionSupport{
 	public String execute() throws Exception {
 		return super.execute();
 	}
-	public String getSczid() {
+
+    public List getData() {
+        return data;
+    }
+
+    public void setData(List data) {
+        this.data = data;
+    }
+
+    public String getSczid() {
 		return sczid;
 	}
 
