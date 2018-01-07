@@ -42,6 +42,15 @@
                     </s:iterator>
                 </select></td>
                 <tr>
+                    <td colspan="1"><label  class='control-label x85'>用工性质:</label><select data-toggle="selectpicker"  name='roster.jobTimeType'  data-width="80"  value='<s:property value="roster.jobTimeType" />'  >
+                        <option value="" <s:if test="roster.jobTimeType.equals(\"\")">selected = "selected"</s:if>>未选</option>
+                        <option value="长期工" <s:if test="roster.jobTimeType.equals(\"长期工\")">selected = "selected"</s:if>>长期工</option>
+                        <option value="短期工" <s:if test="roster.jobTimeType.equals(\"短期工\")">selected = "selected"</s:if>>短期工</option>
+                        <option value="临时工" <s:if test="roster.jobTimeType.equals(\"临时工\")">selected = "selected"</s:if>>临时工</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
                     	<td><label class='control-label x85'>工伤开始日期:</label><input type='text' data-toggle="datepicker"  name='roster.gsStart'  size='20'  value='<s:date name="roster.gsStart" format="yyyy-MM-dd"/>' ></td>
                     	<td><label class='control-label x85'>工伤结束日期:</label><input type='text' data-toggle="datepicker" name='roster.gsEnd'  size='20'   value='<s:date name="roster.gsEnd" format="yyyy-MM-dd"/>'  ></td>
                 </tr>

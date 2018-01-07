@@ -4,79 +4,200 @@
 
 <style type="text/css">
 
-#form input{
-	width:40%;
-	margin-top:3px
-}
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
 	round:#ffffff;
 }
 
-#form span{
+#viewkqform span{
 	display:inline-block;
-	width:7%;
+	width:5%;
 	font-weight:bold;
 	text-align:center
 }
 
+
+#viewkqform input{
+    display:inline-block;
+    margin-top: 5px;
+    width:14%;
+    border:1px solid #4A8CDB;
+}
+
 </style>
 <div class="bjui-pageContent tableContent">
-    <form action="updatekqb.action" class="pageForm" id="form" data-toggle="validate">
-       	<input type="hidden" name="" value="<s:property value="kqb.scz"/>" readonly="readonly">
-        <input type="hidden" name="type" value="<s:property value="type"/>" readonly="readonly">
-       	<span>姓名：</span><input name="kqb.name" value="<s:property value="kqb.name"/>"  readonly="readonly">
-        <span>生产组：</span><input name="scz" value="<s:property value="scz"/>"  readonly="readonly"><br/>
-        <span>岗位：</span><input name="kqb.gw" value="<s:property value="kqb.gw"/>" readonly="readonly">
-      	<input name="kqb.uuid" type="hidden" value="<s:property value="kqb.uuid" />"readonly="readonly">
-        <span>年份：</span><input name="kqb.year" value="<s:property value="kqb.year" />"readonly="readonly" style="width:15%">
-        <span>月份：</span><input name="kqb.month" value="<s:property value="kqb.month" />"readonly="readonly" style="width:15%"><br/><br/><br/>
-        <span>1号：</span><input name="kqb.day1" class="kqb.day1" value="<s:property value="kqb.day1" />"readonly="readonly">
-        <span>2号：</span><input name="kqb.day2" class="kqb.day2" value="<s:property value="kqb.day2" />"readonly="readonly"><br/>
-        <span>3号：</span><input name="kqb.day3" class="kqb.day3" value="<s:property value="kqb.day3" />"readonly="readonly">
-        <span>4号：</span><input name="kqb.day4" class="kqb.day4" value="<s:property value="kqb.day4" />"readonly="readonly"><br/>
-        <span>5号：</span><input name="kqb.day5" class="kqb.day5" value="<s:property value="kqb.day5" />"readonly="readonly">
-        <span>6号：</span><input name="kqb.day6" class="kqb.day6" value="<s:property value="kqb.day6" />"readonly="readonly"><br/>
-        <span>7号：</span><input name="kqb.day7" class="kqb.day7" value="<s:property value="kqb.day7" />"readonly="readonly">
-        <span>8号：</span><input name="kqb.day8" class="kqb.day8" value="<s:property value="kqb.day8" />"readonly="readonly"><br/>
-        <span>9号：</span><input name="kqb.day9" class="kqb.day9" value="<s:property value="kqb.day9" />"readonly="readonly">
-        <span>10号：</span><input name="kqb.day10" class="kqb.day10" value="<s:property value="kqb.day10" />"readonly="readonly"><br/>
-        <span>11号：</span><input name="kqb.day11" class="kqb.day11" value="<s:property value="kqb.day11" />"readonly="readonly">
-        <span>12号：</span><input name="kqb.day12" class="kqb.day12" value="<s:property value="kqb.day12" />"readonly="readonly"><br/>
-        <span>13号：</span><input name="kqb.day13" class="kqb.day13" value="<s:property value="kqb.day13" />"readonly="readonly">
-        <span>14号：</span><input name="kqb.day14" class="kqb.day14" value="<s:property value="kqb.day14" />"readonly="readonly"><br/>
-        <span>15号：</span><input name="kqb.day15" class="kqb.day15" value="<s:property value="kqb.day15" />"readonly="readonly">
-        <span>16号：</span><input name="kqb.day16" class="kqb.day16" value="<s:property value="kqb.day16" />"readonly="readonly"><br/>
-        <span>17号：</span><input name="kqb.day17" class="kqb.day17" value="<s:property value="kqb.day17" />"readonly="readonly">
-        <span>18号：</span><input name="kqb.day18" class="kqb.day18" value="<s:property value="kqb.day18" />"readonly="readonly"><br/>
-        <span>19号：</span><input name="kqb.day19" class="kqb.day19" value="<s:property value="kqb.day19" />"readonly="readonly">
-        <span>20号：</span><input name="kqb.day20" class="kqb.day20" value="<s:property value="kqb.day20" />"readonly="readonly"><br/>
-        <span>21号：</span><input name="kqb.day21" class="kqb.day21" value="<s:property value="kqb.day21" />"readonly="readonly">
-        <span>22号：</span><input name="kqb.day22" class="kqb.day22" value="<s:property value="kqb.day22" />"readonly="readonly"><br/>
-        <span>23号：</span><input name="kqb.day23" class="kqb.day23" value="<s:property value="kqb.day23" />"readonly="readonly">
-        <span>24号：</span><input name="kqb.day24" class="kqb.day24" value="<s:property value="kqb.day24" />"readonly="readonly"><br/>
-        <span>25号：</span><input name="kqb.day25" class="kqb.day25" value="<s:property value="kqb.day25" />"readonly="readonly">
-        <span>26号：</span><input name="kqb.day26" class="kqb.day26" value="<s:property value="kqb.day26" />"readonly="readonly"><br/>
-        <span>27号：</span><input name="kqb.day27" class="kqb.day27" value="<s:property value="kqb.day27" />"readonly="readonly">
-        <span>28号：</span><input name="kqb.day28" class="kqb.day28" value="<s:property value="kqb.day28" />"readonly="readonly"><br/>
-        <span>29号：</span><input name="kqb.day29" class="kqb.day29" value="<s:property value="kqb.day29" />"readonly="readonly">
-        <span>30号：</span><input name="kqb.day30" class="kqb.day30" value="<s:property value="kqb.day30" />"readonly="readonly"><br/>
-        <span>31号：</span><input name="kqb.day31" class="kqb.day31" value="<s:property value="kqb.day31" />"readonly="readonly"><br/>
-		<div style="margin-top:10px">
-	    	<span>月考勤统计：</span>
-	        <textarea cols="60" rows="6" name="kqb.monthcount" style="display:inline-block;vertical-align:middle;" readonly="readonly">
-	        <s:property value="kqb.monthcount" />
-	        </textarea>
-	    </div> 
+    <form class="pageForm" id="viewkqform" data-toggle="validate">
+       	<input type="" style="display: none" id="month" value="<s:property value="ViewKqMonth"/>" readonly="readonly">
+        <input type="" style="display: none" id="uuid" value="<s:property value="ViewKqUuid"/>" readonly="readonly">
     </form>
 </div>
-<s:if test="type==1"></s:if><s:else>
+
 <div class="bjui-pageFooter">
     <ul>
         <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
     </ul>
 </div>
-</s:else>
+
 
 <script>
+    $(function () {
+        var month = $('#month').val();
+        var uuid = $('#uuid').val();
+        var data = {
+            month:month,
+            uuid:uuid
+        }
+        $.ajax({
+            type: "POST",
+            url: "viewKqbInfo.action",
+            data: data,
+            dataType: "json",
+            success: function(data){
+                if(data.statusCode==200){
+                    var list = data.data;
+                    var htmlStr = '';
+                    htmlStr += '<span>姓名：</span><input value="'+ list[0].name +'"readonly="readonly">';
+                    htmlStr += '<span>生产组：</span><input value="'+ list[0].scz +'"readonly="readonly">';
+                    htmlStr += '<span>年份：</span><input value="'+ list[0].year +'"readonly="readonly">';
+                    htmlStr += '<span>月份：</span><input value="'+ list[0].month +'"readonly="readonly">';
+                    for(var i = 0;i<list.length;i++){
+                        htmlStr += '<br/><span>工种：</span><input value="'+ list[i].jobOrSizeName +'"readonly="readonly"><br/>';
+                        if(list[i].day1){
+                            htmlStr += '<span>' + 1 +'日'+'：</span><input value="'+ list[i].day1 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 1 +'日'+'：</span><input value="" readonly="readonly">';
+                        }
+                        if(list[i].day2){
+                            htmlStr += '<span>' + 2 +'日'+'：</span><input value="'+ list[i].day2 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 2 +'日'+'：</span><input value="" readonly="readonly">';
+                        }
+                        if(list[i].day3){
+                            htmlStr += '<span>' + 3 +'日'+'：</span><input value="'+ list[i].day3 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 3 +'日'+'：</span><input value="" readonly="readonly">';
+                        }
+                        if(list[i].day4){
+                            htmlStr += '<span>' + 4 +'日'+'：</span><input value="'+ list[i].day4 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 4 +'日'+'：</span><input value="" readonly="readonly">';
+                        }
+                        if(list[i].day5){
+                            htmlStr += '<span>' + 5 +'日'+'：</span><input value="'+ list[i].day5 +'"readonly="readonly"><br/>';
+                        }else{
+                            htmlStr += '<span>' + 5 +'日'+'：</span><input value="" readonly="readonly"><br/>';
+                        }if(list[i].day6){
+                            htmlStr += '<span>' + 6 +'日'+'：</span><input value="'+ list[i].day6 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 6 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day7){
+                            htmlStr += '<span>' + 7 +'日'+'：</span><input value="'+ list[i].day7 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 7 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day8){
+                            htmlStr += '<span>' + 8 +'日'+'：</span><input value="'+ list[i].day8 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 8 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day9){
+                            htmlStr += '<span>' + 9 +'日'+'：</span><input value="'+ list[i].day9 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 9 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day10){
+                            htmlStr += '<span>' + 10 +'日'+'：</span><input value="'+ list[i].day10 +'"readonly="readonly"><br/>';
+                        }else{
+                            htmlStr += '<span>' + 10 +'日'+'：</span><input value="" readonly="readonly"><br/>';
+                        }if(list[i].day11){
+                            htmlStr += '<span>' + 11 +'日'+'：</span><input value="'+ list[i].day11 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 11 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day12){
+                            htmlStr += '<span>' + 12 +'日'+'：</span><input value="'+ list[i].day12 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 12 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day13){
+                            htmlStr += '<span>' + 13 +'日'+'：</span><input value="'+ list[i].day13 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 13 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day14){
+                            htmlStr += '<span>' + 14 +'日'+'：</span><input value="'+ list[i].day14 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 14 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day15){
+                            htmlStr += '<span>' + 15 +'日'+'：</span><input value="'+ list[i].day15 +'"readonly="readonly"><br/>';
+                        }else{
+                            htmlStr += '<span>' + 15 +'日'+'：</span><input value="" readonly="readonly"><br/>';
+                        }if(list[i].day16){
+                            htmlStr += '<span>' + 16 +'日'+'：</span><input value="'+ list[i].day16 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 16 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day17){
+                            htmlStr += '<span>' + 17 +'日'+'：</span><input value="'+ list[i].day17 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 17 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day18){
+                            htmlStr += '<span>' + 18 +'日'+'：</span><input value="'+ list[i].day18 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 18 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day19){
+                            htmlStr += '<span>' + 19 +'日'+'：</span><input value="'+ list[i].day19 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 19 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day20){
+                            htmlStr += '<span>' + 20 +'日'+'：</span><input value="'+ list[i].day20 +'"readonly="readonly"><br/>';
+                        }else{
+                            htmlStr += '<span>' + 20 +'日'+'：</span><input value="" readonly="readonly"><br/>';
+                        }if(list[i].day21){
+                            htmlStr += '<span>' + 21 +'日'+'：</span><input value="'+ list[i].day21 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 21 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day22){
+                            htmlStr += '<span>' + 22 +'日'+'：</span><input value="'+ list[i].day22 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 22 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day23){
+                            htmlStr += '<span>' + 23 +'日'+'：</span><input value="'+ list[i].day23 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 23 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day24){
+                            htmlStr += '<span>' + 24 +'日'+'：</span><input value="'+ list[i].day24 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 24 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day25){
+                            htmlStr += '<span>' + 25 +'日'+'：</span><input value="'+ list[i].day25 +'"readonly="readonly"><br/>';
+                        }else{
+                            htmlStr += '<span>' + 25 +'日'+'：</span><input value="" readonly="readonly"><br/>';
+                        }if(list[i].day26){
+                            htmlStr += '<span>' + 26 +'日'+'：</span><input value="'+ list[i].day26 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 26 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day27){
+                            htmlStr += '<span>' + 27 +'日'+'：</span><input value="'+ list[i].day27 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 27 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day28){
+                            htmlStr += '<span>' + 28 +'日'+'：</span><input value="'+ list[i].day28 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 28 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day29){
+                            htmlStr += '<span>' + 29 +'日'+'：</span><input value="'+ list[i].day29 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 29 +'日'+'：</span><input value="" readonly="readonly">';
+                        }if(list[i].day30){
+                            htmlStr += '<span>' + 30 +'日'+'：</span><input value="'+ list[i].day30 +'"readonly="readonly"><br/>';
+                        }else{
+                            htmlStr += '<span>' + 30 +'日'+'：</span><input value="" readonly="readonly"><br/>';
+                        }if(list[i].day31){
+                            htmlStr += '<span>' + 31 +'日'+'：</span><input value="'+ list[i].day31 +'"readonly="readonly">';
+                        }else{
+                            htmlStr += '<span>' + 31 +'日'+'：</span><input value="" readonly="readonly">';
+                        }
+
+                    }
+                    $('#viewkqform').append(htmlStr);
+                }else{
+                    $(this).alertmsg('error', '操作失败');
+                }
+            }
+        });
+    })
 </script>

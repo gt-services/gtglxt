@@ -48,7 +48,23 @@ public class JobService {
 		List<Job> list = new ArrayList<Job>();
 		try {
 			Query q = session.createQuery("from Job where  scz =:scz order by createDate desc").setParameter("scz", sczid);
-			
+
+			list = q.list();
+			tx.commit();
+			Hfsession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public static List<Job> getListJobName(String sczName){
+		Session session = Hfsession.init();
+		Transaction tx = session.beginTransaction();
+		List<Job> list = new ArrayList<Job>();
+		try {
+			Query q = session.createQuery("from Job where  scz =:scz order by createDate desc").setParameter("scz", sczName);
+
 			list = q.list();
 			tx.commit();
 			Hfsession.close();

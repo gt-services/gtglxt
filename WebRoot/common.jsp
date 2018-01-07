@@ -294,10 +294,10 @@
 									data-on-click="MainMenuClick" data-expand-all="true">
 									<li data-id="31" data-pid="3" data-url="getRosterList.action"  data-tabid="datagrid-convertable" data-faicon="table">人事信息</li>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "
 									<li data-id="20" data-pid="2" data-url="yujing.action"
-										data-tabid="table" data-faicon="table">代缴社保预警</li>
+										data-tabid="table" data-faicon="table">社保预警</li>
 									
-									<!-- <li data-id="21" data-pid="2" data-url="table-fixed.html"
-										data-tabid="table-fixed" data-faicon="list-alt">社保信息录入</li> -->
+									<li data-id="21" data-pid="2" data-url="getSecurityList.action"
+										data-tabid="table-fixed" data-faicon="list-alt">代缴社保</li>
 									
 									<li data-id="20" data-pid="2" data-url="getKqbListrs.action"
 										data-tabid="table" data-faicon="table">考勤信息</li>

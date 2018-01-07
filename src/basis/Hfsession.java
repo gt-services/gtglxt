@@ -14,18 +14,20 @@ import org.junit.Test;
 public class Hfsession {
 		static SessionFactory sessionFactory;  //会话工厂
 	    static Session session ;  //会话
-	    static Transaction tx ;   //事务
 	    //此方法用于会话的创建和初始化
 		
 		public static Session init() {
-			sessionFactory = new Configuration().configure().buildSessionFactory();  
-	        session = sessionFactory.openSession();  
-	       // tx = session.beginTransaction();  
-	        return session;
+			try{
+				sessionFactory = new Configuration().configure().buildSessionFactory();
+				session = sessionFactory.openSession();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+			return session;
 		}
 		//关闭会话
 		public static void close() {
-			//tx.commit();
 			if(session.isOpen()){
 				session.close();  
 		        sessionFactory.close(); 

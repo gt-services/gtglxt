@@ -23,6 +23,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.management.RuntimeErrorException;
 import javax.servlet.http.HttpServletRequest;
@@ -73,6 +75,12 @@ public class RosterAction extends ActionSupport {
 	private Integer author;//详情 1；
 	private String orderField;
 	private String orderDirection;
+
+	public void setSecurityList(List<SocialSecurity> securityList) {
+		this.securityList = securityList;
+	}
+
+	private List<SocialSecurity> securityList = new ArrayList<>();
 	private Page page = new Page();
 	private int currentPage=1;
 
@@ -154,7 +162,6 @@ public class RosterAction extends ActionSupport {
 			if(StringHelp.isNotEmpty(scz)){
 				q1.setParameter("scz", scz);
 			}
-			System.out.println("查询出数据库中的条数"+q1.list().size());
 			q1.setFirstResult((currentPage-1)*20); 
 			q1.setMaxResults(20);                                                                                                                                                                                   
 			list = q1.list();
@@ -221,7 +228,6 @@ public class RosterAction extends ActionSupport {
 			if(StringHelp.isNotEmpty(scz)){
 				q1.setParameter("scz", scz);
 			}
-			System.out.println("查询出数据库中的条数"+q1.list().size());
 			q1.setFirstResult((currentPage-1)*20); 
 			q1.setMaxResults(20);                                                                                                                                                                                   
 			List<Roster> alllist = q1.list();
@@ -307,7 +313,6 @@ public class RosterAction extends ActionSupport {
 			if(StringHelp.isNotEmpty(scz)){
 				q1.setParameter("scz", scz);
 			}
-			System.out.println("查询出数据库中的条数"+q1.list().size());
 			q1.setFirstResult((currentPage-1)*20);
 			q1.setMaxResults(20);
 			List<Roster> alllist = q1.list();
@@ -554,7 +559,7 @@ public class RosterAction extends ActionSupport {
 		try {
 			//此处为查询数据库中的总条数，为分页做准备
 
-			String hql = "select count(*) from Roster where (lcTime != '' or lcTime != null) and createDate>= ' " + start +"' and createDate <= '"+end+"'";
+			String hql = "select count(*) from Roster where lcTime>= '" + start +"' and lcTime <= '"+end+"'";
 			
 			if(keyword != null && !keyword.equals("")){
 				hql += "and name like :name ";
@@ -574,7 +579,7 @@ public class RosterAction extends ActionSupport {
 			page.setTotalCount(Integer.parseInt(String.valueOf(count)));
 			
 			//此处才是作为查询数据中的数据
-			String sql = "from Roster where (lcTime != '' or lcTime != null) and createDate>= ' " + start +"' and createDate <= '"+end+"'";
+			String sql = "from Roster where lcTime>= '" + start +"' and lcTime <= '"+end+"'";
 			if(keyword != null && !keyword.equals("")){ 
 				sql += "and name like :name ";
 			}
@@ -854,7 +859,7 @@ public class RosterAction extends ActionSupport {
 			}
 			listRoster = q.list();
 
-			String[] str = new String[]{"合同编号","姓名","姓别","身份证","银行卡号","社保编号","家庭地址","合同开始日期","合同结束日期","工种","电话号码","离厂日期","社保开始日期","社保结束日期","保险类型","工伤概况","工伤开始日期","工伤结束日期","员工来源","生产组","备注"};
+			String[] str = new String[]{"合同编号","姓名","姓别","身份证","银行卡号","社保编号","家庭地址","合同开始日期","合同结束日期","工种","电话号码","离厂日期","社保开始日期","社保结束日期","保险类型","工伤概况","工伤开始日期","工伤结束日期","员工来源","生产组","用工性质","备注"};
 
 			for(int i = 0;i<listRoster.size();i++){
 				Roster r = (Roster) listRoster.get(i);
@@ -879,6 +884,7 @@ public class RosterAction extends ActionSupport {
 				rosterExp.setSbStart(r.getSbStart());
 				rosterExp.setScz(r.getScz());
 				rosterExp.setSex(r.getSex());
+				rosterExp.setJobTimeType(r.getJobTimeType());
 				rosterExp.setSource(r.getSource());
 				listObject.add(rosterExp);
 			}
@@ -1083,20 +1089,7 @@ public class RosterAction extends ActionSupport {
 
 	        }
 			tx.commit();
-			JDBCUtil jbutil =new JDBCUtil();
-			Connection con =jbutil.getConnection();
-			String sql1 ="delete from gt_roster"+
-					" WHERE uuid in" +
-					"(select a.uuid from" +
-					"(select g.uuid from gt_roster g," +
-					"(SELECT max(createdate2),identityId,uuid FROM  gt_roster  GROUP BY identityId  HAVING COUNT(identityId)>1) t"+
-					" WHERE " +
-					" g.identityId=t.identityId" +
-					" and g.uuid!=t.uuid" +
-					") a);";
-			PreparedStatement psta1 =con.prepareStatement(sql1);
-			psta1.execute(sql1);
-			jbutil.close();
+			Hfsession.close();
 			map.put("msg", "success");
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
@@ -1107,7 +1100,27 @@ public class RosterAction extends ActionSupport {
 			map.put("statusCode", 100);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 		}finally{
-			Hfsession.close();
+			JDBCUtil jbutil =new JDBCUtil();
+			Connection con =jbutil.getConnection();
+//			String sql1 ="delete from gt_roster"+
+//					" WHERE uuid in" +
+//					"(select a.uuid from" +
+//					"(select g.uuid from gt_roster g," +
+//					"(SELECT min(createDate2),identityId,uuid FROM  gt_roster  GROUP BY identityId  HAVING COUNT(identityId)>1) t"+
+//					" WHERE " +
+//					" g.identityId=t.identityId" +
+//					" and g.uuid!=t.uuid" +
+//					") a);";
+			String sql1 = "DELETE FROM  gt_roster" +
+					" WHERE identityId  IN" +
+					"(SELECT a.identityId FROM (SELECT  *  FROM gt_roster  GROUP  BY  identityId   HAVING  COUNT(identityId) > 1) a)" +
+					"AND " +
+					"(createDate2 NOT IN" +
+					"(SELECT b.* FROM (SELECT MAX(createDate2) FROM  gt_roster  GROUP BY identityId  HAVING COUNT(identityId)>1) b)" +
+					"or createDate2 is null)";
+			PreparedStatement psta1 =con.prepareStatement(sql1);
+			psta1.execute(sql1);
+			jbutil.close();
 		}
 		return SUCCESS;
 	}
@@ -1164,7 +1177,6 @@ public class RosterAction extends ActionSupport {
 			if (StringHelp.isNotEmpty(scz)) {
 				q1.setParameter("scz", scz);
 			}
-			System.out.println("查询出数据库中的条数" + q1.list().size());
 			q1.setFirstResult((currentPage - 1) * 20);
 			q1.setMaxResults(20);
 			list = q1.list();
@@ -1404,6 +1416,65 @@ public class RosterAction extends ActionSupport {
 			map.put("statusCode", 200);
 			ResultUtils.toJson(ServletActionContext.getResponse(), map);
 			tx.commit();
+			Hfsession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+
+
+	/*
+	代缴社保模块  create by zdzMac
+	 */
+
+	public String getSecurityList(){
+		Session session = Hfsession.init();
+		//Transaction tx = session.beginTransaction();
+		Map<String,Object> map = new HashMap<String,Object>();
+		page.setEveryPage(20);
+		page.setCurrentPage(1);
+		try {
+			//此处为查询数据库中的总条数，为分页做准备
+			String hql = "select count(*) from SocialSecurity where 1=1";
+			if(keyword != null && !keyword.equals("")){
+				hql += "and name like :name ";
+			}
+			Query query = session.createQuery(hql);
+			if(keyword != null && !keyword.equals("")){
+				query.setParameter("name", "%"+keyword+"%");
+			}
+			Long count= (Long)query.uniqueResult();
+			page.setTotalCount(Integer.parseInt(String.valueOf(count)));
+
+			//此处才是作为查询数据中的数据
+			String sql = "from SocialSecurity where 1=1";
+			if(keyword != null && !keyword.equals("")){
+				sql += "and name like :name ";
+			}
+			sql += "order by payType desc";
+
+			Query q2 = session.createQuery(sql);
+			if(keyword != null && !keyword.equals("")){
+				q2.setParameter("name", "%"+keyword+"%");
+			}
+			q2.setFirstResult((currentPage-1)*20);
+			q2.setMaxResults(20);
+			securityList = q2.list();
+			//System.out.println("q集合的大小====="+list.size());
+			page.setTotalPage((int)Math.ceil(count/20.0));//
+			page.setHasPrePage(currentPage>1);
+			page.setHasNextPage(currentPage<(int)(Math.ceil(count/20.0)));
+			/*map.put("page", page);
+			if(list.size()>0){
+				map.put("statusCode", 200);
+				map.put("list",list);
+				ResultUtils.toJson(ServletActionContext.getResponse(), map);
+			}else{
+				map.put("statusCode", 300);
+				ResultUtils.toJson(ServletActionContext.getResponse(), map);
+			}*/
+//			tx.commit();
 			Hfsession.close();
 		} catch (Exception e) {
 			e.printStackTrace();

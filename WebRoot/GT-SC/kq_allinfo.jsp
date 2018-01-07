@@ -14,7 +14,7 @@
             <select data-toggle="selectpicker" id="scz" name='scz'  data-width="80">
             		<option value="">请选择</option>
                     <s:iterator value="lists" status="sta">
-                    	<option value="<s:property value="secondId" />" <s:if test="scz==secondId">selected = "selected"</s:if>><s:property value="name" /></option>
+                    	<option value="<s:property value="name" />" <s:if test="scz==secondId">selected = "selected"</s:if>><s:property value="name" /></option>
                     </s:iterator>
             </select>
             <label>年：</label>
@@ -83,6 +83,11 @@
             <a class="btn btn-orange" href="javascript:;" onclick="$(this).navtab('reloadForm', true);" data-icon="undo">清空查询</a>
             <span style="float:right;margin-right:5px;"><input type="button" class="btn btn-blue" onclick="doKqbExport()" value="新表导出" /></span>
             <span style="float:right;margin-right:5px;"><a href="GT-SC/KQimport.jsp"  class="btn btn-blue" data-toggle="dialog" data-width="1000" data-height="600" data-icon="arrow-up">导入</a></span>
+            <s:if test="#session.admin.authority.equals(\"5\")">
+            <span style="float:right;margin-right:5px;">
+                <a onclick="batchKq()" class="btn btn-blue" data-toggle="dialog" data-width="1000" data-height="600" data-icon="arrow-up">批量考勤</a>
+            </span>
+            </s:if>
         </div>
     </form>
 	
@@ -95,8 +100,8 @@
             <th width="30">NO.</th>
             <th>姓名</th>
             <th>生产组</th>
-            <th>岗位</th>
-          	<th>当日考情信息</th>            
+            <%--<th>岗位</th>--%>
+          	<%--<th>当日考情信息</th>            --%>
             <th>考勤添加</th>
             <th>本月考勤信息</th>
             <th>本月扣款信息</th>
@@ -113,16 +118,16 @@
             	<td><s:property value="name" /></td>
             	<td><s:property value="scz" /></td>
             	
-            	<td><s:property value="gw" /></td>
-            	
-            	<td><s:property value="todaykq"/></td>
+            	<%--<td><s:property value="gw" /></td>--%>
+            	<%----%>
+            	<%--<td><s:property value="todaykq"/></td>--%>
 				
          
             	
-            	<td><a href='javascript:void(0)' onclick="kq(2,'<s:property value="uuid"/>','<s:property value="sczid" />','<s:property value="scz" />')" id="todaykq">考勤添加</a></td>
-            	<td><a href='javascript:void(0)' onclick="view(2,'<s:property value="uuid"/>','<s:property value="sczid" />','<s:property value="scz" />')"  >本月考勤信息</a>
+            	<td><a href='javascript:void(0)' onclick="kq(2,'<s:property value="uuid"/>','<s:property value="scz"/>','<s:property value="name"/>')" id="todaykq">考勤添加</a></td>
+            	<td><a href='javascript:void(0)' onclick="view(2,'<s:property value="uuid"/>')"  >本月考勤信息</a>
             	<%-- <td><a href="viewkqb.action?type=2&uuid=<s:property value="uuid"/>&scz=<s:property value="scz" />&sczid=<s:property value="sczid" />" class="btn-green" data-toggle="dialog" data-width="900" data-height="600" data-id="dialog-mask" >本月考勤信息</a> --%>
-            	<td><a href="viewkqb.action?type=1&uuid=<s:property value="uuid"/>&scz=<s:property value="scz" />&sczid=<s:property value="sczid" />" class="btn-green" data-toggle="dialog" data-width="900" data-height="600" data-id="dialog-mask" >本月扣款</a>
+            	<td><a href="viewkqb.action?type=1&uuid=<s:property value="uuid"/>" class="btn-green" data-toggle="dialog" data-width="900" data-height="600" data-id="dialog-mask" >本月扣款</a>
             	</td>
             	
             </tr>
@@ -149,7 +154,6 @@ $(function(){
 	var dayoptions=$("#day option:selected");
 	var day = dayoptions.val();
 	var status = $("#adstatus").val();
-	console.log($("#adstatus").val());
 	if(status==0){
 		if(daynow!=day || monthnow!=month){
 			$('#todaykq').removeAttr('onclick');
@@ -159,19 +163,19 @@ $(function(){
 	
 });
 
-function view(type,uuid,sczid,scz){
+function view(type,uuid){
 	var monthoptions=$("#month option:selected");
-	var a = monthoptions.val();
-	$(this).dialog({id:'mydialog1', url:'viewkqb.action?type=2&month='+a+'&uuid='+uuid+'&sczid='+sczid+'&scz='+scz, title:'本月考勤统计',width:800,height:500});
+	var month = monthoptions.val();
+	$(this).dialog({id:'mydialog1', url:'viewkqb.action?type=2&month='+month+'&uuid='+uuid, title:'本月考勤统计',width:1000,height:600});
 }
 
-function kq(type,uuid,sczidd){
+function kq(type,uuid,scz,name){
 	var monthoptions=$("#month option:selected");
 	var month = monthoptions.val();
 	var dayoptions=$("#day option:selected");
 	var day = dayoptions.val();
   
-    $(this).dialog({id:'mydialog2', url:'editkqb.action?type=2&uuid='+uuid+'&sczidd='+sczidd+'&month='+month+'&day='+day, title:'考勤添加',width:900,height:500});
+    $(this).dialog({id:'mydialog2', url:'editkqb.action?type=2&uuid='+uuid+'&month='+month+'&day='+day+'&sczByName='+scz+'&name='+name, title:'考勤添加',width:900,height:500});
 
 
 }
@@ -183,5 +187,17 @@ function doKqbExport(){
     $(this).alertmsg('confirm', '确定要导出吗？', {displayMode:'slide', displayPosition:'topcenter', okName:'确定', cancelName:'取消', title:'提示信息',okCall:function(){
         location.href='exportKqbExport.action?year='+year+'&month='+month+'&scz='+scz;
     }});
+}
+
+
+function batchKq(){
+
+        var monthoptions=$("#month option:selected");
+        var month = monthoptions.val();
+        var dayoptions=$("#day option:selected");
+        var day = dayoptions.val();
+
+        $(this).dialog({id:'mydialog3', url:'batchKq.action?month='+month+'&day='+day, title:'考勤批量添加',width:1000,height:600});
+
 }
 </script>

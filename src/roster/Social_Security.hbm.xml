@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping>
+
+    <class name="roster.SocialSecurity" table="gt_social_security">
+    	<property name="name" column="name"/>
+    	<property name="sex" column="sex"/>
+    	<property name="age" column="age"/>
+    	<property name="identityId" column="identityId"/>
+    	<property name="sbNumber" column="sbNumber"/>
+    	<property name="address" column="address"/>
+		<property name="phone" column="phone"/>
+    	<property name="htStart"  column="htStart"/>
+    	<property name="htEnd"  column="htEnd"/>
+    	<property name="payEnd" column="payEnd"/>
+    	<property name="introducePrs" column="introducePrs"/>
+    	<property name="introducePrsTel" column="introducePrsTel"/>
+    	<property name="payType" column="payType"/>
+    	<property name="gjjNumber"  column="gjjNumber"/>
+		<property name="sbEnd" column="sbEnd"/>
+		<property name="hujiType" column="hujiType"/>
+		<property name="beizhu"  column="beizhu"/>
+		<property name="createDate" type="timestamp" column= "createDate"/>
+	</class>
+</hibernate-mapping>

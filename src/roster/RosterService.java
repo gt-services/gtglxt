@@ -75,8 +75,11 @@ public class RosterService {
             	if(cellslength >=20){
             		info.setScz(cells[19].getContents().toString());
                 }
-            	if(cellslength >=21){
-            		info.setBeizhu(cells[20].getContents().toString());
+				if(cellslength >=21){
+					info.setJobTimeType(cells[20].getContents().toString());
+				}
+            	if(cellslength >=22){
+            		info.setBeizhu(cells[21].getContents().toString());
                 }
 
                 try {

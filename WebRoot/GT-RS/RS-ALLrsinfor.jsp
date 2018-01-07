@@ -107,13 +107,13 @@
             	<td><s:property value="scz" /></td>
             	<td><a href="editroster.action?type=1&uuid=<s:property value="uuid"/>" class="btn btn-blue" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" >详细</a></td>
             	<td><a href="editroster.action?uuid=<s:property value="uuid"/>" class="btn btn-green" data-toggle="dialog" data-width="900" data-height="500" data-id="dialog-mask" >编辑</a>&nbsp;
-                    <s:if test="lcTime == null">
-                        <a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')" disabled="true">删除</a>
-                    </s:if>
-                    <s:else>
-                        <a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')">离职</a>
-                        <input type="checkbox" style="width: 15px;height: 15px" name="delUuid" value="<s:property value="uuid" />"/>
-                    </s:else>
+                    <%--<s:if test="lcTime == null">--%>
+                        <%--<a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')" disabled="true">删除</a>--%>
+                    <%--</s:if>--%>
+                    <%--<s:else>--%>
+                        <%--<a class="btn btn-red" id="delete<s:property value="uuid" />" onclick="deleteRS('<s:property value="uuid" />')">离职</a>--%>
+                        <%--<input type="checkbox" style="width: 15px;height: 15px" name="delUuid" value="<s:property value="uuid" />"/>--%>
+                    <%--</s:else>--%>
                 </td>
 
             </tr>

@@ -13,7 +13,7 @@
                 <result name="success">/GT-RS/RS-ALLrsinfor.jsp</result>
                 <interceptor-ref name="defaultStack"/>
         </action>
-       <!--  代缴社保预警页面 -->
+       <!-- 社保预警页面 -->
        			<action name="yujing" class="roster.RosterAction" method="getYujingList">
                 <result name="success">/GT-RS/RS-yujing.jsp</result>
                 <interceptor-ref name="defaultStack"/>
@@ -133,6 +133,11 @@
         </action>
         <action name="batcheditDeal" class="roster.RosterAction" method="batcheditDeal">
             <result name="success">main.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+
+        <action name="getSecurityList" class="roster.RosterAction" method="getSecurityList">
+            <result name="success">/GT-RS/RS-SecurityList.jsp</result>
             <interceptor-ref name="defaultStack"/>
         </action>
     </package>

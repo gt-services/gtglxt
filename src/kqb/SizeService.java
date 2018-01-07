@@ -54,4 +54,20 @@ public class SizeService {
 		}
 		return list;
 	}
+
+
+	public static List<Size> getListSizeName(String sczName){
+		Session session = Hfsession.init();
+		Transaction tx = session.beginTransaction();
+		List<Size> list = new ArrayList<Size>();
+		try {
+			Query q = session.createQuery("from Size where  scz =:scz order by createDate desc").setParameter("scz", sczName);
+			list = q.list();
+			tx.commit();
+			Hfsession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

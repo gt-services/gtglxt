@@ -10,7 +10,6 @@ import java.util.Date;
 public class Roster implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	public Roster(){}
 	
 	//社保
 	private String uuid;//人员编号
@@ -40,10 +39,19 @@ public class Roster implements Serializable{
 	private Date createDate;//创建日期
 	private String beizhu;//备注
 	private String image;//图片
+	private String jobTimeType;//用工性质
 	private String deal = String.valueOf(0);//离职人员已处理1 /未处理0
 	
 	//专做导入时的时间区别
 	private Date createDate2;
+
+	public String getJobTimeType() {
+		return jobTimeType;
+	}
+
+	public void setJobTimeType(String jobTimeType) {
+		this.jobTimeType = jobTimeType;
+	}
 	
 
 	public Date getCreateDate2() {

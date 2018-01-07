@@ -6,14 +6,21 @@
 	padding:3px 0;
 	display:inline-block;
 }
+
+.ck .icheckbox_minimal-purple:nth-child(1){
+	display: none;
+}
+
+.ck .ilabel:nth-child(2){
+	display: none;
+}
 </style>
 <div class="bjui-pageContent tableContent">
-    <form action="updatekqb.action" class="pageForm" id="form" data-toggle="validate">            
+    <form action="" class="pageForm" id="form" data-toggle="validate">
         <table class="table table-condensed table-hover">
           <tr>
               	<td><label  class='control-label x85' >姓名:</label>
-              		<input type='text' id="name" data-rule="姓名:required" size='20'  value='<s:property value="kqb.name" />'  >
-              		<input type='hidden' data-rule="姓名:required"  size='20'  value='<s:property value="kqb.gw" />'  >
+              		<input type='text' id="name" data-rule="姓名:required" size='20'  value='<s:property value="name" />'  readonly="readonly">
               	</td>
 	                
 	       </tr>
@@ -33,7 +40,8 @@
 	                	<s:iterator value="joblist" status="sta">
 	                	<div>
 	                	 <p class="ck">
-        					<input type="checkbox" class="checkboxip" name="jobid" value="<s:property value="secondId" />" data-toggle="icheck" data-label="<s:property value="name" />"/>
+							 <input type="checkbox" name="jobname" style="display: none" value="<s:property value="name" />" data-toggle="icheck" data-label="<s:property value="name" />"/>
+							 <input type="checkbox" class="checkboxip" name="jobid" value="<s:property value="secondId" />" data-toggle="icheck" data-label="<s:property value="name" />"/>
     						</p>
     					 
 	                	</div>
@@ -45,7 +53,8 @@
 	                	<s:iterator value="sizelist" status="sta">
 	                	<div>
 	                	 <p class="ck">
-        					<input type="checkbox" class="checkboxip1" name="sizeid" value="<s:property value="sizeid" />" data-toggle="icheck" data-label="<s:property value="name" />"/>
+							 <input type="checkbox" name="sizename" style="display: none" value="<s:property value="name" />" data-toggle="icheck" data-label="<s:property value="name" />"/>
+							 <input type="checkbox" class="checkboxip1" name="sizeid" value="<s:property value="sizeid" />" data-toggle="icheck" data-label="<s:property value="name" />"/>
     						</p>
     					 
 	                	</div>
@@ -54,7 +63,8 @@
 
 	                	 </tr>
             </table>
-            <input type="hidden" name="uuid" id="uuid" value="<s:property value="kqb.uuid" />">
+            <input type="hidden" name="uuid" id="uuid" value="<s:property value="uuidUsedByKq" />">
+			<input type="hidden" name="sczByName"  value="<s:property value="sczByName" />">
             <input type="hidden" name="sczid" value="<s:property value="sczid" />">
             <input type="hidden" name="month"  value="<s:property value="month" />">
         	<input type="hidden" name="day"  value="<s:property value="day" />">
@@ -78,8 +88,10 @@
 			           ];
 			var _html = str.join("");
 			$(this).parent('div').parent('.ck').parent('div').append(_html);
+			$(this).parent('div').siblings().children('input').iCheck('check');
 		});
 	$('.checkboxip').on('ifUnchecked', function(event){
+        $(this).parent('div').siblings().children('input').iCheck('uncheck');
 		$(this).parent('div').parent('.ck').parent('div').children('p').remove('.mdgb');
 		});
 	
@@ -91,9 +103,11 @@
 			           ];
 			var _html = str.join("");
 			$(this).parent('div').parent('.ck').parent('div').append(_html);
+        	$(this).parent('div').siblings().children('input').iCheck('check');
 		});
 	$('.checkboxip1').on('ifUnchecked', function(event){
 		$(this).parent('div').parent('.ck').parent('div').children('p').remove('.mdgb');
+        $(this).parent('div').siblings().children('input').iCheck('uncheck');
 		});
 
 
@@ -102,39 +116,19 @@
 		var day = date.getDate();
 		var days = 'kqb.day'+day;
 		$('.'+days).val('');
-		console.log(days);
 	}); 
 	$("#baocun").click(function(){
-	    var name = $("#name").val();
-	    if(name==""){
-	    	return false;
-	    };
-	   // debugger;
-	    console.log($('#formjob').serialize());
 	    /*此处的保存操作加入了两张表*/
-		$.ajax({
-            type: "POST",
-            url: "addTodayKqb.action",
-            data: $('#formjob').serialize(),
-            dataType: "json",
-            success: function(data){
-	            if(data.statusCode==200){
-	         		$.ajax({
-	          			type:"POST",
-	          			url:"updatekqb.action",
-	          			data:$('#formjob').serialize(),
-	          			dataType:"json",
-	          			success:function(data){
-	          				if(data.statusCode==200){
-		          				$(this).dialog('closeCurrent',true);
-		     	          		$("#queryRS").click(); 
-	          				}
-	          			}
-	          		});
-	            }else{
-	          		$(this).alertmsg('error', '操作失败');
-	            }
-          }
-        });
+	    $.ajax({
+			type:"POST",
+			url:"addKqbExport.action",
+			data:$('#formjob').serialize(),
+			dataType:"json",
+			success:function(data){
+			        $(this).dialog('closeCurrent',true);
+			        $("#queryRS").click();
+
+			}
+	    })
 	});
 </script>

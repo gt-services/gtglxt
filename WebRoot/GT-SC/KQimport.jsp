@@ -32,7 +32,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <ul id="submitExcel">
         <li><button type="button" class="btn-close" data-icon="close">取消</button></li>
         <li><button type="button" class="btn-default" data-icon="save"  onclick="importExcel()">导入</button></li>
-        <li><button type="button" class="btn-default" data-icon="save"  onclick="importExcel()">批量考勤</button></li>
     </ul>
 </div>
 
@@ -41,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     exportdata = {};
 
     $(function () {
-        var trobj = '<th width="30">NO.</th><th>姓名</th><th>银行卡</th> <th>生产组</th> <th>岗位</th> <th>年份</th> <th>月份</th>';
+        var trobj = '<th>NO.</th><th>姓名</th><th>银行卡</th> <th>生产组</th> <th>岗位</th> <th>年份</th> <th>月份</th>';
         for(i=1;i<=31;i++){
             trobj =  trobj + '<th>' + i + '</th>'
         }
@@ -52,9 +51,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 
-    function allPrpos(obj) {
+    function allPrpos(obj,index) {
         // 用来保存所有的属性名称和值
-        var props = "";
+        var props = '<td>' + index  + '</td>';
         for(var p in obj){
             if(p!='jid' && p!='uuid' && p!='sid'){
                 props = props + '<td>' + obj[p]  + '</td>';
@@ -87,11 +86,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          exportdata = obj;
 	                     var trobj = "";
 	                     for(i=0;i<=obj.length;i++){
-	                         trobj = trobj + allPrpos(obj[i]);
+	                         trobj = trobj + allPrpos(obj[i],i+1);
                          }
 //
                          $('#tbodyTr').append(trobj);
-                         $('#submitExcel').append('<li><button type="button" class="btn-green" onclick="submitExcel()">上传</button></li>');
+                         $('#submitExcel').append('<li><button type="button" class="btn btn-green" data-icon="save" onclick="submitExcel()">上传</button></li>');
 	                	 $(this).alertmsg('ok', "导入成功！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'});
 		             	    
 //	             	    $(this).dialog('closeCurrent',true);
@@ -100,7 +99,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 //	                    },500);
 	                 } ,
 	                 error:function(data,status){
-	                     console.log(data);
 	                	 $(this).alertmsg('error', "导入失败！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'})
 	                 }
 	             	});
@@ -129,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         dataType: 'JSON',//返回数据的类型
                         async:false,
                         success: function(data,status) {
-                            $(this).alertmsg('ok', "导入成功！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'});
+                            $(this).alertmsg('ok', "上传成功！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'});
 
                             $(this).dialog('closeCurrent',true);
                             setTimeout(function(){
@@ -137,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             },500);
                         } ,
                         error:function(data,status){
-                            $(this).alertmsg('error', "导入失败！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'})
+                            $(this).alertmsg('error', "上传失败！", {displayMode:'slide', displayPosition:'topcenter', title:'提示信息'})
                         }
                     });
                 }else{

@@ -37,6 +37,7 @@
     	<property name="addinkq" column= "addinkq"/>
     	<property name="image" length="1000" column= "image" />
 		<property name="deal" column="deal"/>
+		<property name="jobTimeType" column="jobTimeType"/>
 
 		<property name="createDate2" type="timestamp" column= "createDate2"/>
 	</class>

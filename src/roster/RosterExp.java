@@ -33,6 +33,7 @@ public class RosterExp implements Serializable{
 	private Date gsEnd;	//工伤结束时间
 	private String source;//人事来源
 	private String scz;//生产组
+	private String jobTimeType;//用工性质
 	private String beizhu;//备注
 
 	public String getHtNumber() {
@@ -204,6 +205,11 @@ public class RosterExp implements Serializable{
 	}
 
 
+	public String getJobTimeType() {
+		return jobTimeType;
+	}
 
-
+	public void setJobTimeType(String jobTimeType) {
+		this.jobTimeType = jobTimeType;
+	}
 }

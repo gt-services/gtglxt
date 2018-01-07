@@ -83,11 +83,36 @@
                 <result name="success">main.jsp</result>
                 <interceptor-ref name="defaultStack"/>
         </action>
+
+        <action name="addKqbExport" class="kqb.KqbAction" method="addKqbExport">
+            <result name="success">main.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+
+
         
         <action name="cutEdit" class="kqb.KqbAction" method="cutEdit">
         		 <result name="success">main.jsp</result> 
                 <interceptor-ref name="defaultStack"/>
-        </action>                                
+        </action>
+
+        <action name="batchKq" class="kqb.KqbAction" method="batchKq">
+            <result name="success">/GT-SC/kq_batch.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+
+
+        <action name="viewKqbInfo" class="kqb.KqbAction" method="viewKqbInfo">
+            <result name=""></result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+
+        <action name="batchAddKqbExport" class="kqb.KqbAction" method="batchAddKqbExport">
+            <result name=""></result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+
+
     </package>
     <package name="jsonPlugin" extends="json-default">
         <action name="importKqb" class="kqb.KqbAction" method="importKqb">
