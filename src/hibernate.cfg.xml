@@ -27,6 +27,7 @@
 		
 		<mapping resource="admin/Admin.hbm.xml" />
 		<mapping resource="roster/Roster.hbm.xml" />
+		<mapping resource="roster/SocialSecurity.hbm.xml" />
 		<mapping resource="px/PxInfo.hbm.xml" />
 		<mapping resource="second/Second.hbm.xml" />
 		<mapping resource="kqb/Job.hbm.xml" />

@@ -7,6 +7,9 @@
 <hibernate-mapping>
 
     <class name="roster.SocialSecurity" table="gt_social_security">
+		<id name="uuid" type="string" column="uuid">
+			<generator class="uuid.hex"></generator>
+		</id>
     	<property name="name" column="name"/>
     	<property name="sex" column="sex"/>
     	<property name="age" column="age"/>
